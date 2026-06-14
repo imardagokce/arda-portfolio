@@ -25,7 +25,7 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
   // Aksi takdirde "Encountered a script tag" veya Hydration Mismatch hataları oluşur.
   // Bu yüzden children her zaman aynı div içinde sarmalanır.
   return (
-    <>
+    <div className="relative flex flex-col min-h-screen">
       <AnimatePresence>
         {mounted && showAnimation && (
           <motion.div 
@@ -75,10 +75,10 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
         initial={{ opacity: mounted && showAnimation ? 0 : 1 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: mounted && showAnimation ? 1.8 : 0, ease: "easeOut" }}
-        className="flex flex-col min-h-screen"
+        className="flex flex-col flex-1"
       >
         {children}
       </motion.div>
-    </>
+    </div>
   );
 }

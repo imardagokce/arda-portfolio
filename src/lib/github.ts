@@ -52,7 +52,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
     // 1. Kullanıcı Bilgilerini Çek (Followers ve Public Repos)
     const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
       headers,
-      next: { revalidate: 3600 } // 1 saat önbellekleme
+      next: { revalidate: 60 } // 1 dakika önbellekleme
     });
 
     if (!userRes.ok) {
@@ -66,7 +66,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
     // Sadece public repoları ve son güncellenenleri al (max 100)
     const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
       headers,
-      next: { revalidate: 3600 }
+      next: { revalidate: 60 }
     });
 
     if (!reposRes.ok) {
@@ -110,7 +110,7 @@ export async function getRepositoryData(repoName: string): Promise<RepositoryDat
   try {
     const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`, {
       headers,
-      next: { revalidate: 3600 }
+      next: { revalidate: 60 }
     });
 
     if (!res.ok) {
