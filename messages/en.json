@@ -1,0 +1,94 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "devlog": "Dev Log",
+    "links": "Links",
+    "contact": "Contact",
+    "backToDevlog": "Back to Dev Log"
+  },
+  "Home": {
+    "greeting": "Hello, I am Arda.",
+    "subtitle": "Linux, open source, privacy, internet freedom, and technology.",
+    "projectsBtn": "Projects",
+    "contactBtn": "Contact",
+    "expertiseTitle": "Understanding the System.",
+    "expertiseDesc": "In the technology world, I love building architectures that prioritize simplicity, performance, and security. My priority is designing products that not only work but feel elegant.",
+    "expertiseLink": "More about me",
+    "expertise1Title": "Linux & Systems",
+    "expertise1Desc": "OS-level optimizations, server management, and infrastructure security.",
+    "expertise2Title": "Open Source",
+    "expertise2Desc": "Community-driven projects, transparent development processes, and free software philosophy.",
+    "expertise3Title": "Privacy & Security",
+    "expertise3Desc": "Internet freedom, data privacy, and secure-by-design architectures.",
+    "expertise4Title": "Modern Web Architecture",
+    "expertise4Desc": "High-performance interfaces with React, Next.js, MDX, and modern state management tools.",
+    "featuredProjectsTitle": "Featured Projects",
+    "viewAll": "View All",
+    "githubStatsTitle": "Open Source Contributions",
+    "statRepos": "Public Repos",
+    "statStars": "Stars Earned",
+    "statFollowers": "Followers",
+    "statActivity": "Last Activity",
+    "statLast": "Last:",
+    "recentLogsTitle": "Recent Notes",
+    "projectLabel": "Project:",
+    "ctaTitle": "Have a suggestion or advice?",
+    "ctaDesc": "I love discussing new ideas, receiving feedback, and meeting new people in the open source world. Feel free to reach out.",
+    "ctaBtn": "Get in Touch"
+  },
+  "About": {
+    "title": "About",
+    "subtitle": "The endeavor to understand the system, code, and architecture.",
+    "whoAmITitle": "Who Am I?",
+    "whoAmIDesc": "I am a Linux enthusiast, open source supporter, and technology geek. I love building systems that prioritize simplicity, performance, and security in the digital world. My goal is not just to write working code, but to design products that are easy to maintain in the long run, elegant, and give a \"premium\" feel.",
+    "interestsTitle": "Interests",
+    "interest1": "Systems Programming & Operating Systems (Linux)",
+    "interest2": "Open Source Projects and Communities",
+    "interest3": "Privacy and Internet Freedom",
+    "interest4": "Modern Web Architectures (React, Next.js, MDX)",
+    "interest5": "Type Safety and Modern Tools",
+    "philosophyTitle": "Philosophy",
+    "philosophyDesc": "Avoiding unnecessary complexity. The beauty of a system lies not in the abundance of its features, but in how harmoniously its parts work together. Avoiding overengineering and creating \"silent\" designs that exactly meet the needs is my core principle.",
+    "currentWorkTitle": "What Am I Working On Now?",
+    "currentWorkDesc": "Currently, I am perfecting my personal digital workspace (this site). At the same time, I am producing projects and turning my ideas into reality to make structural contributions to the open source ecosystem."
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "You can use the form below to get in touch with me. Your emails will reach me directly.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "subjectLabel": "Subject",
+    "messageLabel": "Your Message",
+    "successMessage": "Your message has been received. I will get back to you as soon as possible.",
+    "errorMessage": "An error occurred. Please try again.",
+    "submitBtn": "Send"
+  },
+  "Projects": {
+    "title": "Projects",
+    "subtitle": "My personal projects, open source contributions, and digital experiments.",
+    "backBtn": "Go back",
+    "sourceCode": "Source Code",
+    "liveDemo": "Live Demo",
+    "associatedLogs": "Dev Log"
+  },
+  "Devlog": {
+    "title": "Dev Log",
+    "subtitle": "Short notes, architectural decisions, and fragments from the development process.",
+    "projectLabel": "Project:"
+  },
+  "Links": {
+    "title": "Links",
+    "subtitle": "Places you can find me on the internet.",
+    "githubDesc": "My open source projects and contributions.",
+    "linkedinDesc": "My professional network and career history."
+  },
+  "Metadata": {
+    "title": "Arda | Digital Workspace",
+    "description": "Linux, open source, privacy, internet freedom, and technology."
+  },
+  "Common": {
+    "quote": "\"It was only your weakness that collapsed; get up and finish the process.\""
+  }
+}

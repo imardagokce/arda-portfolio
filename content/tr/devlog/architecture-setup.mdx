@@ -1,0 +1,17 @@
+---
+title: "İçerik Mimarisinin Oluşturulması"
+project: "Epic Borg"
+date: "2026-06-14"
+tags: ["Next.js", "MDX", "Architecture"]
+summary: "next-mdx-remote ve Zod kullanarak nasıl güvenli ve ölçeklenebilir bir MDX mimarisi kurduğumu paylaşıyorum."
+---
+
+Bugün projenin en kritik altyapılarından birini tamamladım: İçerik yönetim sistemi.
+
+Veritabanı yerine dosya sistemi tabanlı bir MDX mimarisi kurmaya karar vermiştim. Bunun en büyük avantajı, içeriklerimi direkt kod editörümde yazabilmek ve git ile versiyonlayabilmek. Ancak Markdown ile çalışmanın en büyük riski tip güvenliğinin olmamasıdır. 
+
+Bunu çözmek için:
+1. `gray-matter` ile frontmatter kısmını ayrıştırdım.
+2. `zod` kullanarak, okunan bu frontmatter verisini derleme (build) anında sıkı bir denetime tabi tuttum.
+
+Böylece eğer eksik bir başlık veya hatalı bir tarih girersem, proje daha derlenmeden haberim oluyor. Sessizce üretim ortamına yansıyan bozuk sayfalara veda.

@@ -1,0 +1,33 @@
+---
+title: "1. Gün: Altyapı ve Arayüzün İnşası"
+project: "Epic Borg"
+date: "2026-06-14"
+tags: ["Next.js", "Tailwind CSS", "MDX", "Framer Motion"]
+summary: "Projenin sıfırdan Next.js 16 ile kurulması, MDX mimarisinin tasarlanması ve minimalist arayüzün (UI) uygulanması süreci."
+---
+
+Bugün, Epic Borg adlı dijital çalışma masasını sıfırdan inşa ettik. İşte günün özeti ve teknik süreçler:
+
+### 1. Temel Altyapı ve Mimari
+- **Next.js 16 (App Router)** tabanlı yepyeni bir proje oluşturuldu.
+- Kod kalitesini korumak için TypeScript ve ESLint kuralları tanımlandı.
+- Renkler, boşluklar ve tipografi gibi görsel kararların tek bir merkezden yönetilebilmesi için **Tasarım Sistemi Token'ları** (`tokens/colors.ts` vb.) oluşturuldu.
+- Tailwind CSS v4'ün en modern `@theme` direktifleri kullanılarak global stiller yapılandırıldı.
+
+### 2. İleri Seviye Altyapı (MDX & i18n)
+- Kullanıcının sistem tercihlerini otomatik algılayan **`next-themes`** entegrasyonu sağlandı.
+- Projenin baştan sona Türkçe ve İngilizce dillerini desteklemesi için **`next-intl`** middleware ve yönlendirme yapısı kuruldu.
+- İçeriklerin veritabanı olmadan sunulabilmesi için **`next-mdx-remote`** ve **Zod** kullanılarak, build anında doğrulama yapan (tip güvenli) bir Markdown/MDX sistemi yazıldı.
+
+### 3. Tasarım ve UI Bileşenleri
+- "Minimalist, premium ve kendinden emin" prensibiyle yola çıkılarak, `globals.css` içerisine hafif bir kâğıt greni (noise) eklendi.
+- Google Fonts üzerinden modern **Geist** yazı tipi entegre edildi.
+- **Framer Motion** kullanılarak:
+  - Sayfa kaydırıldıkça küçülen, bulanıklık efektine (backdrop-blur) sahip yüzen bir **Navbar** yapıldı.
+  - İlk girişte tetiklenen, ekrana SVG çizgileriyle çizilen pürüzsüz bir **İmza Animasyonu** eklendi.
+
+### 4. Sayfalar ve Deneyim
+- **Ana Sayfa:** Devasa bir watermark imza eşliğinde, okunabilirliği yüksek temiz bir giriş (Hero) bölümü tasarlandı.
+- **Projeler & Dev Log:** Geliştirme günlüğü ile projelerin birbiriyle ilişkisel olarak (Dev Log'ların ilgili proje altında listelenmesi) çalışacağı sistem arayüze yansıtıldı.
+- **Hakkımda & Bağlantılar:** Okunabilirliği yüksek profil sayfaları kodlandı.
+- **İletişim:** Kullanıcı deneyimini artırmak adına "Floating Labels" kullanıldı ve arka planda **Resend API** e-posta gönderim altyapısı hazırlandı.

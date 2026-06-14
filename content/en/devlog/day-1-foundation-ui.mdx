@@ -1,0 +1,33 @@
+---
+title: "Day 1: Foundation and UI Construction"
+project: "Epic Borg"
+date: "2026-06-14"
+tags: ["Next.js", "Tailwind CSS", "MDX", "Framer Motion"]
+summary: "The process of setting up the project from scratch with Next.js 16, designing the MDX architecture, and implementing the minimalist UI."
+---
+
+Today, we built the digital workspace named Epic Borg from scratch. Here is the summary of the day and the technical processes:
+
+### 1. Foundation & Architecture
+- Initialized a brand new project based on **Next.js 16 (App Router)**.
+- Configured TypeScript and ESLint rules to maintain code quality.
+- Established **Design System Tokens** (`tokens/colors.ts`, etc.) to centrally manage visual decisions.
+- Configured global styles using the modern `@theme` directives of Tailwind CSS v4.
+
+### 2. Advanced Infrastructure (MDX & i18n)
+- Integrated **`next-themes`** to automatically detect user system preferences.
+- Built a middleware and routing structure with **`next-intl`** to fully support Turkish and English localizations.
+- Created a type-safe Markdown/MDX system using **`next-mdx-remote`** and **Zod** that performs build-time validation.
+
+### 3. Design & UI Components
+- Driven by the "minimalist, premium, and confident" principle, a subtle paper grain (noise) was added to `globals.css`.
+- Integrated the modern **Geist** font.
+- Using **Framer Motion**:
+  - Built a floating **Navbar** with a backdrop-blur effect that shrinks dynamically as the page scrolls.
+  - Added a smooth, SVG-drawn **Signature Animation** that triggers only upon the first visit.
+
+### 4. Pages & Experience
+- **Home:** Designed a highly readable Hero section accompanied by a massive watermark signature.
+- **Projects & Dev Log:** Reflected a relational system on the UI where development logs are listed under their associated projects.
+- **About & Links:** Coded minimal profile pages with high readability.
+- **Contact:** Implemented "Floating Labels" in the form inputs to enhance user experience, and prepared the email delivery backend using the **Resend API**.

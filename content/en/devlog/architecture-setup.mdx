@@ -1,0 +1,17 @@
+---
+title: "Setting up Content Architecture"
+project: "Epic Borg"
+date: "2026-06-14"
+tags: ["Next.js", "MDX", "Architecture"]
+summary: "Sharing how I built a secure and scalable MDX architecture using next-mdx-remote and Zod."
+---
+
+Today I completed one of the most critical infrastructures of the project: The content management system.
+
+I decided to build a file-system based MDX architecture instead of using a database. The biggest advantage is being able to write my content directly in my code editor and version it with git. However, the biggest risk of working with Markdown is the lack of type safety.
+
+To solve this:
+1. I parsed the frontmatter using `gray-matter`.
+2. I subjected this parsed frontmatter data to strict validation at build time using `zod`.
+
+This way, if I enter a missing title or an invalid date, I am notified before the project even compiles. Goodbye to broken pages silently making their way to production.

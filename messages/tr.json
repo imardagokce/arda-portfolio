@@ -1,0 +1,94 @@
+{
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "projects": "Projeler",
+    "devlog": "Geliştirici Günlüğü",
+    "links": "Bağlantılar",
+    "contact": "İletişim",
+    "backToDevlog": "Geliştirici Günlüğü'ne Dön"
+  },
+  "Home": {
+    "greeting": "Merhaba, ben Arda.",
+    "subtitle": "Linux, açık kaynak, gizlilik, internet özgürlüğü ve teknoloji.",
+    "projectsBtn": "Projeler",
+    "contactBtn": "İletişim",
+    "expertiseTitle": "Sistemi Anlamak.",
+    "expertiseDesc": "Teknoloji dünyasında sadeliği, performansı ve güvenliği ön planda tutan mimariler kurmayı seviyorum. Sadece çalışan değil, zarif hissettiren ürünler tasarlamak önceliğim.",
+    "expertiseLink": "Hakkımda detaylar",
+    "expertise1Title": "Linux & Sistem",
+    "expertise1Desc": "İşletim sistemi seviyesinde optimizasyonlar, sunucu yönetimi ve altyapı güvenliği.",
+    "expertise2Title": "Açık Kaynak",
+    "expertise2Desc": "Topluluk odaklı projeler, şeffaf geliştirme süreçleri ve özgür yazılım felsefesi.",
+    "expertise3Title": "Gizlilik & Güvenlik",
+    "expertise3Desc": "İnternet özgürlüğü, veri mahremiyeti ve güvenli by-design mimariler.",
+    "expertise4Title": "Modern Web Mimarisi",
+    "expertise4Desc": "React, Next.js, MDX ve modern state yönetim araçlarıyla yüksek performanslı arayüzler.",
+    "featuredProjectsTitle": "Öne Çıkan Projeler",
+    "viewAll": "Tümünü Gör",
+    "githubStatsTitle": "Açık Kaynak Katkıları",
+    "statRepos": "Açık Repo",
+    "statStars": "Alınan Yıldız",
+    "statFollowers": "Takipçi",
+    "statActivity": "Son Aktivite",
+    "statLast": "Son:",
+    "recentLogsTitle": "Son Notlar",
+    "projectLabel": "Proje:",
+    "ctaTitle": "Bir önerin veya tavsiyen mi var?",
+    "ctaDesc": "Yeni fikirler üzerine konuşmayı, eleştiri almayı ve açık kaynak dünyasında yeni insanlarla tanışmayı seviyorum. Çekinmeden yazabilirsin.",
+    "ctaBtn": "İletişime Geç"
+  },
+  "About": {
+    "title": "Hakkımda",
+    "subtitle": "Sistemi, kodları ve mimariyi anlama çabası.",
+    "whoAmITitle": "Ben Kimim?",
+    "whoAmIDesc": "Linux tutkunu, açık kaynak destekçisi ve teknoloji meraklısıyım. Dijital dünyada sadeliği, performansı ve güvenliği ön planda tutan sistemler kurmayı seviyorum. Amacım sadece çalışan kodlar yazmak değil, aynı zamanda uzun vadede bakımı kolay, zarif ve \"premium\" hissiyat veren ürünler tasarlamaktır.",
+    "interestsTitle": "İlgi Alanları",
+    "interest1": "Sistem Programlama & İşletim Sistemleri (Linux)",
+    "interest2": "Açık Kaynak Projeler ve Topluluklar",
+    "interest3": "Gizlilik (Privacy) ve İnternet Özgürlüğü",
+    "interest4": "Modern Web Mimarileri (React, Next.js, MDX)",
+    "interest5": "Tip Güvenliği ve Modern Araçlar",
+    "philosophyTitle": "Felsefe",
+    "philosophyDesc": "Gereksiz karmaşıklıktan uzak durmak. Bir sistemin güzelliği, barındırdığı özelliklerin çokluğunda değil, parçalarının birbiriyle ne kadar uyumlu çalıştığında gizlidir. Aşırı mühendislikten (overengineering) kaçınarak, ihtiyaca tam cevap veren \"sessiz\" tasarımlar yaratmak en temel prensibim.",
+    "currentWorkTitle": "Şu An Ne Üzerinde Çalışıyorum?",
+    "currentWorkDesc": "Mevcut durumda kişisel dijital çalışma alanımı (bu siteyi) mükemmelleştiriyorum. Aynı zamanda açık kaynak ekosistemine daha yapısal katkılarda bulunabilmek için projeler üretiyor, fikirlerimi gerçeğe dönüştürüyorum."
+  },
+  "Contact": {
+    "title": "İletişim",
+    "subtitle": "Benimle iletişime geçmek için aşağıdaki formu kullanabilirsiniz. E-postalarınız doğrudan bana ulaşacaktır.",
+    "nameLabel": "İsim",
+    "emailLabel": "E-posta",
+    "subjectLabel": "Konu",
+    "messageLabel": "Mesajınız",
+    "successMessage": "Mesajınız ulaştı. En kısa sürede dönüş yapacağım.",
+    "errorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "submitBtn": "Gönder"
+  },
+  "Projects": {
+    "title": "Projeler",
+    "subtitle": "Kişisel projelerim, açık kaynak katkılarım ve dijital deneylerim.",
+    "backBtn": "Geri dön",
+    "sourceCode": "Kaynak Kod",
+    "liveDemo": "Canlı Demo",
+    "associatedLogs": "Geliştirici Günlüğü"
+  },
+  "Devlog": {
+    "title": "Geliştirici Günlüğü",
+    "subtitle": "Kısa notlar, mimari kararlar ve geliştirme sürecinden parçalar.",
+    "projectLabel": "Proje:"
+  },
+  "Links": {
+    "title": "Bağlantılar",
+    "subtitle": "Beni internette bulabileceğiniz yerler.",
+    "githubDesc": "Açık kaynak projelerim ve katkılarım.",
+    "linkedinDesc": "Profesyonel iş ağım ve kariyer geçmişim."
+  },
+  "Metadata": {
+    "title": "Arda | Dijital Çalışma Masası",
+    "description": "Linux, açık kaynak, gizlilik, internet özgürlüğü ve teknoloji."
+  },
+  "Common": {
+    "quote": "\"Yıkılan sadece zayıflığındı; kalk ve süreci bitir.\""
+  }
+}
