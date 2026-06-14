@@ -6,11 +6,11 @@ import { useTheme } from 'next-themes';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { LanguageSelector } from '@/components/LanguageSelector';
 
 export function NavBar() {
   const t = useTranslations('Navigation');
   const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const { scrollY } = useScroll();
@@ -23,11 +23,6 @@ export function NavBar() {
     if (latest > 50) setScrolled(true);
     else setScrolled(false);
   });
-
-  const switchLocale = () => {
-    const nextLocale = locale === 'tr' ? 'en' : 'tr';
-    router.replace(pathname, { locale: nextLocale });
-  };
 
   return (
     <motion.header 
@@ -48,13 +43,8 @@ export function NavBar() {
            </div>
          </div>
          
-         <div className="flex items-center gap-5">
-           <button 
-             onClick={switchLocale} 
-             className="text-xs font-semibold tracking-wider text-muted-foreground hover:text-foreground transition-colors uppercase"
-           >
-             {locale === 'tr' ? 'EN' : 'TR'}
-           </button>
+         <div className="flex items-center gap-2 sm:gap-5">
+           <LanguageSelector />
            
            <button 
              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -64,7 +54,7 @@ export function NavBar() {
              {mounted ? (
                theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
              ) : (
-               <div className="h-4 w-4" />
+               <span className="block h-4 w-4" />
              )}
            </button>
          </div>
