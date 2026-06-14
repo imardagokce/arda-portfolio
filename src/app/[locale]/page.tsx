@@ -1,10 +1,9 @@
-import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { ArrowRight, Mail, Terminal, Server, Globe, Shield, Code2, Star, GitBranch, GitCommit, Users, ExternalLink } from 'lucide-react';
+import { ArrowRight, Mail, Terminal, Server, Globe, Shield, Code2, Star, GitCommit, Users, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
-import { getAllDevLogs, getAllProjects } from '@/lib/content';
-import { getGitHubStats, getRepositoryData } from '@/lib/github';
+import { getAllDevLogs } from '@/lib/content';
+import { getGitHubStats, getRepositories } from '@/lib/github';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -12,20 +11,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Home' });
   
   const recentLogs = getAllDevLogs(locale).slice(0, 2);
-  const projects = getAllProjects(locale);
+  const allRepos = await getRepositories();
   
-  const featuredProjects = projects.filter(p => p.frontmatter.featured).slice(0, 2);
+  // En çok yıldız alan 2 projeyi öne çıkar
+  const featuredProjects = [...allRepos].sort((a, b) => b.stars - a.stars).slice(0, 2);
   
-  // GitHub verileriyle zenginleştirilmiş projeler
-  const enrichedProjects = await Promise.all(featuredProjects.map(async (p) => {
-    let repoData = null;
-    if (p.frontmatter.github) {
-       const parts = p.frontmatter.github.split('/');
-       const repoName = parts[parts.length - 1];
-       repoData = await getRepositoryData(repoName);
-    }
-    return { ...p, repoData };
-  }));
+  
 
   // Genel GitHub İstatistikleri
   const githubStats = await getGitHubStats();
@@ -121,7 +112,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* Featured Projects Section */}
-      {enrichedProjects.length > 0 && (
+      {featuredProjects.length > 0 && (
         <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
           <ScrollReveal>
             <div className="flex items-center justify-between mb-12">
@@ -133,41 +124,44 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {enrichedProjects.map((project, index) => (
-              <ScrollReveal key={project.slug} delay={index * 0.1}>
+            {featuredProjects.map((project, index) => {
+              const status = project.topics?.find(t => ['active', 'completed', 'idea', 'planned', 'paused', 'archived'].includes(t)) || null;
+              return (
+              <ScrollReveal key={project.name} delay={index * 0.1}>
                  <Link 
-                    href={`/projects/${project.slug}`}
+                    href={`/projects/${project.name}`}
                     className="group block p-6 bg-background border border-border/50 rounded-2xl hover:-translate-y-1 hover:shadow-sm hover:border-accent/50 transition-all duration-300 h-full"
                   >
                     <div className="flex flex-col h-full justify-between">
                       <div>
                         <div className="flex items-center justify-between mb-4">
                           <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
-                            {project.frontmatter.title}
+                            {project.name}
                           </h2>
                           <div className="flex items-center gap-3">
-                            {project.repoData && (
-                              <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border border-border/50">
-                                <Star className="w-3 h-3 text-accent" />
-                                {project.repoData.stars}
-                              </div>
+                            <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border border-border/50">
+                              <Star className="w-3 h-3 text-accent" />
+                              {project.stars}
+                            </div>
+                            {status && (
+                              <span className="text-xs px-2 py-1 rounded-full font-medium bg-muted text-muted-foreground">
+                                {status}
+                              </span>
                             )}
-                            <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                              project.frontmatter.status === 'active' ? 'bg-green-500/10 text-green-600 dark:text-green-400' :
-                              project.frontmatter.status === 'completed' ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400' :
-                              'bg-muted text-muted-foreground'
-                            }`}>
-                              {project.frontmatter.status}
-                            </span>
                           </div>
                         </div>
                         <p className="text-muted-foreground mb-6 line-clamp-3">
-                          {project.repoData?.description || project.frontmatter.description}
+                          {project.description}
                         </p>
                       </div>
                       
                       <div className="flex flex-wrap gap-2">
-                        {project.frontmatter.technologies.slice(0, 3).map(tech => (
+                        {project.language && (
+                          <span className="text-xs px-2 py-1 bg-muted/50 text-muted-foreground rounded-md border border-border/50">
+                            {project.language}
+                          </span>
+                        )}
+                        {project.topics.slice(0, 2).map(tech => (
                           <span key={tech} className="text-xs px-2 py-1 bg-muted/50 text-muted-foreground rounded-md border border-border/50">
                             {tech}
                           </span>
@@ -176,7 +170,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </div>
                   </Link>
               </ScrollReveal>
-            ))}
+            )})}
           </div>
         </section>
       )}

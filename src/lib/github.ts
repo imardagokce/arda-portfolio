@@ -28,12 +28,15 @@ export interface GitHubStats {
   } | null;
 }
 
-export interface RepositoryData {
+export interface Repository {
   name: string;
   description: string | null;
   stars: number;
   url: string;
+  createdAt: string;
   updatedAt: string;
+  language: string | null;
+  topics: string[];
 }
 
 /**
@@ -81,7 +84,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
 
     const reposData = await reposRes.json();
     
-    // Toplam yıldız sayısını hesapla
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
     
     // Son güncellenen depoyu bul (zaten updated olarak sıralı geliyor, ama emin olalım)
@@ -106,7 +109,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
 /**
  * Belirli bir deponun verilerini çeker.
  */
-export async function getRepositoryData(repoName: string): Promise<RepositoryData | null> {
+export async function getRepositoryData(repoName: string): Promise<Repository | null> {
   try {
     const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`, {
       headers,
@@ -125,10 +128,75 @@ export async function getRepositoryData(repoName: string): Promise<RepositoryDat
       description: data.description,
       stars: data.stargazers_count,
       url: data.html_url,
+      createdAt: data.created_at,
       updatedAt: data.updated_at,
+      language: data.language,
+      topics: data.topics || [],
     };
   } catch (error) {
     console.error(`[GitHub API] ${repoName} detayları alınırken hata:`, error);
     return null; // Fallback
+  }
+}
+
+/**
+ * Kullanıcının tüm public repolarını çeker.
+ */
+export async function getRepositories(): Promise<Repository[]> {
+  try {
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
+      headers,
+      next: { revalidate: 60 }
+    });
+
+    if (!res.ok) {
+      console.warn(`[GitHub API] Repolar çekilemedi: ${res.status}`);
+      return [];
+    }
+
+    const data = await res.json();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.map((repo: any) => ({
+      name: repo.name,
+      description: repo.description,
+      stars: repo.stargazers_count,
+      url: repo.html_url,
+      createdAt: repo.created_at,
+      updatedAt: repo.updated_at,
+      language: repo.language,
+      topics: repo.topics || [],
+    }));
+  } catch (error) {
+    console.error('[GitHub API] Repolar alınırken hata:', error);
+    return [];
+  }
+}
+
+/**
+ * Belirli bir deponun README.md içeriğini çeker.
+ */
+export async function getRepositoryReadme(repoName: string): Promise<string | null> {
+  try {
+    const readmeHeaders: HeadersInit = {
+      ...headers,
+      'Accept': 'application/vnd.github.v3.raw', // Markdown olarak almak için raw accept
+    };
+    
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/readme`, {
+      headers: readmeHeaders,
+      next: { revalidate: 60 }
+    });
+
+    if (!res.ok) {
+      if (res.status === 404) return null; // README yoksa sessizce null dön
+      console.warn(`[GitHub API] ${repoName} README çekilemedi: ${res.status}`);
+      return null;
+    }
+
+    return await res.text();
+  } catch (error) {
+    console.error(`[GitHub API] ${repoName} README alınırken hata:`, error);
+    return null;
   }
 }

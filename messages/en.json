@@ -71,7 +71,28 @@
     "backBtn": "Go back",
     "sourceCode": "Source Code",
     "liveDemo": "Live Demo",
-    "associatedLogs": "Dev Log"
+    "associatedLogs": "Dev Log",
+    "status": {
+      "active": "In Progress",
+      "completed": "Completed",
+      "idea": "Idea Stage",
+      "planned": "Planned",
+      "paused": "Paused",
+      "archived": "Archived",
+      "notSpecified": "Not Specified"
+    },
+    "filters": {
+      "all": "All",
+      "active": "In Progress",
+      "completed": "Completed",
+      "idea": "Idea Stage",
+      "planned": "Planned",
+      "paused": "Paused",
+      "archived": "Archived"
+    },
+    "viewDetails": "View Details",
+    "viewGithub": "View on GitHub",
+    "noDescription": "No description provided."
   },
   "Devlog": {
     "title": "Dev Log",

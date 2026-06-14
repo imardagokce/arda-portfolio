@@ -57,6 +57,7 @@ export function LanguageSelector() {
     }
     
     // next-intl middleware'in hatırlayabilmesi için NEXT_LOCALE cookie'sini açıkça ayarlıyoruz.
+    // eslint-disable-next-line react-hooks/immutability
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     
     router.replace(pathname, { locale: newLocale });

@@ -71,7 +71,28 @@
     "backBtn": "Geri dön",
     "sourceCode": "Kaynak Kod",
     "liveDemo": "Canlı Demo",
-    "associatedLogs": "Geliştirici Günlüğü"
+    "associatedLogs": "Geliştirici Günlüğü",
+    "status": {
+      "active": "Üzerinde Çalışılıyor",
+      "completed": "Tamamlandı",
+      "idea": "Fikir Aşaması",
+      "planned": "Planlandı",
+      "paused": "Beklemede",
+      "archived": "Arşiv",
+      "notSpecified": "Durum Belirtilmedi"
+    },
+    "filters": {
+      "all": "Tümü",
+      "active": "Üzerinde Çalışılıyor",
+      "completed": "Tamamlandı",
+      "idea": "Fikir Aşaması",
+      "planned": "Planlandı",
+      "paused": "Beklemede",
+      "archived": "Arşiv"
+    },
+    "viewDetails": "Detayları İncele",
+    "viewGithub": "GitHub'da Gör",
+    "noDescription": "Açıklama belirtilmemiş."
   },
   "Devlog": {
     "title": "Geliştirici Günlüğü",

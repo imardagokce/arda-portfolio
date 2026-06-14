@@ -27,7 +27,7 @@ export default function ContactPage() {
       
       setStatus('success');
       (e.target as HTMLFormElement).reset();
-    } catch (err) {
+    } catch (_err) {
       setStatus('error');
     }
   };

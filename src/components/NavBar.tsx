@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -10,13 +10,13 @@ import { LanguageSelector } from '@/components/LanguageSelector';
 
 export function NavBar() {
   const t = useTranslations('Navigation');
-  const locale = useLocale();
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
