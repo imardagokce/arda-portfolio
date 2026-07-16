@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
@@ -37,7 +37,6 @@ export function NavBar() {
            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium text-muted-foreground">
              <Link href="/about" className={`transition-colors ${pathname.startsWith('/about') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('about')}</Link>
              <Link href="/projects" className={`transition-colors ${pathname.startsWith('/projects') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('projects')}</Link>
-             <Link href="/devlog" className={`transition-colors ${pathname.startsWith('/devlog') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('devlog')}</Link>
              <Link href="/links" className={`transition-colors ${pathname.startsWith('/links') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('links')}</Link>
              <Link href="/contact" className={`transition-colors ${pathname.startsWith('/contact') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('contact')}</Link>
            </div>

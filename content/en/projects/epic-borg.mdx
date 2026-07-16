@@ -1,10 +1,24 @@
 ---
-title: "Day 1: Foundation and UI Construction"
-project: "Epic Borg"
+title: "Epic Borg"
+description: "Development Notes"
 date: "2026-06-14"
-tags: ["Next.js", "Tailwind CSS", "MDX", "Framer Motion"]
-summary: "The process of setting up the project from scratch with Next.js 16, designing the MDX architecture, and implementing the minimalist UI."
 ---
+
+## Setting up Content Architecture (2026-06-14)
+
+Today I completed one of the most critical infrastructures of the project: The content management system.
+
+I decided to build a file-system based MDX architecture instead of using a database. The biggest advantage is being able to write my content directly in my code editor and version it with git. However, the biggest risk of working with Markdown is the lack of type safety.
+
+To solve this:
+1. I parsed the frontmatter using `gray-matter`.
+2. I subjected this parsed frontmatter data to strict validation at build time using `zod`.
+
+This way, if I enter a missing title or an invalid date, I am notified before the project even compiles. Goodbye to broken pages silently making their way to production.
+
+---
+
+## Day 1: Foundation and UI Construction (2026-06-14)
 
 Today, we built the digital workspace named Epic Borg from scratch. Here is the summary of the day and the technical processes:
 

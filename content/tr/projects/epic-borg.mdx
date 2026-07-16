@@ -1,10 +1,24 @@
 ---
-title: "1. Gün: Altyapı ve Arayüzün İnşası"
-project: "Epic Borg"
+title: "Epic Borg"
+description: "Geliştirme Notları"
 date: "2026-06-14"
-tags: ["Next.js", "Tailwind CSS", "MDX", "Framer Motion"]
-summary: "Projenin sıfırdan Next.js 16 ile kurulması, MDX mimarisinin tasarlanması ve minimalist arayüzün (UI) uygulanması süreci."
 ---
+
+## İçerik Mimarisinin Oluşturulması (2026-06-14)
+
+Bugün projenin en kritik altyapılarından birini tamamladım: İçerik yönetim sistemi.
+
+Veritabanı yerine dosya sistemi tabanlı bir MDX mimarisi kurmaya karar vermiştim. Bunun en büyük avantajı, içeriklerimi direkt kod editörümde yazabilmek ve git ile versiyonlayabilmek. Ancak Markdown ile çalışmanın en büyük riski tip güvenliğinin olmamasıdır. 
+
+Bunu çözmek için:
+1. `gray-matter` ile frontmatter kısmını ayrıştırdım.
+2. `zod` kullanarak, okunan bu frontmatter verisini derleme (build) anında sıkı bir denetime tabi tuttum.
+
+Böylece eğer eksik bir başlık veya hatalı bir tarih girersem, proje daha derlenmeden haberim oluyor. Sessizce üretim ortamına yansıyan bozuk sayfalara veda.
+
+---
+
+## 1. Gün: Altyapı ve Arayüzün İnşası (2026-06-14)
 
 Bugün, Epic Borg adlı dijital çalışma masasını sıfırdan inşa ettik. İşte günün özeti ve teknik süreçler:
 
@@ -28,6 +42,6 @@ Bugün, Epic Borg adlı dijital çalışma masasını sıfırdan inşa ettik. İ
 
 ### 4. Sayfalar ve Deneyim
 - **Ana Sayfa:** Devasa bir watermark imza eşliğinde, okunabilirliği yüksek temiz bir giriş (Hero) bölümü tasarlandı.
-- **Projeler & Dev Log:** Geliştirme günlüğü ile projelerin birbiriyle ilişkisel olarak (Dev Log'ların ilgili proje altında listelenmesi) çalışacağı sistem arayüze yansıtıldı.
+- **Projeler & Dev Log:** Geliştirme günlüğü ile projelerin birbiriyle ilişkisel olarak çalışacağı sistem arayüze yansıtıldı.
 - **Hakkımda & Bağlantılar:** Okunabilirliği yüksek profil sayfaları kodlandı.
 - **İletişim:** Kullanıcı deneyimini artırmak adına "Floating Labels" kullanıldı ve arka planda **Resend API** e-posta gönderim altyapısı hazırlandı.

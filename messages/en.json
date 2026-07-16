@@ -3,10 +3,8 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "devlog": "Dev Log",
     "links": "Links",
-    "contact": "Contact",
-    "backToDevlog": "Back to Dev Log"
+    "contact": "Contact"
   },
   "Home": {
     "greeting": "Hello, I am Arda.",
@@ -32,8 +30,7 @@
     "statFollowers": "Followers",
     "statActivity": "Last Activity",
     "statLast": "Last:",
-    "recentLogsTitle": "Recent Notes",
-    "projectLabel": "Project:",
+    "recentLogsTitle": "Recent Updates",
     "ctaTitle": "Have a suggestion or advice?",
     "ctaDesc": "I love discussing new ideas, receiving feedback, and meeting new people in the open source world. Feel free to reach out.",
     "ctaBtn": "Get in Touch"
@@ -92,12 +89,13 @@
     },
     "viewDetails": "View Details",
     "viewGithub": "View on GitHub",
-    "noDescription": "No description provided."
-  },
-  "Devlog": {
-    "title": "Dev Log",
-    "subtitle": "Short notes, architectural decisions, and fragments from the development process.",
-    "projectLabel": "Project:"
+    "noDescription": "No description provided.",
+    "releases": "Releases",
+    "commits": "Recent Commits",
+    "devNotes": "Development Notes",
+    "noReleases": "No releases found.",
+    "noCommits": "No recent commits found.",
+    "viewCommit": "View Commit"
   },
   "Links": {
     "title": "Links",

@@ -3,10 +3,8 @@
     "home": "Ana Sayfa",
     "about": "Hakkımda",
     "projects": "Projeler",
-    "devlog": "Geliştirici Günlüğü",
     "links": "Bağlantılar",
-    "contact": "İletişim",
-    "backToDevlog": "Geliştirici Günlüğü'ne Dön"
+    "contact": "İletişim"
   },
   "Home": {
     "greeting": "Merhaba, ben Arda.",
@@ -32,8 +30,7 @@
     "statFollowers": "Takipçi",
     "statActivity": "Son Aktivite",
     "statLast": "Son:",
-    "recentLogsTitle": "Son Notlar",
-    "projectLabel": "Proje:",
+    "recentLogsTitle": "Son Güncellemeler",
     "ctaTitle": "Bir önerin veya tavsiyen mi var?",
     "ctaDesc": "Yeni fikirler üzerine konuşmayı, eleştiri almayı ve açık kaynak dünyasında yeni insanlarla tanışmayı seviyorum. Çekinmeden yazabilirsin.",
     "ctaBtn": "İletişime Geç"
@@ -92,12 +89,13 @@
     },
     "viewDetails": "Detayları İncele",
     "viewGithub": "GitHub'da Gör",
-    "noDescription": "Açıklama belirtilmemiş."
-  },
-  "Devlog": {
-    "title": "Geliştirici Günlüğü",
-    "subtitle": "Kısa notlar, mimari kararlar ve geliştirme sürecinden parçalar.",
-    "projectLabel": "Proje:"
+    "noDescription": "Açıklama belirtilmemiş.",
+    "releases": "Sürümler",
+    "commits": "Son Commitler",
+    "devNotes": "Geliştirme Notları",
+    "noReleases": "Henüz bir sürüm yayınlanmamış.",
+    "noCommits": "Son aktivite bulunamadı.",
+    "viewCommit": "Commit'i İncele"
   },
   "Links": {
     "title": "Bağlantılar",

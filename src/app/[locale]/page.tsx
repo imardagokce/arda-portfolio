@@ -1,8 +1,7 @@
 import { Link } from '@/i18n/routing';
-import { ArrowRight, Mail, Terminal, Server, Globe, Shield, Code2, Star, GitCommit, Users, ExternalLink } from 'lucide-react';
+import { ArrowRight, Mail, Server, Globe, Shield, Code2, Star, GitCommit, Users, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
-import { getAllDevLogs } from '@/lib/content';
 import { getGitHubStats, getRepositories } from '@/lib/github';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -10,7 +9,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { getTranslations } = await import('next-intl/server');
   const t = await getTranslations({ locale, namespace: 'Home' });
   
-  const recentLogs = getAllDevLogs(locale).slice(0, 2);
   const allRepos = await getRepositories();
   
   // En çok yıldız alan 2 projeyi öne çıkar
@@ -26,12 +24,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center min-h-[85vh] w-full">
-        <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none overflow-hidden">
-          <span className="font-serif italic text-[25vw] whitespace-nowrap text-foreground">
-            Arda.
-          </span>
-        </div>
-
         <ScrollReveal className="z-10 flex flex-col items-center justify-center text-center max-w-3xl px-6 gap-8">
           <div className="space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">
@@ -236,42 +228,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </ScrollReveal>
       </section>
-
-      {/* Dev Log Preview Section */}
-      {recentLogs.length > 0 && (
-        <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
-          <ScrollReveal>
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl font-bold text-foreground">{t('recentLogsTitle')}</h2>
-              <Link href="/devlog" className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors flex items-center gap-1">
-                {t('viewAll')} <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </ScrollReveal>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {recentLogs.map((log, index) => (
-              <ScrollReveal key={log.slug} delay={index * 0.1}>
-                <Link href={`/devlog/${log.slug}`} className="group block p-6 bg-background border border-border/50 rounded-2xl hover:-translate-y-1 hover:shadow-sm hover:border-accent/50 transition-all duration-300 h-full">
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground mb-4">
-                    <Terminal className="w-4 h-4 group-hover:text-accent transition-colors" />
-                    <time className="font-medium">{new Date(log.frontmatter.date).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors">
-                    {log.frontmatter.title}
-                  </h3>
-                  <span className="inline-block px-3 py-1 bg-muted/50 text-xs font-medium text-muted-foreground rounded-md mb-4 border border-border/50">
-                    {t('projectLabel')} {log.frontmatter.project}
-                  </span>
-                  <p className="text-muted-foreground mb-4 line-clamp-2">
-                    {log.frontmatter.summary}
-                  </p>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* CTA Section */}
       <section className="w-full max-w-2xl mx-auto px-6 py-32 md:py-48 text-center border-t border-border/30">

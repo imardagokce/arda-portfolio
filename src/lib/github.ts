@@ -37,6 +37,23 @@ export interface Repository {
   updatedAt: string;
   language: string | null;
   topics: string[];
+  defaultBranch: string;
+}
+
+export interface Release {
+  id: number;
+  name: string;
+  tagName: string;
+  publishedAt: string;
+  body: string;
+  htmlUrl: string;
+}
+
+export interface Commit {
+  sha: string;
+  message: string;
+  date: string;
+  htmlUrl: string;
 }
 
 /**
@@ -132,6 +149,7 @@ export async function getRepositoryData(repoName: string): Promise<Repository | 
       updatedAt: data.updated_at,
       language: data.language,
       topics: data.topics || [],
+      defaultBranch: data.default_branch,
     };
   } catch (error) {
     console.error(`[GitHub API] ${repoName} detayları alınırken hata:`, error);
@@ -166,6 +184,7 @@ export async function getRepositories(): Promise<Repository[]> {
       updatedAt: repo.updated_at,
       language: repo.language,
       topics: repo.topics || [],
+      defaultBranch: repo.default_branch,
     }));
   } catch (error) {
     console.error('[GitHub API] Repolar alınırken hata:', error);
@@ -198,5 +217,67 @@ export async function getRepositoryReadme(repoName: string): Promise<string | nu
   } catch (error) {
     console.error(`[GitHub API] ${repoName} README alınırken hata:`, error);
     return null;
+  }
+}
+
+/**
+ * Belirli bir deponun release'lerini çeker.
+ */
+export async function getRepositoryReleases(repoName: string): Promise<Release[]> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/releases?per_page=10`, {
+      headers,
+      next: { revalidate: 60 }
+    });
+
+    if (!res.ok) {
+      console.warn(`[GitHub API] ${repoName} releases çekilemedi: ${res.status}`);
+      return [];
+    }
+
+    const data = await res.json();
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.map((release: any) => ({
+      id: release.id,
+      name: release.name || release.tag_name,
+      tagName: release.tag_name,
+      publishedAt: release.published_at,
+      body: release.body || '',
+      htmlUrl: release.html_url
+    }));
+  } catch (error) {
+    console.error(`[GitHub API] ${repoName} releases alınırken hata:`, error);
+    return [];
+  }
+}
+
+/**
+ * Belirli bir deponun son commitlerini çeker.
+ */
+export async function getRepositoryCommits(repoName: string): Promise<Commit[]> {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/commits?per_page=10`, {
+      headers,
+      next: { revalidate: 60 }
+    });
+
+    if (!res.ok) {
+      console.warn(`[GitHub API] ${repoName} commits çekilemedi: ${res.status}`);
+      return [];
+    }
+
+    const data = await res.json();
+    
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return data.map((commit: any) => ({
+      sha: commit.sha,
+      message: commit.commit.message.split('\n')[0], // Sadece ilk satırı al (başlık)
+      date: commit.commit.author.date,
+      htmlUrl: commit.html_url
+    }));
+  } catch (error) {
+    console.error(`[GitHub API] ${repoName} commits alınırken hata:`, error);
+    return [];
   }
 }
