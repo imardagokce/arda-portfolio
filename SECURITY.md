@@ -1,8 +1,10 @@
 # Security Policy
 
+This document outlines the security policies, supported versions, and the process for responsibly reporting vulnerabilities for this project.
+
 ## Supported Versions
 
-Please check the table below for the supported versions of this project. Only the latest major version is actively supported with security updates.
+Please refer to the table below for the supported versions of this project. Only the latest major version receives active security updates, whereas older versions are considered End-of-Life (EOL) and will no longer receive security patches.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -11,25 +13,29 @@ Please check the table below for the supported versions of this project. Only th
 
 ## Reporting a Vulnerability
 
-Security is a high priority. If you discover a vulnerability, we would like to know about it so we can take steps to address it as quickly as possible.
+Maintaining the security and integrity of this project is a top priority. We sincerely appreciate the efforts of security researchers and the community in helping us identify and resolve vulnerabilities.
 
-**Do not report security vulnerabilities through public GitHub issues.**
+If you discover a security vulnerability, we respectfully request that you report it to us confidentially so that we can take prompt and appropriate action. 
 
-Instead, please report them via email to **[Your Email]** or by using the [Contact Form](/contact) on the website. 
+**Do not report undisclosed security vulnerabilities through public GitHub issues.**
 
-Please include the following information in your report:
-- Type of vulnerability (e.g., XSS, CSRF, SQLi)
-- Full paths of source file(s) related to the manifestation of the vulnerability
-- The location of the affected source code (tag/branch/commit or direct URL)
-- Any special configuration required to reproduce the issue
-- Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
-- Impact of the issue, including how an attacker might exploit the issue
+Please report security vulnerabilities using GitHub's Private Vulnerability Reporting feature.
+
+Navigate to the repository's Security tab, select Advisories, and choose 'Report a vulnerability'.
+
+To help us effectively assess and address the issue, please ensure your report includes the following details:
+- A description of the vulnerability type (e.g., XSS, CSRF, SQLi).
+- The exact location or full paths of the affected source file(s) and code blocks.
+- A clear, step-by-step guide to reproducing the issue.
+- Any necessary configurations or proof-of-concept (PoC) exploit code.
+- An assessment of the potential impact and how an attacker might exploit the vulnerability.
 
 ## Responsible Disclosure
 
-We ask that you do not share or publish an unresolved vulnerability with any third parties or the public prior to a patch being available. We will work with you to understand the scope and coordinate the disclosure after the fix has been applied.
+We strictly adhere to responsible disclosure practices. We request that you do not share, discuss, or publish details of an unresolved vulnerability with any third parties or the public until a patch has been successfully deployed. We commit to working closely with you to understand the scope and coordinate a public disclosure once the issue is resolved.
 
 ## Response Expectations
 
-We will endeavor to respond to your report within **48 hours** to acknowledge receipt. We will keep you updated on our progress towards a fix and full announcement, and may ask for additional information or guidance.
+We will endeavor to acknowledge receipt of your vulnerability report within **72 hours**. Following the initial response, we will keep you informed of our progress toward a remediation and may reach out for further clarification or guidance.
+
+Thank you for helping keep this project secure and safe for everyone.
