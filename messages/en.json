@@ -95,6 +95,8 @@
     "devNotes": "Development Notes",
     "noReleases": "No releases found.",
     "noCommits": "No recent commits found.",
+    "noRepos": "Nothing here yet.",
+    "noFilterMatch": "No matching results found.",
     "viewCommit": "View Commit"
   },
   "Links": {
@@ -109,5 +111,19 @@
   },
   "Common": {
     "quote": "\"It was only your weakness that collapsed; get up and finish the process.\""
+  },
+  "NotFound": {
+    "title": "404",
+    "subtitle": "This page does not exist.",
+    "description": "The page you are looking for could not be found or is no longer available.",
+    "backToHome": "← Return to home"
+  },
+  "Error": {
+    "title": "Something went wrong.",
+    "description": "An unexpected error occurred.",
+    "tryAgain": "Try again"
+  },
+  "Loading": {
+    "text": "Loading..."
   }
 }

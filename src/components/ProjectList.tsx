@@ -149,7 +149,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
             animate={{ opacity: 1 }}
             className="col-span-full py-12 text-center text-muted-foreground bg-muted/20 rounded-2xl border border-dashed border-border/50"
           >
-            {locale === 'tr' ? 'Bu filtreye uygun proje bulunamadı.' : 'No projects found for this filter.'}
+            {repos.length === 0 ? t('noRepos') : t('noFilterMatch')}
           </motion.div>
         )}
       </motion.div>

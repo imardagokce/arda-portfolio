@@ -95,6 +95,8 @@
     "devNotes": "Geliştirme Notları",
     "noReleases": "Henüz bir sürüm yayınlanmamış.",
     "noCommits": "Son aktivite bulunamadı.",
+    "noRepos": "Burada henüz bir şey yok.",
+    "noFilterMatch": "Eşleşen bir sonuç bulunamadı.",
     "viewCommit": "Commit'i İncele"
   },
   "Links": {
@@ -109,5 +111,19 @@
   },
   "Common": {
     "quote": "\"Yıkılan sadece zayıflığındı; kalk ve süreci bitir.\""
+  },
+  "NotFound": {
+    "title": "404",
+    "subtitle": "Bu sayfa yok.",
+    "description": "Aradığınız sayfa bulunamadı veya artık mevcut değil.",
+    "backToHome": "← Ana sayfaya dön"
+  },
+  "Error": {
+    "title": "Bir şeyler ters gitti.",
+    "description": "Beklenmeyen bir hata oluştu.",
+    "tryAgain": "Tekrar dene"
+  },
+  "Loading": {
+    "text": "Yükleniyor..."
   }
 }
