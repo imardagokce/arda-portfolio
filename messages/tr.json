@@ -103,7 +103,8 @@
     "title": "Bağlantılar",
     "subtitle": "Beni internette bulabileceğiniz yerler.",
     "githubDesc": "Açık kaynak projelerim ve katkılarım.",
-    "linkedinDesc": "Profesyonel iş ağım ve kariyer geçmişim."
+    "linkedinDesc": "Profesyonel iş ağım ve kariyer geçmişim.",
+    "linkedinUnavailable": "Teknik nedenlerle şu anda kullanılamıyor."
   },
   "Metadata": {
     "title": "Arda | Dijital Çalışma Masası",
@@ -125,5 +126,11 @@
   },
   "Loading": {
     "text": "Yükleniyor..."
+  },
+  "Footer": {
+    "openSourceTitle": "Bu web sitesi açık kaynaklıdır.",
+    "openSourceDesc": "Kodu inceleyebilir, öğrenebilir veya kendi çalışmalarınız için geliştirebilirsiniz.",
+    "viewRepo": "Repoyu Görüntüle",
+    "viewProjects": "Projelerimi Gör"
   }
 }

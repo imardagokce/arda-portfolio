@@ -36,9 +36,11 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
     },
     { 
       name: "LinkedIn", 
-      url: "https://linkedin.com/in/imardagokce", 
+      url: "#", 
       icon: LinkedinIcon, 
-      desc: t('linkedinDesc') 
+      desc: t('linkedinDesc'),
+      disabled: true,
+      unavailableMessage: t('linkedinUnavailable')
     },
   ];
 
@@ -58,27 +60,46 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
       <div className="flex flex-col gap-5 max-w-xl mx-auto">
         {links.map((link, index) => (
           <ScrollReveal key={link.name} delay={index * 0.1}>
-            <a 
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center p-5 sm:p-6 bg-background border border-border/50 rounded-2xl hover:bg-muted/30 hover:border-accent/40 hover:-translate-y-1 transition-all duration-300 shadow-sm"
-            >
-              <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center text-muted-foreground group-hover:bg-foreground group-hover:text-background transition-colors shrink-0 mr-6">
-                <link.icon className="w-6 h-6" />
+            {link.disabled ? (
+              <div className="group flex items-center p-5 sm:p-6 bg-background/50 border border-border/30 rounded-2xl opacity-70 cursor-default shadow-sm">
+                <div className="w-14 h-14 rounded-full bg-muted/50 flex items-center justify-center text-muted-foreground shrink-0 mr-6">
+                  <link.icon className="w-6 h-6" />
+                </div>
+                <div className="flex-1 text-left">
+                  <h2 className="text-xl font-semibold text-foreground/80 mb-1">
+                    {link.name}
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {link.desc}
+                  </p>
+                  <p className="text-[13px] text-muted-foreground/80 mt-2 font-medium">
+                    {link.unavailableMessage}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 text-left">
-                <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors mb-1">
-                  {link.name}
-                </h2>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {link.desc}
-                </p>
-              </div>
-              <div className="pl-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                 <ArrowRight className="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform" />
-              </div>
-            </a>
+            ) : (
+              <a 
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center p-5 sm:p-6 bg-background border border-border/50 rounded-2xl hover:bg-muted/30 hover:border-accent/40 hover:-translate-y-1 transition-all duration-300 shadow-sm"
+              >
+                <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center text-muted-foreground group-hover:bg-foreground group-hover:text-background transition-colors shrink-0 mr-6">
+                  <link.icon className="w-6 h-6" />
+                </div>
+                <div className="flex-1 text-left">
+                  <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors mb-1">
+                    {link.name}
+                  </h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {link.desc}
+                  </p>
+                </div>
+                <div className="pl-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                   <ArrowRight className="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform" />
+                </div>
+              </a>
+            )}
           </ScrollReveal>
         ))}
       </div>

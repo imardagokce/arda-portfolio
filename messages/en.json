@@ -103,7 +103,8 @@
     "title": "Links",
     "subtitle": "Places you can find me on the internet.",
     "githubDesc": "My open source projects and contributions.",
-    "linkedinDesc": "My professional network and career history."
+    "linkedinDesc": "My professional network and career history.",
+    "linkedinUnavailable": "Currently unavailable for technical reasons."
   },
   "Metadata": {
     "title": "Arda | Digital Workspace",
@@ -125,5 +126,11 @@
   },
   "Loading": {
     "text": "Loading..."
+  },
+  "Footer": {
+    "openSourceTitle": "This website is open source.",
+    "openSourceDesc": "Feel free to explore the code, learn from it, or build upon it.",
+    "viewRepo": "View Repository",
+    "viewProjects": "View Projects"
   }
 }
