@@ -16,18 +16,26 @@ export default function ContactPage() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
+    // Sonsuz spinner riskine karşı güvenli fallback timeout (15 saniye)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
 
       if (!res.ok) throw new Error('Failed to send message');
       
       setStatus('success');
       (e.target as HTMLFormElement).reset();
     } catch {
+      clearTimeout(timeoutId);
       setStatus('error');
     }
   };
