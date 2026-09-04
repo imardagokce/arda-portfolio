@@ -17,7 +17,7 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
       
       const timer = setTimeout(() => {
         setShowAnimation(false);
-      }, 1800); // 1.2s animation + 0.6s delay
+      }, 2400); // 2.0s animation + 0.4s delay
       return () => clearTimeout(timer);
     }
   }, []);
@@ -32,7 +32,7 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
           <motion.div 
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-background"
           >
             <motion.svg
@@ -50,13 +50,13 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
                 d="M 55,145 C 60,145 80,80 100,40 C 98,90 102,130 115,150 C 118,154 122,150 120,145"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 0.7, ease: "easeInOut", delay: 0.1 }}
+                transition={{ duration: 0.9, ease: "easeInOut", delay: 0.1 }}
               />
               <motion.path
                 d="M 45,115 C 80,105 120,98 155,93"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: 0.8 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
               />
               <motion.circle
                 cx="155"
@@ -65,7 +65,7 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
                 className="fill-foreground stroke-none"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, ease: "easeOut", delay: 1.2 }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 1.6 }}
               />
             </motion.svg>
           </motion.div>
@@ -75,7 +75,7 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
       <motion.div
         initial={{ opacity: mounted && showAnimation ? 0 : 1 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: mounted && showAnimation ? 1.8 : 0, ease: "easeOut" }}
+        transition={{ duration: 0.8, delay: mounted && showAnimation ? 2.4 : 0, ease: "easeOut" }}
         className="flex flex-col flex-1"
       >
         {children}

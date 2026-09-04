@@ -28,12 +28,27 @@ export function NavBar() {
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-300 ${scrolled ? 'py-4' : 'py-8'}`}
     >
       <nav className={`flex items-center justify-between w-full max-w-4xl px-6 py-3 transition-all duration-300 backdrop-blur-xl bg-background/60 border border-border/40 rounded-2xl ${scrolled ? 'shadow-sm shadow-black/5 dark:shadow-white/5' : ''}`}>
          <div className="flex items-center gap-8">
-           <Link href="/" className="font-semibold text-lg text-foreground hover:text-accent transition-colors tracking-tight">A.</Link>
+           <Link href="/" className="text-foreground hover:text-accent transition-colors flex items-center justify-center" aria-label="Home">
+             <svg
+               width="28"
+               height="28"
+               viewBox="0 0 200 200"
+               fill="none"
+               stroke="currentColor"
+               strokeWidth="12"
+               strokeLinecap="round"
+               strokeLinejoin="round"
+             >
+               <path d="M 55,145 C 60,145 80,80 100,40 C 98,90 102,130 115,150 C 118,154 122,150 120,145" />
+               <path d="M 45,115 C 80,105 120,98 155,93" />
+               <circle cx="155" cy="93" r="12" className="fill-current stroke-none" />
+             </svg>
+           </Link>
            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium text-muted-foreground">
              <Link href="/about" className={`transition-colors ${pathname.startsWith('/about') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('about')}</Link>
              <Link href="/projects" className={`transition-colors ${pathname.startsWith('/projects') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('projects')}</Link>
