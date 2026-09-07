@@ -13,10 +13,10 @@ export function AnimatedSignature({ children }: { children: React.ReactNode }) {
     const hasVisited = sessionStorage.getItem('hasVisited');
     if (!hasVisited) {
       setShowAnimation(true);
-      sessionStorage.setItem('hasVisited', 'true');
       
       const timer = setTimeout(() => {
         setShowAnimation(false);
+        sessionStorage.setItem('hasVisited', 'true');
       }, 2400); // 2.0s animation + 0.4s delay
       return () => clearTimeout(timer);
     }
