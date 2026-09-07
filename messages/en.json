@@ -104,14 +104,22 @@
     "subtitle": "Places you can find me on the internet.",
     "githubDesc": "My open source projects and contributions.",
     "linkedinDesc": "My professional network and career history.",
-    "linkedinUnavailable": "Currently unavailable for technical reasons."
+    "linkedinUnavailable": "Currently unavailable for technical reasons.",
+    "unityDesc": "My game development & Unity learning journey",
+    "unityPathway": "Current Pathway",
+    "unityProgress": "Progress",
+    "unityCompleted": "Completed",
+    "unityBadges": "Badges",
+    "unityNoProfile": "Unity Learn currently doesn't provide a public profile link for sharing this progress.",
+    "itchDesc": "Game development projects",
+    "itchUnavailable": "My itch.io profile will be available here when my first project is published."
   },
   "Metadata": {
     "title": "Arda | Digital Workspace",
     "description": "Linux, open source, privacy, internet freedom, and technology."
   },
   "Common": {
-    "quote": "\"It was only your weakness that collapsed; get up and finish the process.\""
+    "quote": "ascend"
   },
   "NotFound": {
     "title": "404",

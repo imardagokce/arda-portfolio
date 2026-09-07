@@ -104,14 +104,22 @@
     "subtitle": "Beni internette bulabileceğiniz yerler.",
     "githubDesc": "Açık kaynak projelerim ve katkılarım.",
     "linkedinDesc": "Profesyonel iş ağım ve kariyer geçmişim.",
-    "linkedinUnavailable": "Teknik nedenlerle şu anda kullanılamıyor."
+    "linkedinUnavailable": "Teknik nedenlerle şu anda kullanılamıyor.",
+    "unityDesc": "Oyun geliştirme ve Unity öğrenme sürecim",
+    "unityPathway": "Şu anki öğrenme yolu",
+    "unityProgress": "İlerleme",
+    "unityCompleted": "Tamamlanan",
+    "unityBadges": "Rozetler",
+    "unityNoProfile": "Unity Learn, bu ilerlemeyi paylaşabileceğim herkese açık bir profil bağlantısı sunmuyor.",
+    "itchDesc": "Oyun geliştirme projeleri",
+    "itchUnavailable": "İlk projem yayımlandığında itch.io profilim burada erişilebilir olacak."
   },
   "Metadata": {
     "title": "Arda | Dijital Çalışma Masası",
     "description": "Linux, açık kaynak, gizlilik, internet özgürlüğü ve teknoloji."
   },
   "Common": {
-    "quote": "\"Yıkılan sadece zayıflığındı; kalk ve süreci bitir.\""
+    "quote": "yüksel"
   },
   "NotFound": {
     "title": "404",
