@@ -16,26 +16,26 @@ export function Footer() {
   const tFooter = useTranslations('Footer');
   
   return (
-    <footer className="w-full border-t border-border/40 py-16 mt-auto bg-background/50 backdrop-blur-sm">
+    <footer className="w-full py-16 mt-auto bg-background/50 backdrop-blur-sm">
       <div className="w-full max-w-4xl mx-auto px-6 flex flex-col items-center text-center">
         
-        <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-muted/30 border border-border/50 rounded-2xl w-full max-w-2xl mb-12">
-           <GithubIcon className="w-8 h-8 text-muted-foreground mb-4 opacity-80" />
-           <p className="text-foreground font-semibold mb-2">{tFooter('openSourceTitle')}</p>
-           <p className="text-sm text-muted-foreground mb-6 max-w-md">{tFooter('openSourceDesc')}</p>
+        <div className="flex flex-col items-center justify-center p-8 md:p-10 bg-muted/30 border border-border/50 rounded-2xl w-full max-w-xl mx-auto mb-24 md:mb-32 shadow-sm">
+           <GithubIcon className="w-8 h-8 text-foreground mb-5 opacity-90" />
+           <p className="text-lg text-foreground font-semibold mb-2">{tFooter('openSourceTitle')}</p>
+           <p className="text-sm text-muted-foreground mb-8 max-w-sm">{tFooter('openSourceDesc')}</p>
            
-           <div className="flex flex-wrap items-center justify-center gap-4">
+           <div className="flex flex-wrap items-center justify-center gap-3 w-full">
               <a 
                 href="https://github.com/imardagokce/arda-portfolio" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-5 py-2.5 bg-background border border-border/60 hover:border-accent/40 rounded-full text-sm font-medium text-foreground hover:text-accent transition-colors shadow-sm"
+                className="px-6 py-2.5 bg-foreground text-background hover:bg-foreground/90 rounded-full text-sm font-medium transition-all hover:-translate-y-0.5 shadow-sm"
               >
                 {tFooter('viewRepo')}
               </a>
               <Link 
                 href="/projects" 
-                className="px-5 py-2.5 bg-foreground text-background hover:bg-foreground/90 rounded-full text-sm font-medium transition-colors shadow-sm"
+                className="px-6 py-2.5 bg-background border border-border/60 hover:border-accent/40 hover:bg-muted/30 rounded-full text-sm font-medium text-foreground hover:text-accent transition-all hover:-translate-y-0.5 shadow-sm"
               >
                 {tFooter('viewProjects')}
               </Link>

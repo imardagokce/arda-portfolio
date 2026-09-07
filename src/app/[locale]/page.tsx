@@ -230,7 +230,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* CTA Section */}
-      <section className="w-full max-w-2xl mx-auto px-6 py-32 md:py-48 text-center border-t border-border/30">
+      <section className="w-full max-w-2xl mx-auto px-6 pt-32 pb-16 md:pt-48 md:pb-20 text-center border-t border-border/30">
         <ScrollReveal>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             {t('ctaTitle')}
