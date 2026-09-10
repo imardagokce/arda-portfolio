@@ -39,7 +39,7 @@
     "title": "About Me",
     "subtitle": "I'm learning to make games and trying to turn my ideas into something real.",
     "whoAmITitle": "Who Am I?",
-    "whoAmIDesc": "I love making games. I especially want to develop games for PC. For now, I'm learning Unity and turning the ideas that come to my mind into small projects and prototypes. I enjoy both programming and game design, and I know I still have a lot to learn. I'm still at the beginning of the journey, but I don't just want it. Every day, every hour, every minute, I try to push myself a little further and keep working towards my goals. In the long run, I want to gain real experience in a good team, keep improving, and eventually build a place of my own. If I'm given a chance, I want to give it everything I have and make it count.",
+    "whoAmIDesc": "I love making games. I especially want to develop games for PC. For now, I'm learning Unity and turning the ideas that come to my mind into small projects and prototypes. I enjoy both programming and game design, and I know I still have a lot to learn. I'm still at the beginning of the journey, but I don't just want it. Every day, every hour, every minute, I try to push myself a little further and keep working towards my goals. In the long run, I want to gain real experience in a good team, keep improving, and eventually build a place of my own. If I'm given a chance, I want to give it everything I have and make it count. When something really interests me, I can stay deeply focused on it for a long time. I constantly get new ideas, and sometimes something I start turns into a much bigger project than I originally imagined. I like remembering details and combining things I've learned before with new ideas.",
     "interestsTitle": "Interests",
     "interest1": "Unity & C# - I'm learning Unity and reinforcing what I learn by building things.",
     "interest2": "Game Design - I enjoy coming up with game ideas, designing mechanics, and turning them into something playable.",
@@ -53,7 +53,7 @@
   },
   "Contact": {
     "title": "Contact",
-    "subtitle": "You can use the form below to get in touch with me. Your emails will reach me directly.",
+    "subtitle": "Feel free to use the form below to get in touch. Your message will come directly to me.",
     "nameLabel": "Name",
     "emailLabel": "Email",
     "subjectLabel": "Subject",

@@ -39,7 +39,7 @@
     "title": "Hakkımda",
     "subtitle": "Oyun yapmayı öğreniyor, kendi fikirlerimi gerçeğe dönüştürmeye çalışıyorum.",
     "whoAmITitle": "Ben Kimim?",
-    "whoAmIDesc": "Oyun yapmayı seviyorum. Özellikle PC için oyunlar geliştirmek istiyorum. Şimdilik Unity öğreniyor, aklıma gelen fikirleri küçük projeler ve prototiplerle deniyorum. Kodlamayı da oyun tasarlamayı da seviyorum ve daha öğrenecek çok şeyim olduğunu biliyorum. Henüz yolun başındayım ama istemekle kalmıyorum. Her gün, her saat, her dakika kendimi biraz daha ileriye itiyor ve hedeflerimi gerçekleştirmek için durmadan çalışıyorum. Uzun vadede amacım iyi bir ekipte çalışıp gerçek tecrübe kazanmak, kendimi geliştirip bir gün kendi yerimi kurmak. Bana bir şans verildiğinde, o şansı boşa çıkarmamak için elimden gelenin tamamını vermek istiyorum.",
+    "whoAmIDesc": "Oyun yapmayı seviyorum. Özellikle PC için oyunlar geliştirmek istiyorum. Şimdilik Unity öğreniyor, aklıma gelen fikirleri küçük projeler ve prototiplerle deniyorum. Kodlamayı da oyun tasarlamayı da seviyorum ve daha öğrenecek çok şeyim olduğunu biliyorum. Henüz yolun başındayım ama istemekle kalmıyorum. Her gün, her saat, her dakika kendimi biraz daha ileriye itiyor ve hedeflerimi gerçekleştirmek için durmadan çalışıyorum. Uzun vadede amacım iyi bir ekipte çalışıp gerçek tecrübe kazanmak, kendimi geliştirip bir gün kendi yerimi kurmak. Bana bir şans verildiğinde, o şansı boşa çıkarmamak için elimden gelenin tamamını vermek istiyorum. Bir şey gerçekten ilgimi çektiğinde ona uzun süre odaklanabiliyorum. Aklıma sürekli yeni fikirler geliyor ve bazen başladığım bir şey, düşündüğümden çok daha büyük bir projeye dönüşebiliyor. Detayları hatırlamayı ve daha önce öğrendiğim şeyleri yeni fikirlerle birleştirmeyi seviyorum.",
     "interestsTitle": "İlgi Alanları",
     "interest1": "Unity & C# - Unity öğreniyor, öğrendiklerimi yaparak pekiştiriyorum.",
     "interest2": "Oyun Tasarımı - Oyun fikirleri düşünmeyi, mekanikler tasarlamayı ve onları oynanabilir hâle getirmeyi seviyorum.",
@@ -53,7 +53,7 @@
   },
   "Contact": {
     "title": "İletişim",
-    "subtitle": "Benimle iletişime geçmek için aşağıdaki formu kullanabilirsiniz. E-postalarınız doğrudan bana ulaşacaktır.",
+    "subtitle": "Benimle iletişime geçmek için aşağıdaki formu kullanabilirsiniz. Mesajınız doğrudan bana ulaşır.",
     "nameLabel": "İsim",
     "emailLabel": "E-posta",
     "subjectLabel": "Konu",
