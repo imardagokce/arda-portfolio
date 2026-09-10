@@ -7,7 +7,7 @@ import { Link } from "@/i18n/routing";
 import { Code2, ExternalLink, Calendar, Star, CircleDot } from "lucide-react";
 import { Repository } from "@/lib/github";
 
-const OFFICIAL_TOPICS = ['active', 'completed', 'idea', 'planned', 'paused', 'archived'] as const;
+const OFFICIAL_TOPICS = ['active', 'nearly-finished', 'completed', 'idea', 'planned', 'paused', 'archived'] as const;
 type StatusTopic = typeof OFFICIAL_TOPICS[number];
 
 export function ProjectList({ repos }: { repos: Repository[] }) {
@@ -30,6 +30,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
   const getStatusColor = (status: StatusTopic | null) => {
     switch (status) {
       case 'active': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20';
+      case 'nearly-finished': return 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20';
       case 'completed': return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
       case 'idea': return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
       case 'planned': return 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20';

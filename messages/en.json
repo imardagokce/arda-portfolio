@@ -4,7 +4,8 @@
     "about": "About",
     "projects": "Projects",
     "links": "Links",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cv": "CV"
   },
   "Home": {
     "greeting": "Hi, I'm Arda.",
@@ -71,6 +72,7 @@
     "associatedLogs": "Dev Log",
     "status": {
       "active": "In Progress",
+      "nearly-finished": "Nearly Finished",
       "completed": "Completed",
       "idea": "Idea Stage",
       "planned": "Planned",
@@ -81,6 +83,7 @@
     "filters": {
       "all": "All",
       "active": "In Progress",
+      "nearly-finished": "Nearly Finished",
       "completed": "Completed",
       "idea": "Idea Stage",
       "planned": "Planned",
@@ -140,5 +143,9 @@
     "openSourceDesc": "Feel free to explore the code, learn from it, or build upon it.",
     "viewRepo": "View Repository",
     "viewProjects": "View Projects"
+  },
+  "CV": {
+    "title": "Interactive CV coming soon.",
+    "desc": "I'm still working on it. You'll find it here when it's ready."
   }
 }

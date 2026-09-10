@@ -8,6 +8,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const { getTranslations } = await import('next-intl/server');
   const t = await getTranslations({ locale, namespace: 'Home' });
+  const tProjects = await getTranslations({ locale, namespace: 'Projects' });
   
   const allRepos = await getRepositories();
   
@@ -117,7 +118,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
           <div className="grid md:grid-cols-2 gap-6">
             {featuredProjects.map((project, index) => {
-              const status = project.topics?.find(t => ['active', 'completed', 'idea', 'planned', 'paused', 'archived'].includes(t)) || null;
+              const status = project.topics?.find(t => ['active', 'nearly-finished', 'completed', 'idea', 'planned', 'paused', 'archived'].includes(t)) || null;
               return (
               <ScrollReveal key={project.name} delay={index * 0.1}>
                  <Link 
@@ -137,7 +138,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                             </div>
                             {status && (
                               <span className="text-xs px-2 py-1 rounded-full font-medium bg-muted text-muted-foreground">
-                                {status}
+                                {tProjects(`status.${status}`)}
                               </span>
                             )}
                           </div>

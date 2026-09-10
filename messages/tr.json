@@ -4,7 +4,8 @@
     "about": "Hakkımda",
     "projects": "Projeler",
     "links": "Bağlantılar",
-    "contact": "İletişim"
+    "contact": "İletişim",
+    "cv": "CV"
   },
   "Home": {
     "greeting": "Merhaba, ben Arda.",
@@ -71,6 +72,7 @@
     "associatedLogs": "Geliştirici Günlüğü",
     "status": {
       "active": "Üzerinde Çalışılıyor",
+      "nearly-finished": "Tamamlanmak Üzere",
       "completed": "Tamamlandı",
       "idea": "Fikir Aşaması",
       "planned": "Planlandı",
@@ -81,6 +83,7 @@
     "filters": {
       "all": "Tümü",
       "active": "Üzerinde Çalışılıyor",
+      "nearly-finished": "Tamamlanmak Üzere",
       "completed": "Tamamlandı",
       "idea": "Fikir Aşaması",
       "planned": "Planlandı",
@@ -140,5 +143,9 @@
     "openSourceDesc": "Kodu inceleyebilir, öğrenebilir veya kendi çalışmalarınız için geliştirebilirsiniz.",
     "viewRepo": "Repoyu Görüntüle",
     "viewProjects": "Projelerimi Gör"
+  },
+  "CV": {
+    "title": "İnteraktif CV yakında.",
+    "desc": "Şimdilik hazırlıyorum. Tamamladığımda burada bulabilirsin."
   }
 }
