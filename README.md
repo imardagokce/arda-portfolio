@@ -54,4 +54,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Licence
 
-This project is open-source and available under the [MIT Licence](LICENSE).
+This project is open-source and available under the [Artistic License 2.0](https://opensource.org/license/artistic-2.0).
+
+Copyright © 2026 Arda Gökçe Alkan.
