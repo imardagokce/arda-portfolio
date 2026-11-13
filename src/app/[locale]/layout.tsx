@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { routing } from '@/i18n/routing';
@@ -54,6 +54,9 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
+
+  // Statik üretim için: next-intl dili istek başlığından okumak yerine buradan alır.
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 

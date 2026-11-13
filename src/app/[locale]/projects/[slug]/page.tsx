@@ -5,7 +5,7 @@ import { Link, routing } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -27,6 +27,7 @@ export default async function ProjectDetailPage({
   params: Promise<{ locale: string; slug: string }> 
 }) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Projects' });
   
   // 1. Fetch GitHub Data First
