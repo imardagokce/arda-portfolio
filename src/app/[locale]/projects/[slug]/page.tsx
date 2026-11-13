@@ -1,6 +1,6 @@
 import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
@@ -36,12 +36,10 @@ export default async function ProjectDetailPage({
   const project = getProjectBySlug(locale, slug);
 
   // MDX Configuration
-  const mdxOptions = {
+  const mdxOptions: MDXRemoteProps['options'] = {
     mdxOptions: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      remarkPlugins: [remarkGfm, remarkAlert] as any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]] as any,
+      remarkPlugins: [remarkGfm, remarkAlert],
+      rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
     }
   };
 
