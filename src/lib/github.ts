@@ -57,6 +57,42 @@ export interface Commit {
 }
 
 /**
+ * GitHub REST API'nin ham (snake_case) yanıt tipleri.
+ * Yalnızca bu modülde kullanılan alanları içerir.
+ */
+interface RawGitHubRepo {
+  name: string;
+  description: string | null;
+  stargazers_count: number;
+  html_url: string;
+  created_at: string;
+  updated_at: string;
+  language: string | null;
+  topics?: string[];
+  default_branch: string;
+}
+
+interface RawGitHubRelease {
+  id: number;
+  name: string | null;
+  tag_name: string;
+  published_at: string;
+  body: string | null;
+  html_url: string;
+}
+
+interface RawGitHubCommit {
+  sha: string;
+  html_url: string;
+  commit: {
+    message: string;
+    author: {
+      date: string;
+    };
+  };
+}
+
+/**
  * Kullanıcının genel GitHub istatistiklerini çeker.
  */
 export async function getGitHubStats(): Promise<GitHubStats> {
@@ -99,10 +135,9 @@ export async function getGitHubStats(): Promise<GitHubStats> {
       };
     }
 
-    const reposData = await reposRes.json();
-    
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const totalStars = reposData.reduce((acc: number, repo: any) => acc + repo.stargazers_count, 0);
+    const reposData: RawGitHubRepo[] = await reposRes.json();
+
+    const totalStars = reposData.reduce((acc, repo) => acc + repo.stargazers_count, 0);
     
     // Son güncellenen depoyu bul (zaten updated olarak sıralı geliyor, ama emin olalım)
     const lastUpdatedRepo = reposData.length > 0 ? {
@@ -172,10 +207,9 @@ export async function getRepositories(): Promise<Repository[]> {
       return [];
     }
 
-    const data = await res.json();
+    const data: RawGitHubRepo[] = await res.json();
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.map((repo: any) => ({
+    return data.map((repo) => ({
       name: repo.name,
       description: repo.description,
       stars: repo.stargazers_count,
@@ -235,10 +269,9 @@ export async function getRepositoryReleases(repoName: string): Promise<Release[]
       return [];
     }
 
-    const data = await res.json();
-    
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.map((release: any) => ({
+    const data: RawGitHubRelease[] = await res.json();
+
+    return data.map((release) => ({
       id: release.id,
       name: release.name || release.tag_name,
       tagName: release.tag_name,
@@ -267,10 +300,9 @@ export async function getRepositoryCommits(repoName: string): Promise<Commit[]> 
       return [];
     }
 
-    const data = await res.json();
-    
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return data.map((commit: any) => ({
+    const data: RawGitHubCommit[] = await res.json();
+
+    return data.map((commit) => ({
       sha: commit.sha,
       message: commit.commit.message.split('\n')[0], // Sadece ilk satırı al (başlık)
       date: commit.commit.author.date,
