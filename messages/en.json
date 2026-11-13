@@ -5,7 +5,9 @@
     "projects": "Projects",
     "links": "Links",
     "contact": "Contact",
-    "cv": "CV"
+    "cv": "CV",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "Home": {
     "greeting": "Hi, I'm Arda.",

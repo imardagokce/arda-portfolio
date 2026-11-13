@@ -5,7 +5,9 @@
     "projects": "Projeler",
     "links": "Bağlantılar",
     "contact": "İletişim",
-    "cv": "CV"
+    "cv": "CV",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
   },
   "Home": {
     "greeting": "Merhaba, ben Arda.",

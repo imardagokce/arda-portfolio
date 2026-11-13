@@ -3,10 +3,20 @@
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import { LanguageSelector } from '@/components/LanguageSelector';
+
+// Mobil menüde gösterilen sayfalar (masaüstü linkleriyle aynı sıra, başında ana sayfa).
+const MOBILE_NAV_ITEMS = [
+  { href: '/', key: 'home' },
+  { href: '/about', key: 'about' },
+  { href: '/projects', key: 'projects' },
+  { href: '/links', key: 'links' },
+  { href: '/cv', key: 'cv' },
+  { href: '/contact', key: 'contact' },
+] as const;
 
 export function NavBar() {
   const t = useTranslations('Navigation');
@@ -24,6 +34,37 @@ export function NavBar() {
     else setScrolled(false);
   });
 
+  // Mobil menü: Escape ve dışarı dokunma ile kapanır; Escape'te odak menü düğmesine döner.
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [menuOpen]);
+
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+
   return (
     <motion.header 
       initial={{ y: -100 }}
@@ -31,7 +72,7 @@ export function NavBar() {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-300 ${scrolled ? 'py-4' : 'py-8'}`}
     >
-      <nav className={`flex items-center justify-between w-full max-w-4xl px-6 py-3 transition-all duration-300 backdrop-blur-xl bg-background/60 border border-border/40 rounded-2xl ${scrolled ? 'shadow-sm shadow-black/5 dark:shadow-white/5' : ''}`}>
+      <nav ref={navRef} className={`relative flex items-center justify-between w-full max-w-4xl px-6 py-3 transition-all duration-300 backdrop-blur-xl bg-background/60 border border-border/40 rounded-2xl ${scrolled ? 'shadow-sm shadow-black/5 dark:shadow-white/5' : ''}`}>
          <div className="flex items-center gap-8">
            <Link href="/" className="text-foreground hover:text-accent transition-colors flex items-center justify-center" aria-label="Home">
              <svg
@@ -72,7 +113,50 @@ export function NavBar() {
                <span className="block h-4 w-4" />
              )}
            </button>
+
+           {/* Mobil menü düğmesi: görünüm diğer ikon düğmeleriyle aynı, dokunma alanı 44px'e genişletildi. */}
+           <button
+             ref={menuButtonRef}
+             type="button"
+             onClick={() => setMenuOpen((open) => !open)}
+             className="md:hidden relative p-2 rounded-full hover:bg-muted/50 text-foreground hover:text-accent dark:text-muted-foreground dark:hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1.5 after:content-['']"
+             aria-label={menuOpen ? t('closeMenu') : t('openMenu')}
+             aria-expanded={menuOpen}
+             aria-controls="mobile-nav-menu"
+           >
+             {menuOpen ? <X className="h-4 w-4" aria-hidden="true" /> : <Menu className="h-4 w-4" aria-hidden="true" />}
+           </button>
          </div>
+
+         <AnimatePresence>
+           {menuOpen && (
+             <motion.div
+               id="mobile-nav-menu"
+               initial={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
+               animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeOut" } }}
+               exit={{ opacity: 0, y: reduceMotion ? 0 : -8, transition: { duration: 0.15, ease: "easeIn" } }}
+               className="md:hidden absolute left-0 right-0 top-full mt-2 p-2 rounded-2xl bg-background border border-border/50 shadow-lg"
+             >
+               <ul className="flex flex-col gap-1">
+                 {MOBILE_NAV_ITEMS.map((item) => {
+                   const active = isActive(item.href);
+                   return (
+                     <li key={item.href}>
+                       <Link
+                         href={item.href}
+                         onClick={() => setMenuOpen(false)}
+                         aria-current={active ? 'page' : undefined}
+                         className={`flex items-center min-h-11 px-4 rounded-xl text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent ${active ? 'bg-muted/50 text-accent dark:text-foreground' : 'text-foreground dark:text-muted-foreground hover:bg-muted/50 hover:text-accent dark:hover:text-foreground'}`}
+                       >
+                         {t(item.key)}
+                       </Link>
+                     </li>
+                   );
+                 })}
+               </ul>
+             </motion.div>
+           )}
+         </AnimatePresence>
       </nav>
     </motion.header>
   );
