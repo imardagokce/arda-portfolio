@@ -22,7 +22,6 @@ export async function POST(request: Request) {
         replyTo: email,
       });
     } else {
-      console.log(`[Resend Simülasyonu] Mesaj alındı: ${name} (${email}): ${subject}`);
       // Simüle edilmiş gecikme
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
