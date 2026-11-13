@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
@@ -19,6 +20,28 @@ export async function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
     repos.map((repo) => ({ locale, slug: repo.name }))
   );
+}
+
+// Başlık ve açıklama repodan gelir; varsa content/ altındaki MDX notunun başlığı/açıklaması önceliklidir.
+// Buradaki GitHub isteği sayfanın kendi isteğiyle aynı olduğu için Next.js tarafından tek isteğe indirilir.
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string; slug: string }>
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const repoData = await getRepositoryData(slug);
+
+  // Repo bulunamazsa sayfa zaten 404 verir; genel metadata kullanılır.
+  if (!repoData) return {};
+
+  const t = await getTranslations({ locale, namespace: 'Projects' });
+  const project = getProjectBySlug(locale, slug);
+
+  return {
+    title: project?.frontmatter.title || repoData.name,
+    description: project?.frontmatter.description || repoData.description || t('noDescription'),
+  };
 }
 
 export default async function ProjectDetailPage({
