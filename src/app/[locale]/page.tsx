@@ -104,9 +104,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {featuredProjects.length > 0 && (
         <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
           <ScrollReveal>
-            <div className="flex items-center justify-between mb-12">
+            <div className="flex items-center justify-between gap-4 mb-12">
               <h2 className="text-3xl font-bold text-foreground">{t('featuredProjectsTitle')}</h2>
-              <Link href="/projects" className="text-sm font-medium text-muted-foreground hover:text-accent transition-colors flex items-center gap-1">
+              <Link href="/projects" className="shrink-0 whitespace-nowrap text-sm font-medium text-muted-foreground hover:text-accent transition-colors flex items-center gap-1">
                 {t('viewAll')} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -123,17 +123,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   >
                     <div className="flex flex-col h-full justify-between">
                       <div>
-                        <div className="flex items-center justify-between mb-4">
-                          <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
+                        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-4">
+                          <h2 className="min-w-0 break-words text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
                             {project.name}
                           </h2>
-                          <div className="flex items-center gap-3">
+                          <div className="flex shrink-0 items-center gap-3">
                             <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border border-border/50">
                               <Star className="w-3 h-3 text-accent" />
                               {project.stars}
                             </div>
                             {status && (
-                              <span className="text-xs px-2 py-1 rounded-full font-medium bg-muted text-muted-foreground">
+                              <span className="whitespace-nowrap text-xs px-2 py-1 rounded-full font-medium bg-muted text-muted-foreground">
                                 {tProjects(`status.${status}`)}
                               </span>
                             )}
@@ -167,13 +167,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* GitHub Stats Section */}
       <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
         <ScrollReveal>
-          <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center justify-between gap-4 mb-12">
              <h2 className="text-3xl font-bold text-foreground">{t('githubStatsTitle')}</h2>
              <a 
                href={`https://github.com/${GITHUB_USERNAME}`}
                target="_blank" 
                rel="noopener noreferrer" 
-               className="group flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-accent transition-colors px-4 py-2 bg-muted/30 rounded-full border border-border/50 hover:border-accent/30"
+               className="group shrink-0 whitespace-nowrap flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-accent transition-colors px-4 py-2 bg-muted/30 rounded-full border border-border/50 hover:border-accent/30"
              >
                 @{GITHUB_USERNAME} <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
              </a>
