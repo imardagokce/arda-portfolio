@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import type { Metadata } from 'next';
 import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
@@ -90,10 +91,9 @@ export default async function ProjectDetailPage({
   };
 
   const mdxComponents = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    img: (props: any) => {
+    img: (props: ComponentProps<'img'>) => {
       let src = props.src;
-      if (src && !src.startsWith('http')) {
+      if (typeof src === 'string' && src && !src.startsWith('http')) {
         // Remove leading ./ or /
         const cleanPath = src.replace(/^[./]+/, '');
         src = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoData.name}/${repoData.defaultBranch || 'main'}/${cleanPath}`;
