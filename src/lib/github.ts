@@ -6,7 +6,7 @@
  * sistemin çökmesini engellemek için Graceful Fallback kullanır.
  */
 
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'imardagokce';
+export const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'imardagokce';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 const headers: HeadersInit = {

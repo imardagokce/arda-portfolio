@@ -2,7 +2,7 @@ import { Link } from '@/i18n/routing';
 import { ArrowRight, Mail, Server, Globe, Shield, Code2, Star, GitCommit, Users, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { AnimatedCounter } from '@/components/AnimatedCounter';
-import { getGitHubStats, getRepositories } from '@/lib/github';
+import { GITHUB_USERNAME, getGitHubStats, getRepositories } from '@/lib/github';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -174,12 +174,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="flex items-center justify-between mb-12">
              <h2 className="text-3xl font-bold text-foreground">{t('githubStatsTitle')}</h2>
              <a 
-               href="https://github.com/imardagokce" 
+               href={`https://github.com/${GITHUB_USERNAME}`}
                target="_blank" 
                rel="noopener noreferrer" 
                className="group flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-accent transition-colors px-4 py-2 bg-muted/30 rounded-full border border-border/50 hover:border-accent/30"
              >
-                @imardagokce <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                @{GITHUB_USERNAME} <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
              </a>
           </div>
           

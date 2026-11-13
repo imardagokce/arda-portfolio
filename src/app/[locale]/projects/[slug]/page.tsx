@@ -4,7 +4,7 @@ import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { Link } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
+import { GITHUB_USERNAME, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
 import { getTranslations } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({
       if (src && !src.startsWith('http')) {
         // Remove leading ./ or /
         const cleanPath = src.replace(/^[./]+/, '');
-        src = `https://raw.githubusercontent.com/imardagokce/${repoData.name}/${repoData.defaultBranch || 'main'}/${cleanPath}`;
+        src = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoData.name}/${repoData.defaultBranch || 'main'}/${cleanPath}`;
       }
       // eslint-disable-next-line @next/next/no-img-element
       return <img {...props} src={src} className="w-full h-auto rounded-xl border border-border/50" loading="lazy" alt={props.alt || ''} />;
