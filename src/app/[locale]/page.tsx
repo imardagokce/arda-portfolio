@@ -10,15 +10,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Home' });
   const tProjects = await getTranslations({ locale, namespace: 'Projects' });
   
-  const allRepos = await getRepositories();
-  
+  // Repolar ve genel GitHub istatistikleri paralel çekilir
+  const [allRepos, githubStats] = await Promise.all([getRepositories(), getGitHubStats()]);
+
   // En çok yıldız alan 2 projeyi öne çıkar
   const featuredProjects = [...allRepos].sort((a, b) => b.stars - a.stars).slice(0, 2);
-  
-  
-
-  // Genel GitHub İstatistikleri
-  const githubStats = await getGitHubStats();
 
   return (
     <div className="flex flex-col relative w-full items-center min-h-screen">
