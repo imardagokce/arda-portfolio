@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { CONTACT_LIMITS } from '@/lib/contact-limits';
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
@@ -60,7 +61,8 @@ export default function ContactPage() {
             <input 
               type="text" 
               id="name" 
-              name="name" 
+              name="name"
+              maxLength={CONTACT_LIMITS.name} 
               required 
               placeholder=" "
               className="peer w-full bg-muted/10 border border-border/40 rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 hover:bg-muted/20 transition-all shadow-sm"
@@ -79,7 +81,8 @@ export default function ContactPage() {
             <input 
               type="email" 
               id="email" 
-              name="email" 
+              name="email"
+              maxLength={CONTACT_LIMITS.email} 
               required 
               placeholder=" "
               className="peer w-full bg-muted/10 border border-border/40 rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 hover:bg-muted/20 transition-all shadow-sm"
@@ -98,7 +101,8 @@ export default function ContactPage() {
             <input 
               type="text" 
               id="subject" 
-              name="subject" 
+              name="subject"
+              maxLength={CONTACT_LIMITS.subject} 
               required 
               placeholder=" "
               className="peer w-full bg-muted/10 border border-border/40 rounded-xl px-4 pt-6 pb-2 text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 hover:bg-muted/20 transition-all shadow-sm"
@@ -116,7 +120,8 @@ export default function ContactPage() {
           <div className="relative group">
             <textarea 
               id="message" 
-              name="message" 
+              name="message"
+              maxLength={CONTACT_LIMITS.message} 
               required 
               rows={5}
               placeholder=" "
