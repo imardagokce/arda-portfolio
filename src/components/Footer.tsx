@@ -54,7 +54,7 @@ export function Footer() {
           <Link href="/contact" className="hover:text-accent transition-colors">{t('contact')}</Link>
         </div>
         
-        <div className="text-sm text-muted-foreground/60">
+        <div className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} Arda.
         </div>
       </div>

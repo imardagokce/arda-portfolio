@@ -88,8 +88,10 @@ export default async function ProjectDetailPage({
         const cleanPath = src.replace(/^[./]+/, '');
         src = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoData.name}/${repoData.defaultBranch || 'main'}/${cleanPath}`;
       }
+      // README görselleri GitHub'daki gibi satır içi ve kendi boyutunda gösterilir (rozetler yan yana durur,
+      // büyük görseller en fazla içerik genişliğine küçülür). Boyutlar bilinmediği için next/image kullanılmaz.
       // eslint-disable-next-line @next/next/no-img-element
-      return <img {...props} src={src} className="w-full h-auto rounded-xl border border-border/50" loading="lazy" alt={props.alt || ''} />;
+      return <img {...props} src={src} className="inline-block max-w-full h-auto !my-0 align-middle" loading="lazy" alt={props.alt || ''} />;
     }
   };
 
@@ -149,7 +151,7 @@ export default async function ProjectDetailPage({
 
       {/* 1. README Section */}
       <ScrollReveal delay={0.2}>
-        <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80 prose-img:rounded-xl">
+        <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80">
           {readme ? (
              <MDXRemote source={readme} options={githubMarkdownOptions} components={mdxComponents} />
           ) : (

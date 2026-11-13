@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-background: var(--background);
@@ -19,9 +20,9 @@
     --background: #F7F4ED;
     --foreground: #1C1F26;
     --heading: #1C1F26;
-    --accent: #8AAFD0; /* Soft light blue */
+    --accent: #2E6A9E; /* Blue for links and highlights (5.2:1 on background — WCAG AA) */
     --muted: #EAE6DB;
-    --muted-foreground: #7BA7C7; /* Soft blue for secondary text and subheadings */
+    --muted-foreground: #416C8B; /* Soft blue for secondary text and subheadings (5.1:1 on background — WCAG AA) */
     --border: #D8D1C3;
   }
 
@@ -165,4 +166,55 @@
   .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4);
   }
+}
+
+/*
+ * Typography (prose) — README, release notları ve MDX içerikleri.
+ * Renkler tema token'larına bağlıdır, bu yüzden açık ve koyu temada ayrı ayar gerekmez.
+ * Katman dışında tanımlıdır ki eklentinin prose-neutral / prose-invert renklerini geçersiz kılsın.
+ */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--heading);
+  --tw-prose-lead: var(--muted-foreground);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--heading);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--heading);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-kbd: var(--heading);
+  --tw-prose-code: var(--heading);
+  --tw-prose-pre-code: var(--foreground);
+  --tw-prose-pre-bg: var(--muted);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
+/* Satır içi kod: eklentinin eklediği ters tırnakları kaldır, yerine hafif bir zemin ver. */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+.prose :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 0.375rem;
+  background-color: var(--muted);
+  font-weight: 500;
+}
+
+/* Kod blokları: uzun satırlar sayfayı taşırmak yerine blok içinde kayar. */
+.prose pre {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+/* Geniş tablolar dar ekranda sayfayı taşırmasın. */
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
 }
