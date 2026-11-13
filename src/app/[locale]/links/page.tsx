@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { GITHUB_USERNAME } from '@/lib/github';
 
 // Lucide React resmi brand ikonları kütüphaneden kaldırıldığı için, 
 // resmi SVG path'lerini tasarım sistemiyle (currentColor) tam uyumlu şekilde inline olarak kullanıyoruz.
@@ -46,7 +47,7 @@ export default async function LinksPage({ params }: { params: Promise<{ locale: 
   const links = [
     { 
       name: "GitHub", 
-      url: "https://github.com/imardagokce", 
+      url: `https://github.com/${GITHUB_USERNAME}`,
       icon: GithubIcon, 
       desc: t('githubDesc') 
     },
