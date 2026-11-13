@@ -30,6 +30,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       default: t('title'),
     },
     description: t('description'),
+    // og:image, aynı klasördeki opengraph-image.tsx dosyasından otomatik üretilir.
+    openGraph: {
+      type: 'website',
+      siteName: 'Arda',
+      locale: locale === 'tr' ? 'tr_TR' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+    },
   };
 }
 

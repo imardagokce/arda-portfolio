@@ -1,6 +1,18 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getRepositories } from '@/lib/github';
 import { ProjectList } from '@/components/ProjectList';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
+  const t = await getTranslations({ locale, namespace: 'Projects' });
+
+  return {
+    title: tNav('projects'),
+    description: t('subtitle'),
+  };
+}
 
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
