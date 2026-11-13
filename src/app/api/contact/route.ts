@@ -1,18 +1,30 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { z } from 'zod';
+import { ContactSchema } from '@/lib/schemas';
 
 // Geçici (Placeholder) Resend API Key
 const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_123');
 
 export async function POST(request: Request) {
+  let body: unknown;
   try {
-    const body = await request.json();
-    const { name, email, subject, message } = body;
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+  }
 
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
+  const parsed = ContactSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: 'Invalid input', fields: z.flattenError(parsed.error).fieldErrors },
+      { status: 400 }
+    );
+  }
 
+  const { name, email, subject, message } = parsed.data;
+
+  try {
     if (process.env.RESEND_API_KEY) {
        await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
