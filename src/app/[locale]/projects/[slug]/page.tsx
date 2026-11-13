@@ -7,6 +7,7 @@ import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
 import { getTranslations } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 
@@ -50,6 +51,17 @@ export default async function ProjectDetailPage({
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkAlert],
       rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
+    }
+  };
+
+  // GitHub'dan gelen README ve release notları MDX değil, düz Markdown'dır.
+  // MDX olarak işlenirse içlerindeki ham HTML (style="...", <br>, yorumlar) JSX kurallarına takılır;
+  // bu yüzden 'md' formatında derlenir ve ham HTML rehype-raw ile korunur.
+  const githubMarkdownOptions: MDXRemoteProps['options'] = {
+    mdxOptions: {
+      format: 'md',
+      remarkPlugins: [remarkGfm, remarkAlert],
+      rehypePlugins: [rehypeRaw, [rehypePrettyCode, { theme: 'github-dark' }]],
     }
   };
 
@@ -125,7 +137,7 @@ export default async function ProjectDetailPage({
       <ScrollReveal delay={0.2}>
         <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80 prose-img:rounded-xl">
           {readme ? (
-             <MDXRemote source={readme} options={mdxOptions} components={mdxComponents} />
+             <MDXRemote source={readme} options={githubMarkdownOptions} components={mdxComponents} />
           ) : (
              <p className="text-muted-foreground italic text-center py-12 bg-muted/20 rounded-xl border border-dashed border-border/50">
                {locale === 'tr' ? 'Bu proje için henüz README bulunmuyor.' : 'No README found for this project yet.'}
@@ -165,7 +177,7 @@ export default async function ProjectDetailPage({
                   </summary>
                   <div className="p-6 pt-0 border-t border-border/50 bg-muted/10">
                     <div className="prose prose-sm dark:prose-invert max-w-none mt-4 prose-a:text-accent">
-                      <MDXRemote source={release.body} options={mdxOptions} components={mdxComponents} />
+                      <MDXRemote source={release.body} options={githubMarkdownOptions} components={mdxComponents} />
                     </div>
                   </div>
                 </details>
