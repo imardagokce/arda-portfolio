@@ -8,7 +8,7 @@ import { CONTACT_LIMITS } from '@/lib/contact-limits';
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'rateLimited'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,6 +30,12 @@ export default function ContactPage() {
       });
       
       clearTimeout(timeoutId);
+
+      // 429: sunucudaki rate limit'e takıldı; genel hata yerine ne yapılacağını söyleyen ayrı bir mesaj gösterilir.
+      if (res.status === 429) {
+        setStatus('rateLimited');
+        return;
+      }
 
       if (!res.ok) throw new Error('Failed to send message');
       
@@ -147,6 +153,11 @@ export default function ContactPage() {
               {status === 'error' && (
                 <p className="text-red-600 dark:text-red-400 text-sm font-medium animate-in fade-in slide-in-from-bottom-2">
                   {t('errorMessage')}
+                </p>
+              )}
+              {status === 'rateLimited' && (
+                <p className="text-red-600 dark:text-red-400 text-sm font-medium animate-in fade-in slide-in-from-bottom-2">
+                  {t('rateLimitMessage')}
                 </p>
               )}
             </div>

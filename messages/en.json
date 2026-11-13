@@ -63,6 +63,7 @@
     "messageLabel": "Your Message",
     "successMessage": "Your message has been received. I will get back to you as soon as possible.",
     "errorMessage": "An error occurred. Please try again.",
+    "rateLimitMessage": "Too many attempts. Please wait a few minutes and try again.",
     "submitBtn": "Send"
   },
   "Projects": {

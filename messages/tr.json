@@ -63,6 +63,7 @@
     "messageLabel": "Mesajınız",
     "successMessage": "Mesajınız ulaştı. En kısa sürede dönüş yapacağım.",
     "errorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "rateLimitMessage": "Çok fazla deneme yapıldı. Lütfen birkaç dakika bekleyip tekrar deneyin.",
     "submitBtn": "Gönder"
   },
   "Projects": {
