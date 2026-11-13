@@ -7,9 +7,9 @@ import { Link, routing } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
+import { githubMarkdownOptions } from '@/lib/github-markdown';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 
@@ -71,22 +71,12 @@ export default async function ProjectDetailPage({
   // 2. Fetch manual MDX data if it exists (for Dev Notes)
   const project = getProjectBySlug(locale, slug);
 
-  // MDX Configuration
+  // content/ altındaki kendi MDX notların için ayarlar.
+  // GitHub'dan gelen README ve release notları ayrı işlenir: bkz. lib/github-markdown.ts
   const mdxOptions: MDXRemoteProps['options'] = {
     mdxOptions: {
       remarkPlugins: [remarkGfm, remarkAlert],
       rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
-    }
-  };
-
-  // GitHub'dan gelen README ve release notları MDX değil, düz Markdown'dır.
-  // MDX olarak işlenirse içlerindeki ham HTML (style="...", <br>, yorumlar) JSX kurallarına takılır;
-  // bu yüzden 'md' formatında derlenir ve ham HTML rehype-raw ile korunur.
-  const githubMarkdownOptions: MDXRemoteProps['options'] = {
-    mdxOptions: {
-      format: 'md',
-      remarkPlugins: [remarkGfm, remarkAlert],
-      rehypePlugins: [rehypeRaw, [rehypePrettyCode, { theme: 'github-dark' }]],
     }
   };
 
