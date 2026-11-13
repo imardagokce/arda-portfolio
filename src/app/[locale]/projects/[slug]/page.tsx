@@ -1,16 +1,26 @@
 import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
-import { Link } from '@/i18n/routing';
+import { Link, routing } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { GITHUB_USERNAME, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
+import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
 import { getTranslations } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 
-export default async function ProjectDetailPage({ 
+// Bilinen repoları her dil için build sırasında önceden üretir.
+// Listede olmayan slug'lar ilk ziyarette üretilir (GitHub'a ulaşılamazsa liste boş döner).
+export async function generateStaticParams() {
+  const repos = await getRepositories();
+
+  return routing.locales.flatMap((locale) =>
+    repos.map((repo) => ({ locale, slug: repo.name }))
+  );
+}
+
+export default async function ProjectDetailPage({
   params 
 }: { 
   params: Promise<{ locale: string; slug: string }> 
