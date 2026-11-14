@@ -6,24 +6,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Code2, ExternalLink, Calendar, Star, CircleDot } from "lucide-react";
 import { Repository } from "@/lib/github";
-
-const OFFICIAL_TOPICS = ['active', 'nearly-finished', 'completed', 'idea', 'planned', 'paused', 'archived'] as const;
-type StatusTopic = typeof OFFICIAL_TOPICS[number];
+import { STATUS_TOPICS, getStatusTopic, type StatusTopic } from "@/lib/project-status";
 
 export function ProjectList({ repos }: { repos: Repository[] }) {
   const t = useTranslations('Projects');
   const locale = useLocale();
   const [filter, setFilter] = useState<StatusTopic | 'all'>('all');
 
-  // Determine status for a repo
-  const getRepoStatus = (topics: string[]): StatusTopic | null => {
-    const found = topics.find(t => OFFICIAL_TOPICS.includes(t as StatusTopic));
-    return found ? (found as StatusTopic) : null;
-  };
-
   const filteredRepos = repos.filter(repo => {
     if (filter === 'all') return true;
-    const status = getRepoStatus(repo.topics);
+    const status = getStatusTopic(repo.topics);
     return status === filter;
   });
 
@@ -54,7 +46,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
         >
           {t('filters.all')}
         </button>
-        {OFFICIAL_TOPICS.map(topic => (
+        {STATUS_TOPICS.map(topic => (
           <button
             key={topic}
             onClick={() => setFilter(topic)}
@@ -73,8 +65,8 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
       <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AnimatePresence mode="popLayout">
           {filteredRepos.map((repo) => {
-            const status = getRepoStatus(repo.topics);
-            
+            const status = getStatusTopic(repo.topics);
+
             return (
               <motion.div
                 layout

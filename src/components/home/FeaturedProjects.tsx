@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { Link } from '@/i18n/routing';
 import type { Repository } from '@/lib/github';
+import { getStatusTopic } from '@/lib/project-status';
 
 export async function FeaturedProjects({ locale, projects }: { locale: string; projects: Repository[] }) {
   if (projects.length === 0) return null;
@@ -23,7 +24,7 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
 
       <div className="grid md:grid-cols-2 gap-6">
         {projects.map((project, index) => {
-          const status = project.topics?.find(t => ['active', 'nearly-finished', 'completed', 'idea', 'planned', 'paused', 'archived'].includes(t)) || null;
+          const status = getStatusTopic(project.topics);
           return (
           <ScrollReveal key={project.name} delay={index * 0.1}>
              <Link 
