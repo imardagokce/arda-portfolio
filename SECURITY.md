@@ -4,12 +4,12 @@ This document outlines the security policies, supported versions, and the proces
 
 ## Supported Versions
 
-Please refer to the table below for the supported versions of this project. Only the latest major version receives active security updates, whereas older versions are considered End-of-Life (EOL) and will no longer receive security patches.
+This project is in alpha and has not had a stable (v1.0) release yet. Until then, security fixes are made only to the latest code on the `main` branch.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| v0.2.x  | :white_check_mark: |
-| v0.1.x  | :x:                |
+| Latest `main` (pre-1.0 alpha) | :white_check_mark: |
+| Older commits                 | :x:                |
 
 ## Reporting a Vulnerability
 
