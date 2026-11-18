@@ -13,12 +13,11 @@ A personal portfolio, developer journal, and digital garden focusing on Linux, o
 
 ## Technologies Used
 
-- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Content**: [MDX](https://mdxjs.com/) with next-mdx-remote
 - **Localisation**: [next-intl](https://next-intl-docs.vercel.app/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 
 ## Getting Started
@@ -51,6 +50,10 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for how to set up the project, the checks to run and the commit conventions.
 
 ## Licence
 
