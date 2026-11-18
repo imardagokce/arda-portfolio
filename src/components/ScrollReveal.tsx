@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -10,29 +10,58 @@ interface ScrollRevealProps {
   duration?: number;
 }
 
-export function ScrollReveal({ 
-  children, 
-  delay = 0, 
-  direction = "up", 
+// Görünmeden önceki kayma miktarı (öğe yerine doğru kayarak belirir).
+const OFFSETS = {
+  up: "translate3d(0, 40px, 0)",
+  down: "translate3d(0, -40px, 0)",
+  left: "translate3d(40px, 0, 0)",
+  right: "translate3d(-40px, 0, 0)",
+};
+
+/**
+ * İçeriği ekrana girdiğinde bir kez, kayarak ve belirerek gösterir.
+ * IntersectionObserver + CSS geçişiyle çalışır; "hareketi azalt" ayarında içerik
+ * hareketsiz ve hemen görünür.
+ */
+export function ScrollReveal({
+  children,
+  delay = 0,
+  direction = "up",
   className = "",
-  duration = 0.9
+  duration = 0.9,
 }: ScrollRevealProps) {
-  const directions = {
-    up: { y: 40, x: 0 },
-    down: { y: -40, x: 0 },
-    left: { x: 40, y: 0 },
-    right: { x: -40, y: 0 },
-  };
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-20px" }
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, ...directions[direction] }}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{ duration, ease: [0.21, 0.47, 0.32, 0.98], delay }}
-      className={className}
+    <div
+      ref={ref}
+      className={`transition-[opacity,transform] ease-[cubic-bezier(0.21,0.47,0.32,0.98)] motion-reduce:transition-none motion-reduce:opacity-100! motion-reduce:transform-none! ${className}`}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "none" : OFFSETS[direction],
+        transitionDuration: `${duration}s`,
+        transitionDelay: `${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

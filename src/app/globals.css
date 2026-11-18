@@ -218,3 +218,33 @@
   max-width: 100%;
   overflow-x: auto;
 }
+
+/*
+ * Animasyonlar (framer-motion yerine saf CSS).
+ * Bileşenlerde Tailwind'in animate-[...] sınıflarıyla kullanılır; "hareketi azalt" ayarında
+ * motion-reduce:animate-none ile kapatılır.
+ */
+@keyframes nav-enter {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes signature-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes signature-dot {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

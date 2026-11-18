@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { flushSync } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { Code2, ExternalLink, Calendar, Star, CircleDot } from "lucide-react";
 import { Repository } from "@/lib/github";
@@ -12,6 +12,23 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
   const t = useTranslations('Projects');
   const locale = useLocale();
   const [filter, setFilter] = useState<StatusTopic | 'all'>('all');
+
+  // Filtre değişince kartlar View Transitions ile yerlerine kayar (destekleyen tarayıcılarda);
+  // desteklenmiyorsa ya da "hareketi azalt" açıksa liste animasyonsuz güncellenir.
+  const changeFilter = (next: StatusTopic | 'all') => {
+    if (next === filter) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('startViewTransition' in document)) {
+      setFilter(next);
+      return;
+    }
+    document.startViewTransition(() => {
+      flushSync(() => setFilter(next));
+    });
+  };
+
+  // Her kartın geçişte eşleştirilebilmesi için benzersiz ve CSS'te geçerli bir ad.
+  const transitionNames = new Map(repos.map((repo, index) => [repo.name, `project-card-${index}`]));
 
   const filteredRepos = repos.filter(repo => {
     if (filter === 'all') return true;
@@ -37,7 +54,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
       {/* Filters */}
       <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => setFilter('all')}
+          onClick={() => changeFilter('all')}
           className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
             filter === 'all' 
               ? 'bg-foreground text-background border-foreground' 
@@ -49,7 +66,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
         {STATUS_TOPICS.map(topic => (
           <button
             key={topic}
-            onClick={() => setFilter(topic)}
+            onClick={() => changeFilter(topic)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
               filter === topic 
                 ? 'bg-foreground text-background border-foreground' 
@@ -62,20 +79,15 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
       </div>
 
       {/* Grid */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <AnimatePresence mode="popLayout">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredRepos.map((repo) => {
             const status = getStatusTopic(repo.topics);
 
             return (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
+              <div
                 key={repo.name}
-                className="group flex flex-col h-full bg-background border border-border/50 rounded-2xl hover:shadow-sm hover:border-accent/50 transition-all duration-300 overflow-hidden"
+                style={{ viewTransitionName: transitionNames.get(repo.name) }}
+                className="group flex flex-col h-full bg-background border border-border/50 rounded-2xl hover:shadow-sm hover:border-accent/50 transition-all duration-300 overflow-hidden animate-[fade-scale-in_0.2s_ease-out] motion-reduce:animate-none"
               >
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-start justify-between mb-4">
@@ -131,21 +143,16 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </AnimatePresence>
         
         {filteredRepos.length === 0 && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="col-span-full py-12 text-center text-muted-foreground bg-muted/20 rounded-2xl border border-dashed border-border/50"
-          >
+          <div className="col-span-full py-12 text-center text-muted-foreground bg-muted/20 rounded-2xl border border-dashed border-border/50 animate-[fade-in_0.2s_ease-out] motion-reduce:animate-none">
             {repos.length === 0 ? t('noRepos') : t('noFilterMatch')}
-          </motion.div>
+          </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

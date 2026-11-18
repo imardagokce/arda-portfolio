@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -22,23 +21,23 @@ export function NavBar() {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- next-themes hydration guard: mount'ta tek seferlik, bilinçli
   useEffect(() => setMounted(true), []);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 50) setScrolled(true);
-    else setScrolled(false);
-  });
+  // Sayfa 50px'ten fazla kaydırılınca çubuk daralır ve gölge alır.
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Mobil menü: Escape ve dışarı dokunma ile kapanır; Escape'te odak menü düğmesine döner.
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -66,11 +65,8 @@ export function NavBar() {
   const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
-    <motion.header 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-300 ${scrolled ? 'py-4' : 'py-8'}`}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-300 animate-[nav-enter_0.8s_ease-out] motion-reduce:animate-none ${scrolled ? 'py-4' : 'py-8'}`}
     >
       <nav ref={navRef} className={`relative flex items-center justify-between w-full max-w-4xl px-6 py-3 transition-all duration-300 backdrop-blur-xl bg-background/60 border border-border/40 rounded-2xl ${scrolled ? 'shadow-sm shadow-black/5 dark:shadow-white/5' : ''}`}>
          <div className="flex items-center gap-8">
@@ -128,36 +124,29 @@ export function NavBar() {
            </button>
          </div>
 
-         <AnimatePresence>
-           {menuOpen && (
-             <motion.div
-               id="mobile-nav-menu"
-               initial={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
-               animate={{ opacity: 1, y: 0, transition: { duration: 0.2, ease: "easeOut" } }}
-               exit={{ opacity: 0, y: reduceMotion ? 0 : -8, transition: { duration: 0.15, ease: "easeIn" } }}
-               className="md:hidden absolute left-0 right-0 top-full mt-2 p-2 rounded-2xl bg-background border border-border/50 shadow-lg"
-             >
-               <ul className="flex flex-col gap-1">
-                 {MOBILE_NAV_ITEMS.map((item) => {
-                   const active = isActive(item.href);
-                   return (
-                     <li key={item.href}>
-                       <Link
-                         href={item.href}
-                         onClick={() => setMenuOpen(false)}
-                         aria-current={active ? 'page' : undefined}
-                         className={`flex items-center min-h-11 px-4 rounded-xl text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent ${active ? 'bg-muted/50 text-accent dark:text-foreground' : 'text-foreground dark:text-muted-foreground hover:bg-muted/50 hover:text-accent dark:hover:text-foreground'}`}
-                       >
-                         {t(item.key)}
-                       </Link>
-                     </li>
-                   );
-                 })}
-               </ul>
-             </motion.div>
-           )}
-         </AnimatePresence>
+         <div
+           id="mobile-nav-menu"
+           className={`md:hidden absolute left-0 right-0 top-full mt-2 p-2 rounded-2xl bg-background border border-border/50 shadow-lg transition-[opacity,transform,visibility] motion-reduce:translate-y-0 ${menuOpen ? 'visible opacity-100 translate-y-0 duration-200 ease-out' : 'invisible opacity-0 -translate-y-2 pointer-events-none duration-150 ease-in'}`}
+         >
+           <ul className="flex flex-col gap-1">
+             {MOBILE_NAV_ITEMS.map((item) => {
+               const active = isActive(item.href);
+               return (
+                 <li key={item.href}>
+                   <Link
+                     href={item.href}
+                     onClick={() => setMenuOpen(false)}
+                     aria-current={active ? 'page' : undefined}
+                     className={`flex items-center min-h-11 px-4 rounded-xl text-base font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent ${active ? 'bg-muted/50 text-accent dark:text-foreground' : 'text-foreground dark:text-muted-foreground hover:bg-muted/50 hover:text-accent dark:hover:text-foreground'}`}
+                   >
+                     {t(item.key)}
+                   </Link>
+                 </li>
+               );
+             })}
+           </ul>
+         </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }

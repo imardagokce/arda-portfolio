@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Check } from 'lucide-react';
 
 export function LanguageSelector() {
@@ -78,35 +77,28 @@ export function LanguageSelector() {
         </span>
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="absolute right-0 mt-2 w-40 rounded-xl bg-background border border-border/50 shadow-lg overflow-hidden z-50 origin-top-right"
-          >
-            <div className="py-1 flex flex-col">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => switchLocale(lang.code)}
-                  className="flex items-center justify-between px-4 py-2.5 text-sm text-left hover:bg-muted/50 transition-colors w-full focus-visible:bg-muted/50 outline-none"
-                  role="menuitem"
-                >
-                  <span className={`font-medium ${locale === lang.code ? 'text-foreground' : 'text-muted-foreground'}`}>
-                    {lang.label}
-                  </span>
-                  {locale === lang.code && (
-                    <Check className="w-4 h-4 text-accent" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Her zaman DOM'da; kapalıyken görünmez ve odaklanılamaz (visibility: hidden). */}
+      <div
+        className={`absolute right-0 mt-2 w-40 rounded-xl bg-background border border-border/50 shadow-lg overflow-hidden z-50 origin-top-right transition-[opacity,transform,visibility] duration-150 ease-out motion-reduce:translate-y-0 motion-reduce:scale-100 ${isOpen ? 'visible opacity-100 translate-y-0 scale-100' : 'invisible opacity-0 translate-y-2.5 scale-95 pointer-events-none'}`}
+      >
+        <div className="py-1 flex flex-col">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => switchLocale(lang.code)}
+              className="flex items-center justify-between px-4 py-2.5 text-sm text-left hover:bg-muted/50 transition-colors w-full focus-visible:bg-muted/50 outline-none"
+              role="menuitem"
+            >
+              <span className={`font-medium ${locale === lang.code ? 'text-foreground' : 'text-muted-foreground'}`}>
+                {lang.label}
+              </span>
+              {locale === lang.code && (
+                <Check className="w-4 h-4 text-accent" />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
