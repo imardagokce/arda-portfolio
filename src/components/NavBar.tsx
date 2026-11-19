@@ -86,12 +86,12 @@ export function NavBar() {
                <circle cx="155" cy="93" r="12" className="fill-current stroke-none" />
              </svg>
            </Link>
-           <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium text-muted-foreground">
-             <Link href="/about" className={`transition-colors ${pathname.startsWith('/about') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('about')}</Link>
-             <Link href="/projects" className={`transition-colors ${pathname.startsWith('/projects') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('projects')}</Link>
-             <Link href="/links" className={`transition-colors ${pathname.startsWith('/links') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('links')}</Link>
-             <Link href="/cv" className={`transition-colors ${pathname.startsWith('/cv') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('cv')}</Link>
-             <Link href="/contact" className={`transition-colors ${pathname.startsWith('/contact') ? 'text-foreground' : 'hover:text-foreground'}`}>{t('contact')}</Link>
+           <div className="hidden md:flex items-center gap-4 lg:gap-6 text-sm font-medium text-foreground dark:text-muted-foreground">
+             <Link href="/about" className={`transition-colors ${pathname.startsWith('/about') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('about')}</Link>
+             <Link href="/projects" className={`transition-colors ${pathname.startsWith('/projects') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('projects')}</Link>
+             <Link href="/links" className={`transition-colors ${pathname.startsWith('/links') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('links')}</Link>
+             <Link href="/cv" className={`transition-colors ${pathname.startsWith('/cv') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('cv')}</Link>
+             <Link href="/contact" className={`transition-colors ${pathname.startsWith('/contact') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('contact')}</Link>
            </div>
          </div>
          
@@ -100,7 +100,7 @@ export function NavBar() {
            
            <button 
              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-             className="p-2 rounded-full hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
+             className="p-2 rounded-full hover:bg-muted/50 text-foreground hover:text-accent dark:text-muted-foreground dark:hover:text-foreground transition-colors"
              aria-label="Toggle Theme"
            >
              {mounted ? (

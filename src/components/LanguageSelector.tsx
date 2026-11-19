@@ -67,7 +67,7 @@ export function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-2 rounded-full hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="flex items-center gap-2 p-2 rounded-full hover:bg-muted/50 text-foreground hover:text-accent dark:text-muted-foreground dark:hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent"
         aria-label="Select Language"
         aria-expanded={isOpen}
       >
