@@ -4,7 +4,7 @@ import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { Link, routing } from '@/i18n/routing';
-import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag } from 'lucide-react';
+import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag, Info } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
 import { githubMarkdownOptions } from '@/lib/github-markdown';
@@ -12,6 +12,9 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import { remarkAlert } from 'remark-github-blockquote-alert';
+
+// Piyasa/bahis içeriği olduğunu gösteren repo konuları; eşleşirse sayfada uyarı notu gösterilir.
+const FINANCE_TOPICS = ['sports-betting', 'value-betting', 'odds', 'odds-analysis', 'algorithmic-trading', 'trading', 'stocks', 'stock-market', 'kelly-criterion'];
 
 // Bilinen repoları her dil için build sırasında önceden üretir.
 // Listede olmayan slug'lar ilk ziyarette üretilir (GitHub'a ulaşılamazsa liste boş döner).
@@ -79,6 +82,8 @@ export default async function ProjectDetailPage({
       rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
     }
   };
+
+  const showDisclaimer = repoData.topics.some((topic) => FINANCE_TOPICS.includes(topic));
 
   const mdxComponents = {
     img: (props: ComponentProps<'img'>) => {
@@ -148,6 +153,13 @@ export default async function ProjectDetailPage({
           )}
         </header>
       </ScrollReveal>
+
+      {showDisclaimer && (
+        <div role="note" className="flex items-start gap-3 rounded-xl border border-border/50 bg-muted/30 p-4 text-sm text-muted-foreground mb-12">
+          <Info className="w-4 h-4 mt-0.5 shrink-0" />
+          <p>{t('disclaimer')}</p>
+        </div>
+      )}
 
       {/* 1. README Section */}
       <ScrollReveal delay={0.2}>

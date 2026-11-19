@@ -15,7 +15,7 @@
     "projectsBtn": "Projeler",
     "contactBtn": "İletişim",
     "expertiseTitle": "Fikirden Projeye.",
-    "expertiseDesc": "Tek bir alana bağlı kalmadan, ilgimi çeken her konuda bir şeyler üretiyorum: komut satırı araçları, gizlilik odaklı yazılımlar, yapay zekâ için geliştirici araçları ve piyasa verisini inceleyen analiz araçları. Daha öğrenecek çok şeyim var ama her gün biraz daha ilerlemeye çalışıyorum.",
+    "expertiseDesc": "Tek bir alana bağlı kalmadan, ilgimi çeken her konuda bir şeyler üretiyorum: komut satırı araçları, gizlilik odaklı yazılımlar, yapay zekâ için geliştirici araçları ve borsa ile bahis oranları gibi piyasa verisini inceleyen analiz araçları. Daha öğrenecek çok şeyim var ama her gün biraz daha ilerlemeye çalışıyorum.",
     "expertiseLink": "Hakkımda detaylar",
     "expertise1Title": "CLI & Geliştirici Araçları",
     "expertise1Desc": "Rust ve Python ile hızlı ve sade komut satırı araçları yazıyorum.",
@@ -23,8 +23,8 @@
     "expertise2Desc": "Gizliliği ve sistem ayarlarını kullanıcının kontrolüne veren araçlar geliştiriyorum.",
     "expertise3Title": "Yapay Zekâ Araçları",
     "expertise3Desc": "Dil modelleriyle çalışmayı kolaylaştıran bağlam ve prompt araçları üzerinde deneyler yapıyorum.",
-    "expertise4Title": "Piyasalar & Veri Analizi",
-    "expertise4Desc": "Borsayı ve piyasaların işleyişini öğreniyor, veriyi incelemek için kendi analiz araçlarımı yazıyorum.",
+    "expertise4Title": "Piyasa & Oran Analizi",
+    "expertise4Desc": "Borsayı ve bahis oranlarını öğreniyor, bu verileri incelemek için kendi analiz araçlarımı yazıyorum.",
     "featuredProjectsTitle": "Öne Çıkan Projeler",
     "viewAll": "Tümünü Gör",
     "githubStatsTitle": "Kod Yazıyorum.",
@@ -47,12 +47,12 @@
     "interest1": "Komut Satırı Araçları - Rust ve Python ile günlük işlerimi kolaylaştıran hızlı ve sade araçlar yazıyorum.",
     "interest2": "Gizlilik & Güvenlik - Kullanıcıya kendi sistemi üzerinde kontrol veren, şeffaf araçlara önem veriyorum.",
     "interest3": "Yapay Zekâ & Geliştirici Araçları - Dil modelleriyle daha verimli çalışmayı sağlayan araçlar deniyorum.",
-    "interest4": "Borsa & Piyasalar - Piyasaların nasıl işlediğini öğreniyor, veriyi incelemek için kendi analiz araçlarımı geliştiriyorum.",
+    "interest4": "Piyasalar & Oran Analizi - Borsanın ve bahis oranlarının nasıl işlediğini öğreniyor, bu verileri incelemek için kendi analiz araçlarımı geliştiriyorum.",
     "interest5": "Linux & Açık Kaynak - Günlük kullandığım araçlar; projelerimi de açık kaynak olarak paylaşmayı seviyorum.",
     "philosophyTitle": "Felsefem",
     "philosophyDesc": "Her zaman daha iyi olmak istiyorum. Bir şeyi yapamayacağımı duymak genelde beni durdurmuyor, daha fazla uğraşmamı sağlıyor. Hatalarımdan öğrenip yoluma devam etmeyi ve kendimi sürekli biraz daha ileri taşımayı seviyorum.",
     "currentWorkTitle": "Şu An Ne Üzerinde Çalışıyorum?",
-    "currentWorkDesc": "Şu anda farklı alanlardaki projelerimi sırayla tamamlamaya odaklanıyorum. Bir yandan piyasaları öğrenip veri analizi araçları üzerinde çalışırken, bir yandan da bu siteyi geliştiriyor ve yaptıklarımı burada biriktiriyorum."
+    "currentWorkDesc": "Şu anda farklı alanlardaki projelerimi sırayla tamamlamaya odaklanıyorum. Bir yandan borsa ve oran verisi üzerine analiz araçları geliştirirken, bir yandan da bu siteyi geliştiriyor ve yaptıklarımı burada biriktiriyorum."
   },
   "Contact": {
     "title": "İletişim",
@@ -103,7 +103,8 @@
     "noCommits": "Son aktivite bulunamadı.",
     "noRepos": "Burada henüz bir şey yok.",
     "noFilterMatch": "Eşleşen bir sonuç bulunamadı.",
-    "viewCommit": "Commit'i İncele"
+    "viewCommit": "Commit'i İncele",
+    "disclaimer": "Bu proje yalnızca eğitim ve araştırma amaçlıdır. İçerdiği hiçbir analiz veya çıktı yatırım ya da bahis tavsiyesi değildir."
   },
   "Links": {
     "title": "Bağlantılar",
@@ -115,7 +116,7 @@
   "Metadata": {
     "title": "Arda | Dijital Çalışma Masası",
     "tagline": "Dijital Çalışma Masası",
-    "description": "Kişisel projelerim: geliştirici araçları, gizlilik, yapay zekâ ve piyasalar üzerine çalışmalar."
+    "description": "Kişisel projelerim: geliştirici araçları, gizlilik, yapay zekâ ve piyasa analizi üzerine çalışmalar."
   },
   "Common": {
     "quote": "yüksel"

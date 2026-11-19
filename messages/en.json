@@ -15,7 +15,7 @@
     "projectsBtn": "Projects",
     "contactBtn": "Contact",
     "expertiseTitle": "From Idea to Project.",
-    "expertiseDesc": "Rather than staying tied to one field, I build across every topic that catches my interest: command-line tools, privacy-focused software, developer tools for AI, and analysis tools that examine market data. There is still a lot I want to learn, but I try to move a little further every day.",
+    "expertiseDesc": "Rather than staying tied to one field, I build across every topic that catches my interest: command-line tools, privacy-focused software, developer tools for AI, and analysis tools that examine market data such as stock prices and betting odds. There is still a lot I want to learn, but I try to move a little further every day.",
     "expertiseLink": "More about me",
     "expertise1Title": "CLI & Developer Tools",
     "expertise1Desc": "I write fast, simple command-line tools in Rust and Python.",
@@ -23,8 +23,8 @@
     "expertise2Desc": "I build tools that put privacy and system settings under the user's control.",
     "expertise3Title": "AI Tools",
     "expertise3Desc": "I experiment with context and prompt tools that make working with language models easier.",
-    "expertise4Title": "Markets & Data Analysis",
-    "expertise4Desc": "I am learning how stock markets work and writing my own analysis tools to examine market data.",
+    "expertise4Title": "Market & Odds Analysis",
+    "expertise4Desc": "I am learning how stock markets and betting odds work, and I write my own tools to analyse that data.",
     "featuredProjectsTitle": "Featured Projects",
     "viewAll": "View All",
     "githubStatsTitle": "I Like Building Things.",
@@ -47,12 +47,12 @@
     "interest1": "Command-Line Tools - I write fast, simple tools in Rust and Python that make my everyday tasks easier.",
     "interest2": "Privacy & Security - I value transparent tools that give users control over their own systems.",
     "interest3": "AI & Developer Tools - I try out tools that help me work more efficiently with language models.",
-    "interest4": "Stock Markets - I am learning how markets work and building my own analysis tools to examine data.",
+    "interest4": "Markets & Odds Analysis - I am learning how stock markets and betting odds work, and I build my own tools to analyse that data.",
     "interest5": "Linux & Open Source - Tools I use every day, and I enjoy sharing my projects as open source.",
     "philosophyTitle": "My Philosophy",
     "philosophyDesc": "I always want to get better. Being told that I can't do something usually doesn't stop me. It makes me want to work harder. I like learning from my mistakes, moving forward, and constantly pushing myself a little further.",
     "currentWorkTitle": "What Am I Working On?",
-    "currentWorkDesc": "At the moment I am focused on finishing my projects in different areas one after another. While I learn about markets and work on data analysis tools, I am also developing this website and collecting what I build here."
+    "currentWorkDesc": "At the moment I am focused on finishing my projects in different areas one after another. While I build analysis tools for stock and odds data, I am also developing this website and collecting what I build here."
   },
   "Contact": {
     "title": "Contact",
@@ -103,7 +103,8 @@
     "noCommits": "No recent commits found.",
     "noRepos": "Nothing here yet.",
     "noFilterMatch": "No matching results found.",
-    "viewCommit": "View Commit"
+    "viewCommit": "View Commit",
+    "disclaimer": "This project is for educational and research purposes only. None of its analysis or output is investment or betting advice."
   },
   "Links": {
     "title": "Links",
@@ -115,7 +116,7 @@
   "Metadata": {
     "title": "Arda | Digital Workspace",
     "tagline": "Digital Workspace",
-    "description": "My personal projects: work on developer tools, privacy, AI and markets."
+    "description": "My personal projects: work on developer tools, privacy, AI and market analysis."
   },
   "Common": {
     "quote": "ascend"
