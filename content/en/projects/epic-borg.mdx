@@ -36,9 +36,9 @@ Today, we built the digital workspace named Epic Borg from scratch. Here is the 
 ### 3. Design & UI Components
 - Driven by the "minimalist, premium, and confident" principle, a subtle paper grain (noise) was added to `globals.css`.
 - Integrated the modern **Geist** font.
-- Using **Framer Motion**:
-  - Built a floating **Navbar** with a backdrop-blur effect that shrinks dynamically as the page scrolls.
-  - Added a smooth, SVG-drawn **Signature Animation** that triggers only upon the first visit.
+- Animations run on **CSS keyframes and native browser APIs**, with no animation library:
+  - Built a floating **Navbar** with a backdrop-blur effect that shrinks as the page scrolls, driven by a passive scroll listener and CSS transitions.
+  - Added a smooth, SVG-drawn **Signature Animation** by animating `stroke-dashoffset` with CSS keyframes. It plays once per session (tracked in `sessionStorage`) and is skipped for users who prefer reduced motion.
 
 ### 4. Pages & Experience
 - **Home:** Designed a highly readable Hero section accompanied by a massive watermark signature.

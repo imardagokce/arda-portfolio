@@ -36,9 +36,9 @@ Bugün, Epic Borg adlı dijital çalışma masasını sıfırdan inşa ettik. İ
 ### 3. Tasarım ve UI Bileşenleri
 - "Minimalist, premium ve kendinden emin" prensibiyle yola çıkılarak, `globals.css` içerisine hafif bir kâğıt greni (noise) eklendi.
 - Google Fonts üzerinden modern **Geist** yazı tipi entegre edildi.
-- **Framer Motion** kullanılarak:
-  - Sayfa kaydırıldıkça küçülen, bulanıklık efektine (backdrop-blur) sahip yüzen bir **Navbar** yapıldı.
-  - İlk girişte tetiklenen, ekrana SVG çizgileriyle çizilen pürüzsüz bir **İmza Animasyonu** eklendi.
+- Animasyonlar herhangi bir animasyon kütüphanesi olmadan, **CSS keyframe'leri ve tarayıcının yerel API'leriyle** çalışıyor:
+  - Sayfa kaydırıldıkça küçülen, bulanıklık efektine (backdrop-blur) sahip yüzen bir **Navbar** yapıldı. Küçülmeyi pasif bir scroll dinleyicisi ve CSS geçişleri sağlıyor.
+  - Ekrana SVG çizgileriyle çizilen pürüzsüz bir **İmza Animasyonu** `stroke-dashoffset` değerini hareket ettiren CSS keyframe'leriyle eklendi. Her oturumda bir kez oynuyor (`sessionStorage` ile takip ediliyor) ve azaltılmış hareket tercih eden kullanıcılarda atlanıyor.
 
 ### 4. Sayfalar ve Deneyim
 - **Ana Sayfa:** Devasa bir watermark imza eşliğinde, okunabilirliği yüksek temiz bir giriş (Hero) bölümü tasarlandı.
