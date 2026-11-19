@@ -13,7 +13,6 @@ const MOBILE_NAV_ITEMS = [
   { href: '/about', key: 'about' },
   { href: '/projects', key: 'projects' },
   { href: '/links', key: 'links' },
-  { href: '/cv', key: 'cv' },
   { href: '/contact', key: 'contact' },
 ] as const;
 
@@ -90,7 +89,6 @@ export function NavBar() {
              <Link href="/about" className={`transition-colors ${pathname.startsWith('/about') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('about')}</Link>
              <Link href="/projects" className={`transition-colors ${pathname.startsWith('/projects') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('projects')}</Link>
              <Link href="/links" className={`transition-colors ${pathname.startsWith('/links') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('links')}</Link>
-             <Link href="/cv" className={`transition-colors ${pathname.startsWith('/cv') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('cv')}</Link>
              <Link href="/contact" className={`transition-colors ${pathname.startsWith('/contact') ? 'text-accent dark:text-foreground' : 'hover:text-accent dark:hover:text-foreground'}`}>{t('contact')}</Link>
            </div>
          </div>
