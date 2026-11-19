@@ -1,8 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { PlayingCard } from '@/components/PlayingCard';
 import { Link } from '@/i18n/routing';
-import { formatRepoName } from '@/lib/format';
-import type { Repository } from '@/lib/github';
+import { getRepositories, type Repository } from '@/lib/github';
+import { hashTilt, rankLabel, sortByRank, suitForStatus } from '@/lib/deck';
 import { getStatusTopic } from '@/lib/project-status';
 
 export async function FeaturedProjects({ locale, projects }: { locale: string; projects: Repository[] }) {
@@ -10,6 +11,11 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
 
   const t = await getTranslations({ locale, namespace: 'Home' });
   const tProjects = await getTranslations({ locale, namespace: 'Projects' });
+
+  // Rank is the position in the FULL list (same as the Projects page), so a card's rank matches there.
+  const rankByName = new Map(
+    sortByRank(await getRepositories()).map((repo, index) => [repo.name, rankLabel(index)])
+  );
 
   return (
     <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
@@ -22,44 +28,25 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
         </div>
       </ScrollReveal>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <ul className="flex flex-wrap justify-center gap-6 sm:gap-10 list-none p-0">
         {projects.map((project, index) => {
           const status = getStatusTopic(project.topics);
-          const name = formatRepoName(project.name);
           return (
-            <ScrollReveal key={project.name} delay={index * 0.1}>
-              <Link
-                href={`/projects/${project.name}`}
-                aria-label={name}
-                className="business-card block text-foreground"
-              >
-                <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
-                  <h2 lang="en" className="font-display smallcaps letterpress text-2xl sm:text-3xl font-medium break-words">
-                    {name}
-                  </h2>
-                  <p lang="en" className="text-xs sm:text-sm text-muted-foreground mt-2 line-clamp-2">
-                    {project.description}
-                  </p>
-                </div>
-
-                {project.language && (
-                  <span lang="en" className="absolute left-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
-                    {project.language}
-                  </span>
-                )}
-                {status && (
-                  <span className="absolute right-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
-                    {tProjects(`status.${status}`)}
-                  </span>
-                )}
-                <span className="absolute left-5 bottom-4 text-[10px] sm:text-xs text-muted-foreground" title="Stars">
-                  ★ {project.stars}
-                </span>
-              </Link>
-            </ScrollReveal>
+            <li key={project.name} className="w-[calc(50%-0.75rem)] sm:w-[220px]">
+              <ScrollReveal delay={index * 0.1}>
+                <PlayingCard
+                  repo={project}
+                  rank={rankByName.get(project.name) ?? ''}
+                  suit={suitForStatus(status)}
+                  statusLabel={status ? tProjects(`status.${status}`) : tProjects('suitOther')}
+                  noDescription={tProjects('noDescription')}
+                  tilt={hashTilt(project.name)}
+                />
+              </ScrollReveal>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </section>
   );
 }

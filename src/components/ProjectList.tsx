@@ -7,8 +7,10 @@ import { STATUS_TOPICS, getStatusTopic, type StatusTopic } from "@/lib/project-s
 import { SUIT_SYMBOL, hashTilt, isRedSuit, randomTilt, rankLabel, sortByRank, suitForStatus, type Suit } from "@/lib/deck";
 import { PlayingCard } from "@/components/PlayingCard";
 
-const DEAL_MS = 650;
-const DEAL_STAGGER_MS = 70;
+// Kartlar tek tek ve görünür şekilde dağıtılsın: önce deste kısa bir an görünür, sonra her kart ayrı ayrı uçar.
+const DEAL_START_MS = 400;
+const DEAL_MS = 900;
+const DEAL_STAGGER_MS = 280;
 const GATHER_MS = 300;
 const EASE = "cubic-bezier(0.22,1,0.36,1)";
 
@@ -85,7 +87,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
       cards.forEach(({ el }, i) => {
         const tilt = el.dataset.tilt ?? "0";
         el.style.transition = `transform ${DEAL_MS}ms ${EASE}`;
-        el.style.transitionDelay = `${i * DEAL_STAGGER_MS}ms`;
+        el.style.transitionDelay = `${DEAL_START_MS + i * DEAL_STAGGER_MS}ms`;
         el.style.transform = `rotate(${tilt}deg)`;
       });
     });
@@ -95,7 +97,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
           el.style.zIndex = "";
           el.style.transitionDelay = "0ms";
         });
-      }, DEAL_MS + cards.length * DEAL_STAGGER_MS + 50)
+      }, DEAL_START_MS + DEAL_MS + cards.length * DEAL_STAGGER_MS + 50)
     );
     return () => {
       cancelAnimationFrame(raf);
