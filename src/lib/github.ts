@@ -70,6 +70,13 @@ interface RawGitHubRepo {
   language: string | null;
   topics?: string[];
   default_branch: string;
+  fork?: boolean;
+  archived?: boolean;
+}
+
+/** Repos the site should not list: forks, archived repos and repos tagged `hide-from-site`. */
+export function isHiddenRepo(repo: { fork?: boolean; archived?: boolean; topics?: string[] }): boolean {
+  return Boolean(repo.fork || repo.archived || repo.topics?.includes('hide-from-site'));
 }
 
 interface RawGitHubRelease {
@@ -209,7 +216,7 @@ export async function getRepositories(): Promise<Repository[]> {
 
     const data: RawGitHubRepo[] = await res.json();
 
-    return data.map((repo) => ({
+    return data.filter((repo) => !isHiddenRepo(repo)).map((repo) => ({
       name: repo.name,
       description: repo.description,
       stars: repo.stargazers_count,
