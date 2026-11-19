@@ -37,12 +37,11 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
   const active = mod(pos, count);
   const reduced = useSyncExternalStore(subscribeReducedMotion, getReducedMotion, getReducedMotionServer);
 
-  const sectionRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const centreRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const cardH = useRef(CARD_H);
-  const [geo, setGeo] = useState({ desktop: false, rx: 0, ry: 0, height: 0 });
+  const [geo, setGeo] = useState({ desktop: false, rx: 0, ry: 0, height: 0, planet: 0 });
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const goTo = useCallback(
@@ -73,9 +72,10 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
         rx,
         ry,
         height: Math.round(2 * ry + h + 32),
+        planet: Math.round(Math.max(centre.offsetWidth, ch) + 96),
       };
       setGeo((g) =>
-        g.desktop === next.desktop && g.rx === next.rx && g.ry === next.ry && g.height === next.height ? g : next,
+        g.desktop === next.desktop && g.rx === next.rx && g.ry === next.ry && g.height === next.height && g.planet === next.planet ? g : next,
       );
     };
     const ro = new ResizeObserver(compute);
@@ -84,43 +84,6 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
     cardRefs.current.forEach((b) => b && ro.observe(b));
     return () => ro.disconnect();
   }, [items]);
-
-  // Scroll-driven rotation: passive listener + rAF, never prevents default, never pins.
-  useEffect(() => {
-    if (reduced) return;
-    const el = sectionRef.current;
-    if (!el) return;
-    let frame = 0;
-    let lastStep = -1;
-
-    const compute = () => {
-      frame = 0;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const progress = Math.min(1, Math.max(0, (vh - rect.top) / (vh + rect.height)));
-      const s = Math.min(count - 1, Math.max(0, Math.floor(progress * count)));
-      if (lastStep === -1) {
-        lastStep = s;
-        return;
-      }
-      if (s !== lastStep) {
-        lastStep = s;
-        goTo(s);
-      }
-    };
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(compute);
-    };
-
-    compute();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, [reduced, count, goTo]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
@@ -154,7 +117,6 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
 
   return (
     <div
-      ref={sectionRef}
       role="group"
       aria-roledescription="carousel"
       aria-label={groupLabel}
@@ -179,6 +141,55 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
           {centre}
         </div>
 
+        {geo.desktop && (
+          <>
+            {/* Blind-embossed planet disc behind the centre text */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 rounded-full shadow-[inset_0_2px_4px_rgb(0_0_0/0.07),inset_0_-2px_4px_rgb(255_255_255/0.8),0_1px_0_rgb(255_255_255/0.6),0_-1px_0_rgb(0_0_0/0.04)] dark:shadow-[inset_0_2px_5px_rgb(0_0_0/0.6),inset_0_-1px_3px_rgb(255_255_255/0.05)]"
+              style={{
+                width: geo.planet,
+                height: geo.planet,
+                zIndex: 15,
+                transform: 'translate(-50%,-50%)',
+                background:
+                  'radial-gradient(circle, var(--background) 55%, color-mix(in srgb, var(--background) 97%, black) 100%)',
+              }}
+            />
+            {/* Orbit path: back half behind the planet, front half in front of it */}
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 overflow-visible"
+              width={2 * geo.rx}
+              height={2 * geo.ry}
+              style={{ zIndex: 12, transform: 'translate(-50%,-50%)' }}
+            >
+              <path
+                d={`M 0 ${geo.ry} A ${geo.rx} ${geo.ry} 0 0 1 ${2 * geo.rx} ${geo.ry}`}
+                fill="none"
+                stroke="var(--border)"
+                strokeWidth={1}
+                strokeDasharray="2 6"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 overflow-visible"
+              width={2 * geo.rx}
+              height={2 * geo.ry}
+              style={{ zIndex: 25, transform: 'translate(-50%,-50%)' }}
+            >
+              <path
+                d={`M 0 ${geo.ry} A ${geo.rx} ${geo.ry} 0 0 0 ${2 * geo.rx} ${geo.ry}`}
+                fill="none"
+                stroke="var(--muted-foreground)"
+                strokeOpacity={0.45}
+                strokeWidth={1}
+              />
+            </svg>
+          </>
+        )}
+
         {/* Mobile: one swipeable card */}
         <div className={geo.desktop ? 'hidden' : 'mt-10'} aria-hidden="true">
           <div className="business-card aspect-auto p-6 text-center">
@@ -198,6 +209,10 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
             const scale = 0.62 + 0.38 * k;
             const opacity = 0.35 + 0.65 * k;
             const isFront = i === active;
+            // Önden ve yandan geçen kartlar opak kalır (yörünge çizgisi içlerinden görünmesin); yalnızca yazıları solar.
+            const behind = d < -0.001;
+            const cardOpacity = behind ? opacity : 1;
+            const textOpacity = behind ? 1 : Math.max(opacity, 0.7);
             return (
               <button
                 key={i}
@@ -216,11 +231,11 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
                     ? 'none'
                     : 'transform 700ms cubic-bezier(0.22,1,0.36,1), opacity 700ms',
                   transform: `translate(-50%,-50%) translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`,
-                  opacity,
-                  zIndex: d > 0.001 ? 30 : 10,
+                  opacity: cardOpacity,
+                  zIndex: d > -0.001 ? 30 : 10,
                 }}
               >
-                <span className="block font-display smallcaps letterpress text-2xl text-foreground">{item.title}</span>
+                <span className="block font-display smallcaps letterpress text-2xl text-foreground" style={{ opacity: textOpacity }}>{item.title}</span>
                 {isFront && <span className="block text-sm text-muted-foreground mt-2">{item.desc}</span>}
               </button>
             );
