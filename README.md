@@ -2,8 +2,8 @@
 
 # Arda's Digital Workspace
 
-**A personal portfolio, developer journal and digital garden**<br>
-focused on Linux, open-source software, privacy, system architecture and modern web technologies.
+**A personal portfolio and developer journal**<br>
+documenting my journey into game development with Unity and C#, along with my projects and experiments.
 
 <br>
 
@@ -107,7 +107,6 @@ CONTACT_EMAIL=youremail@example.com
 .
 ├── content/            # MDX project pages and dev logs (en/, tr/)
 ├── messages/           # UI translations (en.json, tr.json)
-├── public/             # Static assets
 └── src/
     ├── app/            # App Router routes ([locale]/…, api/contact)
     ├── components/     # UI components (NavBar, Footer, home sections…)
