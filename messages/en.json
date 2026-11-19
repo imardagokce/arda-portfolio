@@ -110,7 +110,10 @@
     "noRepos": "Nothing here yet.",
     "noFilterMatch": "No matching results found.",
     "viewCommit": "View Commit",
-    "disclaimer": "This project is for educational and research purposes only. None of its analysis or output is investment or betting advice."
+    "disclaimer": "This project is for educational and research purposes only. None of its analysis or output is investment or betting advice.",
+    "redeal": "Deal again",
+    "suitOther": "Other",
+    "suitLegend": "A card’s suit shows the project’s status and its rank shows its place: the most-starred project is the Ace."
   },
   "Links": {
     "title": "Links",

@@ -110,7 +110,10 @@
     "noRepos": "Burada henüz bir şey yok.",
     "noFilterMatch": "Eşleşen bir sonuç bulunamadı.",
     "viewCommit": "Commit'i İncele",
-    "disclaimer": "Bu proje yalnızca eğitim ve araştırma amaçlıdır. İçerdiği hiçbir analiz veya çıktı yatırım ya da bahis tavsiyesi değildir."
+    "disclaimer": "Bu proje yalnızca eğitim ve araştırma amaçlıdır. İçerdiği hiçbir analiz veya çıktı yatırım ya da bahis tavsiyesi değildir.",
+    "redeal": "Yeniden dağıt",
+    "suitOther": "Diğer",
+    "suitLegend": "Kartın rengi projenin durumunu, değeri ise sırasını gösterir: en çok yıldız alan proje As."
   },
   "Links": {
     "title": "Bağlantılar",

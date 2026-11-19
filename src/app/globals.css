@@ -10,6 +10,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-ink-black: var(--ink-black);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -33,6 +34,7 @@
     --muted: #EAE3D5;
     --muted-foreground: #6B5E55; /* Warm taupe for secondary text */
     --border: #D9CFBD;
+    --ink-black: #1C1A18; /* Playing-card black suits */
   }
 
   .dark {
@@ -44,6 +46,7 @@
     --muted: #1A1817;
     --muted-foreground: #A89F94; /* Warm grey for secondary text */
     --border: #2A2725;
+    --ink-black: #E8E0D2; /* Playing-card black suits */
   }
 
   /* Force standard typography to use the heading color */
