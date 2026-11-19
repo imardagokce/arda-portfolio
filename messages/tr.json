@@ -38,7 +38,11 @@
     "ctaDesc": "Aklında bir proje, bir fikir ya da birlikte yapabileceğimiz bir şey varsa yazmaktan çekinme. Yeni insanlarla tanışmayı, farklı bakış açılarından öğrenmeyi ve fırsatları değerlendirmeyi seviyorum.",
     "ctaBtn": "Benimle Konuş",
     "cardRole": "Yazılım Geliştirici",
-    "cardFields": "Araçlar, gizlilik ve piyasalar"
+    "cardFields": "Araçlar, gizlilik ve piyasalar",
+    "orbitPrev": "Önceki alan",
+    "orbitNext": "Sonraki alan",
+    "orbitPosition": "{current} / {total}",
+    "orbitLabel": "Çalışma alanlarım"
   },
   "About": {
     "title": "Hakkımda",

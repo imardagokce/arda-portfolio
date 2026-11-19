@@ -263,6 +263,8 @@
 
 /* Kartvizit tasarım dili */
 .smallcaps { font-variant-caps: all-small-caps; letter-spacing: 0.14em; }
+/* Cormorant'ta Türkçe İ için küçük büyük harf yok; Türkçe metinde gerçek büyük harfe geçilir. */
+.smallcaps:lang(tr) { font-variant-caps: normal; text-transform: uppercase; font-size: 0.82em; }
 .letterpress { text-shadow: 0 1px 0 rgb(255 255 255 / 0.55); }
 .dark .letterpress { text-shadow: 0 -1px 0 rgb(0 0 0 / 0.7); }
 .business-card {

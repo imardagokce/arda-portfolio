@@ -38,7 +38,11 @@
     "ctaDesc": "If you have a project, an idea, or something we could build together, feel free to get in touch. I enjoy meeting new people, learning from different perspectives, and making the most of opportunities.",
     "ctaBtn": "Talk to Me",
     "cardRole": "Software Developer",
-    "cardFields": "Tools, privacy and markets"
+    "cardFields": "Tools, privacy and markets",
+    "orbitPrev": "Previous area",
+    "orbitNext": "Next area",
+    "orbitPosition": "{current} / {total}",
+    "orbitLabel": "My areas of work"
   },
   "About": {
     "title": "About Me",
