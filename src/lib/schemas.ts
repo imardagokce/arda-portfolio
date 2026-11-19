@@ -36,6 +36,8 @@ export const ContactSchema = z.object({
     .trim()
     .min(1, 'Message is required')
     .max(CONTACT_LIMITS.message, `Message must be at most ${CONTACT_LIMITS.message} characters`),
+  // KVKK m.9 açık rıza: mesajın ABD'deki Resend altyapısına aktarılmasına onay (işaretli olmalı).
+  consent: z.literal(true, 'Consent is required'),
 });
 
 export type ContactInput = z.infer<typeof ContactSchema>;

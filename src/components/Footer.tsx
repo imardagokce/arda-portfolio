@@ -10,6 +10,7 @@ export function Footer() {
   const tCommon = useTranslations('Common');
   const tFooter = useTranslations('Footer');
   const tPrivacy = useTranslations('Privacy');
+  const tLegal = useTranslations('Legal');
   const pathname = usePathname();
   const onProjectsPage = pathname === '/projects' || pathname.startsWith('/projects/');
 
@@ -47,6 +48,7 @@ export function Footer() {
           <Link href="/links" className={`hover:text-foreground transition-colors ${FOCUS_RING}`}>{t('links')}</Link>
           <Link href="/contact" className={`hover:text-foreground transition-colors ${FOCUS_RING}`}>{t('contact')}</Link>
           <Link href="/privacy" className={`hover:text-foreground transition-colors ${FOCUS_RING}`}>{tPrivacy('footerLink')}</Link>
+          <Link href="/legal" className={`hover:text-foreground transition-colors ${FOCUS_RING}`}>{tLegal('footerLink')}</Link>
         </div>
 
         <div className="text-sm text-muted-foreground">

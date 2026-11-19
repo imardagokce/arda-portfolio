@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { CONTACT_LIMITS } from '@/lib/contact-limits';
@@ -18,9 +18,20 @@ export default function ContactPage() {
   const t = useTranslations('Contact');
   const tPrivacy = useTranslations('Privacy');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'rateLimited'>('idle');
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+  const consentRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Açık rıza işaretlenmeden gönderim yapılmaz; kullanıcı onay kutusuna yönlendirilir.
+    if (!consentChecked) {
+      setConsentError(true);
+      consentRef.current?.focus();
+      return;
+    }
+    setConsentError(false);
     setStatus('loading');
 
     const formData = new FormData(e.currentTarget);
@@ -34,7 +45,7 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, consent: true }),
         signal: controller.signal
       });
 
@@ -50,6 +61,7 @@ export default function ContactPage() {
 
       setStatus('success');
       (e.target as HTMLFormElement).reset();
+      setConsentChecked(false);
     } catch {
       clearTimeout(timeoutId);
       setStatus('error');
@@ -144,6 +156,32 @@ export default function ContactPage() {
                 {t('rateLimitMessage')}
               </p>
             )}
+
+            <div>
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <input
+                  ref={consentRef}
+                  type="checkbox"
+                  id="consent"
+                  checked={consentChecked}
+                  onChange={(e) => {
+                    setConsentChecked(e.target.checked);
+                    if (e.target.checked) setConsentError(false);
+                  }}
+                  aria-invalid={consentError || undefined}
+                  aria-describedby={consentError ? 'consent-error' : undefined}
+                  className="mt-1 h-4 w-4 accent-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
+                />
+                <label htmlFor="consent" className="cursor-pointer leading-relaxed">
+                  {tPrivacy('consentLabel')}
+                </label>
+              </div>
+              {consentError && (
+                <p id="consent-error" className="mt-2 pl-7 text-sm text-foreground">
+                  {tPrivacy('consentRequired')}
+                </p>
+              )}
+            </div>
 
             <button
               type="submit"

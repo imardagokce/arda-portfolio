@@ -42,6 +42,11 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
       </section>
 
       <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('legalBasisTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('legalBasisDesc')}</p>
+      </section>
+
+      <section className={sectionClass}>
         <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('logsTitle')}</h2>
         <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('logsDesc')}</p>
       </section>
