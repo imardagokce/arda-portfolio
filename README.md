@@ -33,7 +33,7 @@ for the projects I build around whatever sparks my curiosity: developer tools, p
 | --- | --- |
 | **Minimalist design** | A clean, distraction-free reading experience with subtle micro-interactions, built on CSS keyframes and native browser APIs, with no animation library. |
 | **Bilingual (i18n)** | Full English and Turkish support with locale-aware URL routing via `next-intl`. |
-| **Light & dark themes** | Follows the system preference, with a carefully tuned deep dark palette and design tokens. |
+| **Light & dark themes** | Follows the system preference, with a carefully tuned deep dark palette defined as CSS variables. |
 | **Developer journal** | MDX-based project pages and dev logs, validated at build time with Zod. |
 | **GitHub integration** | Live repository stats, star counts and project status pulled from the GitHub API. |
 | **SEO ready** | Per-locale metadata and dynamically generated Open Graph images. |
@@ -105,14 +105,13 @@ CONTACT_EMAIL=youremail@example.com
 
 ```text
 .
-├── content/            # MDX project pages and dev logs (en/, tr/)
+├── content/            # MDX project notes (en/, tr/)
 ├── messages/           # UI translations (en.json, tr.json)
 └── src/
     ├── app/            # App Router routes ([locale]/…, api/contact)
     ├── components/     # UI components (NavBar, Footer, home sections…)
     ├── i18n/           # next-intl routing and request config
     ├── lib/            # Content loading, GitHub API, schemas, rate limiting
-    ├── tokens/         # Design tokens (colors, spacing, typography, animations)
     └── proxy.ts        # Locale detection and redirects
 ```
 

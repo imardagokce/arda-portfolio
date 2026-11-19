@@ -50,7 +50,6 @@ src/
   components/           Shared UI components (home page sections in components/home/)
   i18n/                 next-intl routing and request config
   lib/                  GitHub API, Markdown rendering, schemas, helpers
-  tokens/               Design tokens (colours, spacing, typography, animations)
   proxy.ts              Request interceptor (locale routing)
 messages/               UI translations: en.json, tr.json
 content/<locale>/projects/   Optional per-project dev notes (.mdx)
