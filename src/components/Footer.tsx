@@ -1,4 +1,6 @@
-import { Link } from '@/i18n/routing';
+'use client';
+
+import { Link, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 function GithubIcon({ className }: { className?: string }) {
@@ -14,7 +16,9 @@ export function Footer() {
   const t = useTranslations('Navigation');
   const tCommon = useTranslations('Common');
   const tFooter = useTranslations('Footer');
-  
+  const pathname = usePathname();
+  const onProjectsPage = pathname === '/projects' || pathname.startsWith('/projects/');
+
   return (
     <footer className="w-full py-16 mt-auto bg-background/50 backdrop-blur-sm">
       <div className="w-full max-w-4xl mx-auto px-6 flex flex-col items-center text-center">
@@ -33,12 +37,14 @@ export function Footer() {
               >
                 {tFooter('viewRepo')}
               </a>
-              <Link 
-                href="/projects" 
-                className="px-6 py-2.5 bg-background border border-border/60 hover:border-accent/40 hover:bg-muted/30 rounded-full text-sm font-medium text-foreground hover:text-accent transition-all hover:-translate-y-0.5 shadow-sm"
-              >
-                {tFooter('viewProjects')}
-              </Link>
+              {!onProjectsPage && (
+                <Link
+                  href="/projects"
+                  className="px-6 py-2.5 bg-background border border-border/60 hover:border-accent/40 hover:bg-muted/30 rounded-full text-sm font-medium text-foreground hover:text-accent transition-all hover:-translate-y-0.5 shadow-sm"
+                >
+                  {tFooter('viewProjects')}
+                </Link>
+              )}
            </div>
         </div>
 
