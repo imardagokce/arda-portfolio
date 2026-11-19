@@ -1,41 +1,70 @@
 # Security Policy
 
-This document outlines the security policies, supported versions, and the process for responsibly reporting vulnerabilities for this project.
+This document describes which versions of this project receive security fixes, how to report a vulnerability privately, and what to expect after you report one.
 
 ## Supported Versions
 
-This project is in alpha and has not had a stable (v1.0) release yet. Until then, security fixes are made only to the latest code on the `main` branch.
+Security fixes are applied to the latest code on the `main` branch only. Older commits are not patched; update to the latest `main` to receive fixes.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| Latest `main` (pre-1.0 alpha) | :white_check_mark: |
-| Older commits                 | :x:                |
+| Version | Supported |
+| --- | :---: |
+| Latest `main` | :white_check_mark: |
+| Older commits | :x: |
 
 ## Reporting a Vulnerability
 
-Maintaining the security and integrity of this project is a top priority. We sincerely appreciate the efforts of security researchers and the community in helping us identify and resolve vulnerabilities.
+**Please do not report security vulnerabilities through public GitHub issues, discussions or pull requests.**
 
-If you discover a security vulnerability, we respectfully request that you report it to us confidentially so that we can take prompt and appropriate action. 
+Report them privately through GitHub's **Private Vulnerability Reporting**:
 
-**Do not report undisclosed security vulnerabilities through public GitHub issues.**
+1. Open the repository's [**Security** tab](https://github.com/imardagokce/arda-portfolio/security).
+2. Select **Advisories**, then **Report a vulnerability**.
+3. Fill in the form. The report is visible only to you and the maintainer.
 
-Please report security vulnerabilities using GitHub's Private Vulnerability Reporting feature.
+To help assess and fix the issue quickly, please include:
 
-Navigate to the repository's Security tab, select Advisories, and choose 'Report a vulnerability'.
+- The type of vulnerability (for example XSS, open redirect, header injection, rate-limit bypass).
+- The affected file paths, routes or components.
+- Step-by-step instructions to reproduce it.
+- Any configuration needed, and a proof of concept if you have one.
+- The potential impact and how an attacker could exploit it.
 
-To help us effectively assess and address the issue, please ensure your report includes the following details:
-- A description of the vulnerability type (e.g., XSS, CSRF, SQLi).
-- The exact location or full paths of the affected source file(s) and code blocks.
-- A clear, step-by-step guide to reproducing the issue.
-- Any necessary configurations or proof-of-concept (PoC) exploit code.
-- An assessment of the potential impact and how an attacker might exploit the vulnerability.
+## Scope
+
+**In scope**
+
+- Source code in this repository, including the App Router pages, the `/api/contact` route, the locale proxy and the Markdown/MDX rendering pipeline.
+- Handling of secrets and environment variables by the application code.
+
+**Out of scope**
+
+- Vulnerabilities in third-party services or dependencies themselves (GitHub API, Resend, npm packages). Please report those to their maintainers. Reports showing that this project uses a dependency in an unsafe way are welcome.
+- Denial-of-service through high request volume, spam or social engineering.
+- Findings from automated scanners without a demonstrated impact.
+
+## Security Measures
+
+The project already includes the following protections:
+
+- **Input validation:** contact form submissions are validated against a strict Zod schema before any processing.
+- **Rate limiting:** the contact endpoint enforces a per-IP limit and a global daily send limit.
+- **HTML sanitisation:** Markdown fetched from GitHub READMEs is passed through `rehype-sanitize` before rendering.
+- **Build-time content validation:** MDX frontmatter is validated with Zod during the build.
+- **Secret handling:** API keys and tokens are read only from server-side environment variables and are never exposed to the client.
+- **Dependency hygiene:** vulnerable transitive dependencies are pinned to patched versions through `overrides` in `package.json`.
+
+## Response Process
+
+| Step | Target |
+| --- | --- |
+| Acknowledge the report | within **72 hours** |
+| Initial assessment and severity | within **7 days** |
+| Fix for confirmed issues | as soon as possible, depending on severity |
+
+You will be kept informed of progress and may be contacted for clarification. Once a fix is released, the issue will be published as a GitHub Security Advisory, and you will be credited unless you prefer to stay anonymous.
 
 ## Responsible Disclosure
 
-We strictly adhere to responsible disclosure practices. We request that you do not share, discuss, or publish details of an unresolved vulnerability with any third parties or the public until a patch has been successfully deployed. We commit to working closely with you to understand the scope and coordinate a public disclosure once the issue is resolved.
+Please give the maintainer reasonable time to release a fix before sharing details publicly, and do not access, modify or delete data that does not belong to you while testing. Good-faith research that follows this policy is welcome and appreciated.
 
-## Response Expectations
-
-We will endeavor to acknowledge receipt of your vulnerability report within **72 hours**. Following the initial response, we will keep you informed of our progress toward a remediation and may reach out for further clarification or guidance.
-
-Thank you for helping keep this project secure and safe for everyone.
+Thank you for helping keep this project secure.
