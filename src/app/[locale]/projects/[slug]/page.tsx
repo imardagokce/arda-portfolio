@@ -4,10 +4,10 @@ import { getProjectBySlug } from '@/lib/content';
 import { notFound } from 'next/navigation';
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { Link, routing } from '@/i18n/routing';
-import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag, Info } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
 import { formatRepoName } from '@/lib/format';
+import { getStatusTopic } from '@/lib/project-status';
 import { githubMarkdownOptions } from '@/lib/github-markdown';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -50,17 +50,17 @@ export async function generateMetadata({
 }
 
 export default async function ProjectDetailPage({
-  params 
-}: { 
-  params: Promise<{ locale: string; slug: string }> 
+  params
+}: {
+  params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Projects' });
-  
+
   // 1. Fetch GitHub Data First
   const repoData = await getRepositoryData(slug);
-  
+
   // If no repo found on GitHub, we don't display it (since it's GitHub-centric now)
   if (!repoData) {
     notFound();
@@ -74,6 +74,11 @@ export default async function ProjectDetailPage({
 
   // 2. Fetch manual MDX data if it exists (for Dev Notes)
   const project = getProjectBySlug(locale, slug);
+
+  // Kartta gösterilen ad, açıklama ve durum (MDX notu önceliklidir).
+  const displayName = project?.frontmatter.title || formatRepoName(repoData.name);
+  const displayDescription = project?.frontmatter.description || repoData.description || t('noDescription');
+  const status = getStatusTopic(repoData.topics);
 
   // content/ altındaki kendi MDX notların için ayarlar.
   // GitHub'dan gelen README ve release notları ayrı işlenir: bkz. lib/github-markdown.ts
@@ -104,71 +109,75 @@ export default async function ProjectDetailPage({
   return (
     <article className="w-full max-w-3xl mx-auto px-6 py-12 md:py-24">
       <ScrollReveal>
-        <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors mb-12">
-          <ArrowLeft className="w-4 h-4" />
-          {t('backBtn')}
-        </Link>
+        <div className="mb-12">
+          <Link href="/projects" className="ink-link text-sm text-muted-foreground">
+            {t('backBtn')}
+          </Link>
+        </div>
 
-        <header className="mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 break-words">
-            {project?.frontmatter.title || formatRepoName(repoData.name)}
-          </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-            {project?.frontmatter.description || repoData.description || t('noDescription')}
-          </p>
+        <header>
+          <div className="business-card mx-auto w-full max-w-[560px]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-10 text-center">
+              <h1
+                lang={project?.frontmatter.title ? undefined : 'en'}
+                className="font-display smallcaps letterpress text-3xl sm:text-4xl font-medium break-words"
+              >
+                {displayName}
+              </h1>
+              <p lang="en" className="text-xs sm:text-sm text-muted-foreground mt-2 line-clamp-3">
+                {displayDescription}
+              </p>
+            </div>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-4 text-sm text-muted-foreground mb-8">
             {repoData.language && (
-              <span className="flex items-center gap-1.5">
-                <CircleDot className="w-4 h-4 text-accent" />
+              <span lang="en" className="absolute left-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
                 {repoData.language}
               </span>
             )}
-            <span className="flex items-center gap-1.5">
-              <Star className="w-4 h-4" />
-              {repoData.stars}
+            {status && (
+              <span className="absolute right-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
+                {t(`status.${status}`)}
+              </span>
+            )}
+            <span className="absolute left-5 bottom-4 text-[10px] sm:text-xs text-muted-foreground">
+              ★ {repoData.stars}
             </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4" />
+            <span className="absolute right-5 bottom-4 text-[10px] sm:text-xs text-muted-foreground">
               {new Date(repoData.updatedAt).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', {
                 year: 'numeric', month: 'long', day: 'numeric'
               })}
             </span>
           </div>
-
-          <div className="flex flex-wrap items-center gap-4 mb-8">
-            <a href={repoData.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-medium px-4 py-2 bg-muted/50 rounded-full hover:bg-muted transition-colors border border-border/50">
-              <Code2 className="w-4 h-4" />
-              {t('viewGithub')}
-            </a>
-          </div>
-
-          {(repoData.topics).length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {(repoData.topics).map(tech => (
-                <span key={tech} className="text-sm px-3 py-1 bg-background border border-border/50 text-muted-foreground rounded-full">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          )}
         </header>
+
+        <div className="mt-10 flex flex-wrap gap-6 justify-center">
+          <a href={repoData.url} target="_blank" rel="noopener noreferrer" className="ink-link text-sm text-foreground">
+            {t('viewGithub')}
+          </a>
+        </div>
+
+        {(repoData.topics).length > 0 && (
+          <ul className="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+            {(repoData.topics).map(tech => (
+              <li key={tech}>{tech}</li>
+            ))}
+          </ul>
+        )}
       </ScrollReveal>
 
       {showDisclaimer && (
-        <div role="note" className="flex items-start gap-3 rounded-xl border border-border/50 bg-muted/30 p-4 text-sm text-muted-foreground mb-12">
-          <Info className="w-4 h-4 mt-0.5 shrink-0" />
+        <div role="note" className="mt-12 border-t border-b border-border py-4 text-sm text-muted-foreground">
           <p>{t('disclaimer')}</p>
         </div>
       )}
 
       {/* 1. README Section */}
       <ScrollReveal delay={0.2}>
-        <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80">
+        <div className="mt-16 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80">
           {readme ? (
              <MDXRemote source={readme} options={githubMarkdownOptions} components={mdxComponents} />
           ) : (
-             <p className="text-muted-foreground italic text-center py-12 bg-muted/20 rounded-xl border border-dashed border-border/50">
+             <p className="text-muted-foreground italic text-center py-12">
                {locale === 'tr' ? 'Bu proje için henüz README bulunmuyor.' : 'No README found for this project yet.'}
              </p>
           )}
@@ -176,36 +185,31 @@ export default async function ProjectDetailPage({
       </ScrollReveal>
 
       {/* 2. Releases Section */}
-      <section className="mt-24 pt-12 border-t border-border/50">
+      <section className="mt-16 pt-16 border-t border-border">
         <ScrollReveal>
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-            <Tag className="w-6 h-6 text-accent" />
+          <h2 className="font-display font-medium text-foreground text-2xl sm:text-3xl mb-8">
             {t('releases')}
-          </h3>
+          </h2>
           {releases.length > 0 ? (
-            <div className="space-y-4">
+            <div className="divide-y divide-border">
               {releases.map((release) => (
-                <details key={release.id} className="group border border-border/50 bg-background rounded-2xl overflow-hidden">
-                  <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-muted/30 transition-colors select-none">
-                    <div className="flex flex-col gap-1">
-                      <span className="font-semibold text-lg text-foreground group-hover:text-accent transition-colors">
+                <details key={release.id} className="group py-6">
+                  <summary className="flex items-center justify-between gap-6 cursor-pointer select-none">
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <span className="font-medium text-lg text-foreground break-words">
                         {release.name}
                       </span>
-                      <span className="text-sm text-muted-foreground flex items-center gap-2">
-                        <span className="inline-block px-2 py-0.5 bg-muted rounded-md border border-border/50 text-xs">
-                          {release.tagName}
-                        </span>
-                        {new Date(release.publishedAt).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      <span className="flex flex-wrap items-center gap-x-4 text-sm text-muted-foreground">
+                        <span>{release.tagName}</span>
+                        <time>{new Date(release.publishedAt).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
                       </span>
                     </div>
-                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-muted group-open:rotate-180 transition-transform">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
+                    <svg aria-hidden="true" className="shrink-0 w-3 h-3 text-muted-foreground group-open:rotate-180 transition-transform" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </summary>
-                  <div className="p-6 pt-0 border-t border-border/50 bg-muted/10">
-                    <div className="prose prose-sm dark:prose-invert max-w-none mt-4 prose-a:text-accent">
+                  <div className="pt-6">
+                    <div className="prose prose-sm dark:prose-invert max-w-none prose-a:text-accent">
                       <MDXRemote source={release.body} options={githubMarkdownOptions} components={mdxComponents} />
                     </div>
                   </div>
@@ -219,35 +223,30 @@ export default async function ProjectDetailPage({
       </section>
 
       {/* 3. Recent Commits Section */}
-      <section className="mt-16 pt-12 border-t border-border/50">
+      <section className="mt-16 pt-16 border-t border-border">
         <ScrollReveal>
-          <h3 className="text-2xl font-bold mb-8 flex items-center gap-2">
-            <GitCommit className="w-6 h-6 text-accent" />
+          <h2 className="font-display font-medium text-foreground text-2xl sm:text-3xl mb-8">
             {t('commits')}
-          </h3>
+          </h2>
           {commits.length > 0 ? (
-            <div className="relative border-l border-border/50 ml-4 space-y-8 pb-4">
+            <div className="divide-y divide-border">
               {commits.map((commit) => (
-                <div key={commit.sha} className="relative pl-8">
-                  <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-accent ring-4 ring-background" />
-                  <div className="flex flex-col gap-2">
-                    <p className="font-medium text-foreground text-base leading-relaxed break-words pr-4">
-                      {commit.message}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <time>
-                        {new Date(commit.date).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                      </time>
-                      <a 
-                        href={commit.htmlUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="hover:text-accent transition-colors flex items-center gap-1"
-                      >
-                        {commit.sha.substring(0, 7)}
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    </div>
+                <div key={commit.sha} className="py-4 flex flex-col gap-2">
+                  <p className="text-foreground text-base leading-relaxed break-words">
+                    {commit.message}
+                  </p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <time>
+                      {new Date(commit.date).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </time>
+                    <a
+                      href={commit.htmlUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ink-link"
+                    >
+                      {commit.sha.substring(0, 7)}
+                    </a>
                   </div>
                 </div>
               ))}
@@ -260,10 +259,10 @@ export default async function ProjectDetailPage({
 
       {/* 4. Development Notes (Optional) */}
       {project?.content && (
-        <section className="mt-24 pt-12 border-t border-border/50">
+        <section className="mt-16 pt-16 border-t border-border">
           <ScrollReveal>
-            <h3 className="text-3xl font-bold mb-8">{t('devNotes')}</h3>
-            <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80 prose-img:rounded-xl bg-muted/10 p-8 rounded-3xl border border-border/50">
+            <h2 className="font-display font-medium text-foreground text-2xl sm:text-3xl mb-8">{t('devNotes')}</h2>
+            <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80 prose-img:rounded-xl">
               <MDXRemote source={project.content} options={mdxOptions} components={mdxComponents} />
             </div>
           </ScrollReveal>

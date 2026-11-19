@@ -15,8 +15,8 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
     <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32 border-t border-border/30">
       <ScrollReveal>
         <div className="flex items-center justify-between gap-4 mb-12">
-          <h2 className="text-3xl font-bold text-foreground">{t('featuredProjectsTitle')}</h2>
-          <Link href="/projects" className="smallcaps ink-link text-xs text-muted-foreground hover:text-foreground transition-colors shrink-0 whitespace-nowrap">
+          <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('featuredProjectsTitle')}</h2>
+          <Link href="/projects" className="ink-link text-sm text-muted-foreground hover:text-foreground transition-colors shrink-0 whitespace-nowrap">
             {t('viewAll')}
           </Link>
         </div>

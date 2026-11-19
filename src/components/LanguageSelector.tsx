@@ -67,33 +67,33 @@ export function LanguageSelector() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 p-2 rounded-full hover:bg-muted/50 text-foreground hover:text-accent dark:text-muted-foreground dark:hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="flex items-center gap-2 p-2 text-muted-foreground hover:text-foreground transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
         aria-label="Select Language"
         aria-expanded={isOpen}
       >
         <Globe className="w-4 h-4" />
-        <span className="text-xs font-semibold tracking-wider uppercase hidden sm:block">
+        <span className="text-sm hidden sm:block">
           {locale}
         </span>
       </button>
 
       {/* Her zaman DOM'da; kapalıyken görünmez ve odaklanılamaz (visibility: hidden). */}
       <div
-        className={`absolute right-0 mt-2 w-40 rounded-xl bg-background border border-border/50 shadow-lg overflow-hidden z-50 origin-top-right transition-[opacity,transform,visibility] duration-150 ease-out motion-reduce:translate-y-0 motion-reduce:scale-100 ${isOpen ? 'visible opacity-100 translate-y-0 scale-100' : 'invisible opacity-0 translate-y-2.5 scale-95 pointer-events-none'}`}
+        className={`absolute right-0 mt-2 w-40 bg-background border border-border z-50 origin-top-right transition-[opacity,transform,visibility] duration-150 ease-out motion-reduce:translate-y-0 motion-reduce:scale-100 ${isOpen ? 'visible opacity-100 translate-y-0 scale-100' : 'invisible opacity-0 translate-y-2.5 scale-95 pointer-events-none'}`}
       >
         <div className="py-1 flex flex-col">
           {languages.map((lang) => (
             <button
               key={lang.code}
               onClick={() => switchLocale(lang.code)}
-              className="flex items-center justify-between px-4 py-2.5 text-sm text-left hover:bg-muted/50 transition-colors w-full focus-visible:bg-muted/50 outline-none"
+              className="flex items-center justify-between px-4 py-2.5 text-sm text-left hover:text-foreground transition-colors w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-foreground"
               role="menuitem"
             >
-              <span className={`font-medium ${locale === lang.code ? 'text-foreground' : 'text-muted-foreground'}`}>
+              <span className={locale === lang.code ? 'text-foreground' : 'text-muted-foreground'}>
                 {lang.label}
               </span>
               {locale === lang.code && (
-                <Check className="w-4 h-4 text-accent" />
+                <Check className="w-4 h-4 text-foreground" />
               )}
             </button>
           ))}

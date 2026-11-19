@@ -53,7 +53,7 @@
 
   /* Specifically target prose-invert to fix Tailwind's internal white/gray overrides */
   .dark .prose-invert {
-    --tw-prose-body: var(--foreground);
+    --tw-prose-body: var(--muted-foreground);
     --tw-prose-headings: var(--heading);
     --tw-prose-lead: var(--muted-foreground);
     --tw-prose-links: var(--accent);
@@ -183,7 +183,7 @@
  * Katman dışında tanımlıdır ki eklentinin prose-neutral / prose-invert renklerini geçersiz kılsın.
  */
 .prose {
-  --tw-prose-body: var(--foreground);
+  --tw-prose-body: var(--muted-foreground);
   --tw-prose-headings: var(--heading);
   --tw-prose-lead: var(--muted-foreground);
   --tw-prose-links: var(--accent);
@@ -203,6 +203,9 @@
 }
 
 /* Satır içi kod: eklentinin eklediği ters tırnakları kaldır, yerine hafif bir zemin ver. */
+/* README başlıkları da kartvizit serifiyle */
+.prose :where(h1, h2, h3, h4) { font-family: var(--font-display); font-weight: 500; }
+
 .prose :not(pre) > code::before,
 .prose :not(pre) > code::after {
   content: none;

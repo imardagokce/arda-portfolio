@@ -11,65 +11,65 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+const sectionClass = 'mt-16 pt-16 border-t border-border';
+
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Privacy' });
 
   return (
-    <article className="w-full max-w-3xl mx-auto px-6 py-12 md:py-24">
+    <article className="w-full max-w-2xl mx-auto px-6 py-12 md:py-24">
       <header className="mb-16">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">
+        <h1 className="font-display font-medium text-4xl sm:text-5xl letterpress text-foreground">
           {t('title')}
         </h1>
-        <p className="text-sm text-muted-foreground mb-6">
+        <p className="mt-4 text-sm text-muted-foreground">
           {t('updated')}
         </p>
-        <p className="text-xl text-muted-foreground leading-relaxed">
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
           {t('intro')}
         </p>
       </header>
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold space-y-12">
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('controllerTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('controllerDesc')}</p>
-        </section>
+      <section>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('controllerTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('controllerDesc')}</p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('contactTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('contactDesc')}</p>
-        </section>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('contactTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('contactDesc')}</p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('logsTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('logsDesc')}</p>
-        </section>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('logsTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('logsDesc')}</p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('cookiesTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('cookiesDesc')}</p>
-          <ul className="list-disc pl-5 text-muted-foreground space-y-2 text-lg mt-4">
-            <li>{t('cookie1')}</li>
-            <li>{t('cookie2')}</li>
-            <li>{t('cookie3')}</li>
-          </ul>
-        </section>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('cookiesTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('cookiesDesc')}</p>
+        <ul className="mt-8 divide-y divide-border">
+          <li className="py-4 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('cookie1')}</li>
+          <li className="py-4 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('cookie2')}</li>
+          <li className="py-4 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('cookie3')}</li>
+        </ul>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('thirdTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('thirdDesc')}</p>
-        </section>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('thirdTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('thirdDesc')}</p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('rightsTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('rightsDesc')}</p>
-        </section>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('rightsTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('rightsDesc')}</p>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-foreground border-b border-border/50 pb-4 mb-6">{t('changesTitle')}</h2>
-          <p className="text-muted-foreground leading-relaxed text-lg">{t('changesDesc')}</p>
-        </section>
-      </div>
+      <section className={sectionClass}>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('changesTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">{t('changesDesc')}</p>
+      </section>
     </article>
   );
 }

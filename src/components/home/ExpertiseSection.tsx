@@ -1,4 +1,3 @@
-import { ArrowRight, Code2, Globe, Server, Shield } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { Link } from '@/i18n/routing';
@@ -7,49 +6,35 @@ export async function ExpertiseSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Home' });
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-6 py-24 md:py-32">
+    <section className="w-full max-w-3xl mx-auto px-6 py-24 md:py-32">
       <ScrollReveal>
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-foreground mb-6">{t('expertiseTitle')}</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
-            {t('expertiseDesc')}
-          </p>
-          <Link href="/about" className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent/80 transition-colors mt-6">
-            {t('expertiseLink')} <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </ScrollReveal>
+        <h2 className="font-display font-medium text-2xl sm:text-3xl text-foreground">{t('expertiseTitle')}</h2>
+        <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground max-w-2xl">
+          {t('expertiseDesc')}
+        </p>
+        <Link href="/about" className="inline-block mt-6 ink-link text-foreground">
+          {t('expertiseLink')}
+        </Link>
 
-      <div className="grid md:grid-cols-2 gap-6 mt-12">
-        <ScrollReveal delay={0.1}>
-          <div className="p-8 bg-background border border-border/50 rounded-2xl hover:border-accent/40 transition-colors h-full">
-            <Server className="w-8 h-8 text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-foreground mb-3">{t('expertise1Title')}</h3>
-            <p className="text-muted-foreground">{t('expertise1Desc')}</p>
+        <dl className="mt-12 grid sm:grid-cols-2 gap-x-12 gap-y-10">
+          <div>
+            <dt className="font-display text-2xl text-foreground">{t('expertise1Title')}</dt>
+            <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{t('expertise1Desc')}</dd>
           </div>
-        </ScrollReveal>
-        <ScrollReveal delay={0.2}>
-          <div className="p-8 bg-background border border-border/50 rounded-2xl hover:border-accent/40 transition-colors h-full">
-            <Globe className="w-8 h-8 text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-foreground mb-3">{t('expertise2Title')}</h3>
-            <p className="text-muted-foreground">{t('expertise2Desc')}</p>
+          <div>
+            <dt className="font-display text-2xl text-foreground">{t('expertise2Title')}</dt>
+            <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{t('expertise2Desc')}</dd>
           </div>
-        </ScrollReveal>
-        <ScrollReveal delay={0.3}>
-          <div className="p-8 bg-background border border-border/50 rounded-2xl hover:border-accent/40 transition-colors h-full">
-            <Shield className="w-8 h-8 text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-foreground mb-3">{t('expertise3Title')}</h3>
-            <p className="text-muted-foreground">{t('expertise3Desc')}</p>
+          <div>
+            <dt className="font-display text-2xl text-foreground">{t('expertise3Title')}</dt>
+            <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{t('expertise3Desc')}</dd>
           </div>
-        </ScrollReveal>
-        <ScrollReveal delay={0.4}>
-          <div className="p-8 bg-background border border-border/50 rounded-2xl hover:border-accent/40 transition-colors h-full">
-            <Code2 className="w-8 h-8 text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-foreground mb-3">{t('expertise4Title')}</h3>
-            <p className="text-muted-foreground">{t('expertise4Desc')}</p>
+          <div>
+            <dt className="font-display text-2xl text-foreground">{t('expertise4Title')}</dt>
+            <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{t('expertise4Desc')}</dd>
           </div>
-        </ScrollReveal>
-      </div>
+        </dl>
+      </ScrollReveal>
     </section>
   );
 }

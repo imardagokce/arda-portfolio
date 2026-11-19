@@ -42,7 +42,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
   );
 
   const tabClass = (active: boolean) =>
-    `smallcaps text-xs transition-colors ${
+    `text-sm transition-colors ${
       active
         ? 'text-foreground underline underline-offset-8 decoration-1'
         : 'text-muted-foreground hover:text-foreground'
