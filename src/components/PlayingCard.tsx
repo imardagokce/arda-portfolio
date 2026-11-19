@@ -58,6 +58,9 @@ export function PlayingCard({ repo, rank, suit, statusLabel, noDescription, tilt
       style={{
         position: "relative",
         aspectRatio: "5 / 7",
+        // İskambil kâğıdı: yuvarlak köşe ve kartvizitlerden daha belirgin bir kenar.
+        borderRadius: "12px",
+        borderColor: "color-mix(in srgb, var(--muted-foreground) 55%, transparent)",
         transform: resting,
         transition: "transform 200ms ease, box-shadow 300ms ease",
       }}
