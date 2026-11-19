@@ -182,6 +182,11 @@ export async function getRepositoryData(repoName: string): Promise<Repository | 
 
     const data = await res.json();
 
+    // Gizlenen repolar listede olmadığı gibi doğrudan adresle de açılmaz; sayfa 404 döner.
+    if (isHiddenRepo(data)) {
+      return null;
+    }
+
     return {
       name: data.name,
       description: data.description,
