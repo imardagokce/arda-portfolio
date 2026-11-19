@@ -1,10 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
-import { PlayingCard } from '@/components/PlayingCard';
 import { Link } from '@/i18n/routing';
 import { getRepositories, type Repository } from '@/lib/github';
 import { hashTilt, rankLabel, sortByRank, suitForStatus } from '@/lib/deck';
 import { getStatusTopic } from '@/lib/project-status';
+import { RandomFeaturedCards } from '@/components/home/RandomFeaturedCards';
 
 export async function FeaturedProjects({ locale, projects }: { locale: string; projects: Repository[] }) {
   if (projects.length === 0) return null;
@@ -28,25 +28,19 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
         </div>
       </ScrollReveal>
 
-      <ul className="flex flex-wrap justify-center gap-6 sm:gap-10 list-none p-0">
-        {projects.map((project, index) => {
+      <RandomFeaturedCards
+        noDescription={tProjects('noDescription')}
+        cards={projects.map((project) => {
           const status = getStatusTopic(project.topics);
-          return (
-            <li key={project.name} className="w-[calc(50%-0.75rem)] sm:w-[220px]">
-              <ScrollReveal delay={index * 0.1}>
-                <PlayingCard
-                  repo={project}
-                  rank={rankByName.get(project.name) ?? ''}
-                  suit={suitForStatus(status)}
-                  statusLabel={status ? tProjects(`status.${status}`) : tProjects('suitOther')}
-                  noDescription={tProjects('noDescription')}
-                  tilt={hashTilt(project.name)}
-                />
-              </ScrollReveal>
-            </li>
-          );
+          return {
+            repo: project,
+            rank: rankByName.get(project.name) ?? '',
+            suit: suitForStatus(status),
+            tilt: hashTilt(project.name),
+            statusLabel: status ? tProjects(`status.${status}`) : tProjects('suitOther'),
+          };
         })}
-      </ul>
+      />
     </section>
   );
 }
