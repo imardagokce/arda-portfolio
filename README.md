@@ -3,7 +3,7 @@
 # Arda's Digital Workspace
 
 **A personal portfolio and developer journal**<br>
-documenting my journey into game development with Unity and C#, along with my projects and experiments.
+for the projects I build around whatever sparks my curiosity: developer tools, privacy software, AI tooling and market analysis.
 
 <br>
 
