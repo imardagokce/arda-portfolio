@@ -13,29 +13,37 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cormorant), Georgia, serif;
+
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
 }
 
 @layer base {
   :root {
-    /* Light Theme (Bone-white paper with soft blue accents) */
-    --background: #F7F4ED;
-    --foreground: #1C1F26;
-    --heading: #1C1F26;
-    --accent: #2E6A9E; /* Blue for links and highlights (5.2:1 on background — WCAG AA) */
-    --muted: #EAE6DB;
-    --muted-foreground: #416C8B; /* Soft blue for secondary text and subheadings (5.1:1 on background — WCAG AA) */
-    --border: #D8D1C3;
+    /* Light Theme (Bone paper with blood-red letterpress ink) */
+    --background: #F4EFE4; /* Bone paper */
+    --foreground: #8A0303; /* Blood-red ink */
+    --heading: #8A0303; /* Kan kırmızısı başlıklar */
+    --accent: #8A0303; /* Blood-red ink for links and highlights */
+    --muted: #EAE3D5;
+    --muted-foreground: #6B5E55; /* Warm taupe for secondary text */
+    --border: #D9CFBD;
   }
 
   .dark {
-    /* Dark Theme (Deep navy notebook with warm golden typography) */
-    --background: #0B1020; /* Deep Navy */
-    --foreground: #DCCB92; /* Warm Gold for main text */
-    --heading: #E7D7A5; /* Brighter, elegant gold for headings */
-    --accent: #D6C68D; /* Deeper gold for hover and highlights */
-    --muted: #161D30;
-    --muted-foreground: #B3A573; /* Muted gold for secondary text */
-    --border: #1F2942;
+    /* Dark Theme (Charcoal paper with bright red ink) */
+    --background: #0E0D0C; /* Charcoal */
+    --foreground: #E5484D; /* Bright red ink for main text */
+    --heading: #E5484D; /* Koyu temada okunur kan kırmızısı (5:1) */
+    --accent: #E5484D; /* Bright red ink for hover and highlights */
+    --muted: #1A1817;
+    --muted-foreground: #A89F94; /* Warm grey for secondary text */
+    --border: #2A2725;
   }
 
   /* Force standard typography to use the heading color */
@@ -249,3 +257,21 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Kartvizit tasarım dili */
+.smallcaps { font-variant-caps: all-small-caps; letter-spacing: 0.14em; }
+.letterpress { text-shadow: 0 1px 0 rgb(255 255 255 / 0.55); }
+.dark .letterpress { text-shadow: 0 -1px 0 rgb(0 0 0 / 0.7); }
+.business-card {
+  position: relative;
+  aspect-ratio: 3.5 / 2;
+  background: #FAF7F0;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 12px 28px -14px rgb(0 0 0 / 0.22);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.dark .business-card { background: #151312; box-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 28px -14px rgb(0 0 0 / 0.8); }
+.business-card:hover { transform: translateY(-3px) rotate(-0.4deg); box-shadow: 0 2px 4px rgb(0 0 0 / 0.08), 0 20px 36px -16px rgb(0 0 0 / 0.3); }
+@media (prefers-reduced-motion: reduce) { .business-card, .business-card:hover { transition: none; transform: none; } }
+.ink-link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.ink-link:hover { text-decoration-thickness: 2px; }

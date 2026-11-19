@@ -22,7 +22,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
   return (
     <div className="w-full max-w-4xl mx-auto px-6 py-12 md:py-24">
       <div className="mb-16">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">
+        <h1 className="font-display smallcaps letterpress text-4xl sm:text-5xl font-medium text-foreground mb-4">
           {t('title')}
         </h1>
         <p className="text-muted-foreground text-lg">

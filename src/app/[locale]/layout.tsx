@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { NavBar } from '@/components/NavBar';
 import { Footer } from '@/components/Footer';
 import { AnimatedSignature } from '@/components/AnimatedSignature';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google';
 import '../globals.css';
 
 const geistSans = Geist({
@@ -18,6 +18,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+
+const cormorant = Cormorant_Garamond({
+  weight: ['400', '500', '600'],
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-cormorant',
+  display: 'swap',
 });
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -60,7 +67,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable}`}>
       <body className="antialiased min-h-screen flex flex-col font-sans" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

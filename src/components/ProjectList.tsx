@@ -4,7 +4,6 @@ import { useState } from "react";
 import { flushSync } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { Code2, ExternalLink, Calendar, Star, CircleDot } from "lucide-react";
 import { Repository } from "@/lib/github";
 import { STATUS_TOPICS, getStatusTopic, type StatusTopic } from "@/lib/project-status";
 import { formatRepoName } from '@/lib/format';
@@ -37,47 +36,44 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
     return status === filter;
   });
 
-  // Yalnızca listede en az bir projesi olan durumların chip'i gösterilir.
+  // Yalnızca listede en az bir projesi olan durumların sekmesi gösterilir.
   const presentStatuses = new Set(
     repos.map(repo => getStatusTopic(repo.topics)).filter((s): s is StatusTopic => s !== null)
   );
 
-  const getStatusColor = (status: StatusTopic | null) => {
-    switch (status) {
-      case 'active': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20';
-      case 'nearly-finished': return 'bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20';
-      case 'completed': return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
-      case 'idea': return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
-      case 'planned': return 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20';
-      case 'paused': return 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/20';
-      case 'archived': return 'bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/20';
-      default: return 'bg-muted text-muted-foreground border-border/50';
-    }
-  };
+  const tabClass = (active: boolean) =>
+    `smallcaps text-xs transition-colors ${
+      active
+        ? 'text-foreground underline underline-offset-8 decoration-1'
+        : 'text-muted-foreground hover:text-foreground'
+    }`;
+
+  const dateFormatter = (value: string) =>
+    new Date(value).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
 
   return (
     <div className="flex flex-col gap-8">
       {/* Filters */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-x-6 gap-y-3">
         <button
+          type="button"
           onClick={() => changeFilter('all')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
-            filter === 'all' 
-              ? 'bg-foreground text-background border-foreground' 
-              : 'bg-background text-muted-foreground border-border/50 hover:border-accent/50'
-          }`}
+          aria-pressed={filter === 'all'}
+          className={tabClass(filter === 'all')}
         >
           {t('filters.all')}
         </button>
         {STATUS_TOPICS.filter(topic => presentStatuses.has(topic)).map(topic => (
           <button
             key={topic}
+            type="button"
             onClick={() => changeFilter(topic)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors border ${
-              filter === topic 
-                ? 'bg-foreground text-background border-foreground' 
-                : 'bg-background text-muted-foreground border-border/50 hover:border-accent/50'
-            }`}
+            aria-pressed={filter === topic}
+            className={tabClass(filter === topic)}
           >
             {t(`filters.${topic}`)}
           </button>
@@ -85,76 +81,50 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredRepos.map((repo) => {
-            const status = getStatusTopic(repo.topics);
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {filteredRepos.map((repo) => {
+          const status = getStatusTopic(repo.topics);
+          const name = formatRepoName(repo.name);
 
-            return (
-              <div
-                key={repo.name}
-                style={{ viewTransitionName: transitionNames.get(repo.name) }}
-                className="group flex flex-col h-full bg-background border border-border/50 rounded-2xl hover:shadow-sm hover:border-accent/50 transition-all duration-300 overflow-hidden animate-[fade-scale-in_0.2s_ease-out] motion-reduce:animate-none"
-              >
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors break-words line-clamp-1" title={formatRepoName(repo.name)}>
-                      {formatRepoName(repo.name)}
-                    </h2>
-                    <span className={`text-xs px-3 py-1 rounded-full font-medium border whitespace-nowrap ml-4 ${getStatusColor(status)}`}>
-                      {status ? t(`status.${status}`) : t('status.notSpecified')}
-                    </span>
-                  </div>
-                  
-                  <p className="text-muted-foreground text-sm mb-6 flex-1 line-clamp-3">
-                    {repo.description || t('noDescription')}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground mb-6">
-                    {repo.language && (
-                      <span className="flex items-center gap-1.5">
-                        <CircleDot className="w-3 h-3 text-accent" />
-                        {repo.language}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1.5" title="Stars">
-                      <Star className="w-3.5 h-3.5" />
-                      {repo.stars}
-                    </span>
-                    <span className="flex items-center gap-1.5" title="Last Updated">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {new Date(repo.updatedAt).toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                      })}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-                    <Link 
-                      href={`/projects/${repo.name}`}
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground rounded-lg transition-colors text-sm font-medium"
-                    >
-                      {t('viewDetails')}
-                      <ExternalLink className="w-4 h-4" />
-                    </Link>
-                    <a 
-                      href={repo.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors border border-transparent hover:border-border/50"
-                      title={t('viewGithub')}
-                    >
-                      <Code2 className="w-5 h-5" />
-                    </a>
-                  </div>
-                </div>
+          return (
+            <Link
+              key={repo.name}
+              href={`/projects/${repo.name}`}
+              aria-label={name}
+              style={{ viewTransitionName: transitionNames.get(repo.name) }}
+              className="business-card block text-foreground animate-[fade-scale-in_0.2s_ease-out] motion-reduce:animate-none"
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center px-8 text-center">
+                <h2 lang="en" className="font-display smallcaps letterpress text-2xl sm:text-3xl font-medium break-words">
+                  {name}
+                </h2>
+                <p lang={repo.description ? 'en' : undefined} className="text-xs sm:text-sm text-muted-foreground mt-2 line-clamp-2">
+                  {repo.description || t('noDescription')}
+                </p>
               </div>
-            );
-          })}
-        
+
+              {repo.language && (
+                <span lang="en" className="absolute left-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
+                  {repo.language}
+                </span>
+              )}
+              {status && (
+                <span className="absolute right-5 top-4 smallcaps text-[10px] sm:text-xs text-muted-foreground">
+                  {t(`status.${status}`)}
+                </span>
+              )}
+              <span className="absolute left-5 bottom-4 text-[10px] sm:text-xs text-muted-foreground" title="Stars">
+                ★ {repo.stars}
+              </span>
+              <span className="absolute right-5 bottom-4 text-[10px] sm:text-xs text-muted-foreground" title="Last Updated">
+                {dateFormatter(repo.updatedAt)}
+              </span>
+            </Link>
+          );
+        })}
+
         {filteredRepos.length === 0 && (
-          <div className="col-span-full py-12 text-center text-muted-foreground bg-muted/20 rounded-2xl border border-dashed border-border/50 animate-[fade-in_0.2s_ease-out] motion-reduce:animate-none">
+          <div className="col-span-full py-12 text-center text-muted-foreground animate-[fade-in_0.2s_ease-out] motion-reduce:animate-none">
             {repos.length === 0 ? t('noRepos') : t('noFilterMatch')}
           </div>
         )}
