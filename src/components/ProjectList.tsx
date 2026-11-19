@@ -7,6 +7,7 @@ import { Link } from "@/i18n/routing";
 import { Code2, ExternalLink, Calendar, Star, CircleDot } from "lucide-react";
 import { Repository } from "@/lib/github";
 import { STATUS_TOPICS, getStatusTopic, type StatusTopic } from "@/lib/project-status";
+import { formatRepoName } from '@/lib/format';
 
 export function ProjectList({ repos }: { repos: Repository[] }) {
   const t = useTranslations('Projects');
@@ -36,6 +37,11 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
     return status === filter;
   });
 
+  // Yalnızca listede en az bir projesi olan durumların chip'i gösterilir.
+  const presentStatuses = new Set(
+    repos.map(repo => getStatusTopic(repo.topics)).filter((s): s is StatusTopic => s !== null)
+  );
+
   const getStatusColor = (status: StatusTopic | null) => {
     switch (status) {
       case 'active': return 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20';
@@ -63,7 +69,7 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
         >
           {t('filters.all')}
         </button>
-        {STATUS_TOPICS.map(topic => (
+        {STATUS_TOPICS.filter(topic => presentStatuses.has(topic)).map(topic => (
           <button
             key={topic}
             onClick={() => changeFilter(topic)}
@@ -91,8 +97,8 @@ export function ProjectList({ repos }: { repos: Repository[] }) {
               >
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors break-words line-clamp-1" title={repo.name}>
-                      {repo.name}
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-accent transition-colors break-words line-clamp-1" title={formatRepoName(repo.name)}>
+                      {formatRepoName(repo.name)}
                     </h2>
                     <span className={`text-xs px-3 py-1 rounded-full font-medium border whitespace-nowrap ml-4 ${getStatusColor(status)}`}>
                       {status ? t(`status.${status}`) : t('status.notSpecified')}

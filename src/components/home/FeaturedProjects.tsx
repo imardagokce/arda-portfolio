@@ -2,6 +2,7 @@ import { ArrowRight, Star } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { Link } from '@/i18n/routing';
+import { formatRepoName } from '@/lib/format';
 import type { Repository } from '@/lib/github';
 import { getStatusTopic } from '@/lib/project-status';
 
@@ -35,7 +36,7 @@ export async function FeaturedProjects({ locale, projects }: { locale: string; p
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-4">
                       <h2 className="min-w-0 break-words text-xl font-semibold text-foreground group-hover:text-accent transition-colors">
-                        {project.name}
+                        {formatRepoName(project.name)}
                       </h2>
                       <div className="flex shrink-0 items-center gap-3">
                         <div className="flex items-center gap-1 text-xs font-medium text-muted-foreground bg-muted/50 px-2 py-1 rounded-md border border-border/50">

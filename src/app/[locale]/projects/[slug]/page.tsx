@@ -7,6 +7,7 @@ import { Link, routing } from '@/i18n/routing';
 import { ArrowLeft, Code2, ExternalLink, Star, Calendar, CircleDot, GitCommit, Tag, Info } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { GITHUB_USERNAME, getRepositories, getRepositoryData, getRepositoryReadme, getRepositoryReleases, getRepositoryCommits } from '@/lib/github';
+import { formatRepoName } from '@/lib/format';
 import { githubMarkdownOptions } from '@/lib/github-markdown';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -43,7 +44,7 @@ export async function generateMetadata({
   const project = getProjectBySlug(locale, slug);
 
   return {
-    title: project?.frontmatter.title || repoData.name,
+    title: project?.frontmatter.title || formatRepoName(repoData.name),
     description: project?.frontmatter.description || repoData.description || t('noDescription'),
   };
 }
@@ -110,7 +111,7 @@ export default async function ProjectDetailPage({
 
         <header className="mb-16">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6 break-words">
-            {project?.frontmatter.title || repoData.name}
+            {project?.frontmatter.title || formatRepoName(repoData.name)}
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed mb-8">
             {project?.frontmatter.description || repoData.description || t('noDescription')}
