@@ -55,16 +55,18 @@ The project already includes the following protections:
 
 ## Response Process
 
-| Step | Target |
-| --- | --- |
-| Acknowledge the report | within **72 hours** |
-| Initial assessment and severity | within **7 days** |
-| Fix for confirmed issues | as soon as possible, depending on severity |
+This is a personal project maintained by one person, so response times may vary. As a guideline:
 
-You will be kept informed of progress and may be contacted for clarification. Once a fix is released, the issue will be published as a GitHub Security Advisory, and you will be credited unless you prefer to stay anonymous.
+- Reports are acknowledged within **72 hours** where possible.
+- Each report is then reviewed and its severity assessed as soon as possible.
+- Confirmed issues are fixed with a priority that matches their severity.
 
-## Responsible Disclosure
+You may be contacted for clarification while the issue is being investigated.
 
-Please give the maintainer reasonable time to release a fix before sharing details publicly, and do not access, modify or delete data that does not belong to you while testing. Good-faith research that follows this policy is welcome and appreciated.
+## Confidentiality
+
+Vulnerability reports are handled privately from start to finish. The report, its details and the discussion around it stay between you and the maintainer, and fixed issues are not published as public advisories.
+
+Please keep the details confidential as well: do not share them publicly or with third parties, even after a fix has been released. While testing, do not access, modify or delete data that does not belong to you. Good-faith research that follows this policy is welcome and appreciated.
 
 Thank you for helping keep this project secure.
