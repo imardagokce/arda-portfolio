@@ -5,9 +5,11 @@ import { useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { CONTACT_LIMITS } from '@/lib/contact-limits';
+import { Link } from '@/i18n/routing';
 
 export default function ContactPage() {
   const t = useTranslations('Contact');
+  const tPrivacy = useTranslations('Privacy');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'rateLimited'>('idle');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -177,6 +179,16 @@ export default function ContactPage() {
               )}
             </button>
           </div>
+
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {tPrivacy.rich('formNotice', {
+              link: (chunks) => (
+                <Link href="/privacy" className="underline underline-offset-4 hover:text-foreground transition-colors">
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
         </form>
       </ScrollReveal>
     </div>

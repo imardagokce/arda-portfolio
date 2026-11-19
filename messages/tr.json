@@ -36,7 +36,9 @@
     "recentLogsTitle": "Son Güncellemeler",
     "ctaTitle": "Yeni fikirlere ve iş birliklerine açığım.",
     "ctaDesc": "Aklında bir proje, bir fikir ya da birlikte yapabileceğimiz bir şey varsa yazmaktan çekinme. Yeni insanlarla tanışmayı, farklı bakış açılarından öğrenmeyi ve fırsatları değerlendirmeyi seviyorum.",
-    "ctaBtn": "Benimle Konuş"
+    "ctaBtn": "Benimle Konuş",
+    "cardRole": "Yazılım Geliştirici",
+    "cardFields": "Araçlar · Gizlilik · Piyasalar"
   },
   "About": {
     "title": "Hakkımda",
@@ -144,5 +146,30 @@
   "CV": {
     "title": "İnteraktif CV yakında.",
     "desc": "Şimdilik hazırlıyorum. Tamamladığımda burada bulabilirsin."
+  },
+  "Privacy": {
+    "title": "Gizlilik Politikası",
+    "updated": "Son güncelleme: 19 Kasım 2026",
+    "intro": "Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) kapsamında, bu web sitesini ziyaret ettiğinizde hangi verilerin işlendiğini açıklar.",
+    "controllerTitle": "Veri Sorumlusu",
+    "controllerDesc": "Bu sitenin sahibi ve veri sorumlusu Arda Gökçe Alkan'dır. Gizlilikle ilgili tüm talepleriniz için iletişim formunu kullanabilirsiniz.",
+    "contactTitle": "İletişim Formu",
+    "contactDesc": "İletişim formunu kullandığınızda adınız, e-posta adresiniz, konu ve mesajınız yalnızca size yanıt verebilmek amacıyla işlenir. Mesajınız, e-posta gönderim hizmeti Resend (Resend, Inc., ABD) aracılığıyla site sahibinin e-posta kutusuna iletilir; bu nedenle verileriniz yurt dışına aktarılır. Formu göndererek bu aktarıma açık rıza vermiş olursunuz. Mesajlar, yazışma tamamlandıktan sonra makul bir süre içinde silinir.",
+    "logsTitle": "Kötüye Kullanımın Önlenmesi ve Sunucu Kayıtları",
+    "logsDesc": "Formun kötüye kullanılmasını önlemek için IP adresiniz kısa süreli olarak yalnızca sunucu belleğinde tutulur ve kalıcı olarak kaydedilmez. Sitenin barındırıldığı altyapı sağlayıcısı, güvenlik ve işletim amacıyla standart sunucu kayıtları (IP adresi, tarayıcı bilgisi, ziyaret zamanı) tutabilir.",
+    "cookiesTitle": "Çerezler ve Tarayıcı Depolaması",
+    "cookiesDesc": "Bu site analiz, reklam veya takip amaçlı çerez kullanmaz. Yalnızca sitenin çalışması için gerekli olan aşağıdaki kayıtlar kullanılır; bunlar için onay gerekmez:",
+    "cookie1": "NEXT_LOCALE (çerez, 1 yıl): Seçtiğiniz dili hatırlar.",
+    "cookie2": "theme (tarayıcı deposu): Açık veya koyu tema tercihinizi hatırlar.",
+    "cookie3": "İmza animasyonu kaydı (oturum deposu): Giriş animasyonunun bir oturumda yalnızca bir kez oynamasını sağlar; tarayıcı kapanınca silinir.",
+    "thirdTitle": "Üçüncü Taraf Hizmetler",
+    "thirdDesc": "Proje bilgileri GitHub API'sinden sunucu tarafında çekilir; tarayıcınız GitHub'a doğrudan bağlanmaz. Yazı tipleri bu sitenin kendi sunucusundan yüklenir, Google'a istek gönderilmez.",
+    "rightsTitle": "Haklarınız",
+    "rightsDesc": "KVKK'nın 11. maddesi ve GDPR kapsamında; verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, işlemeye itiraz etme ve verdiğiniz rızayı geri alma haklarına sahipsiniz. Taleplerinizi iletişim formu üzerinden iletebilirsiniz. Ayrıca Kişisel Verileri Koruma Kurulu'na veya bulunduğunuz ülkenin veri koruma otoritesine şikâyette bulunabilirsiniz.",
+    "changesTitle": "Değişiklikler",
+    "changesDesc": "Bu politika gerektiğinde güncellenebilir. Güncel sürüm her zaman bu sayfada yayımlanır.",
+    "formNotice": "Formu göndererek, mesajınızın {link} kapsamında işlenmesini kabul etmiş olursunuz.",
+    "formNoticeLink": "Gizlilik Politikası",
+    "footerLink": "Gizlilik"
   }
 }

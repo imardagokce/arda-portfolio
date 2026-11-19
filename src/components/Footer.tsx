@@ -16,6 +16,7 @@ export function Footer() {
   const t = useTranslations('Navigation');
   const tCommon = useTranslations('Common');
   const tFooter = useTranslations('Footer');
+  const tPrivacy = useTranslations('Privacy');
   const pathname = usePathname();
   const onProjectsPage = pathname === '/projects' || pathname.startsWith('/projects/');
 
@@ -57,6 +58,7 @@ export function Footer() {
           <Link href="/projects" className="hover:text-accent transition-colors">{t('projects')}</Link>
           <Link href="/links" className="hover:text-accent transition-colors">{t('links')}</Link>
           <Link href="/contact" className="hover:text-accent transition-colors">{t('contact')}</Link>
+          <Link href="/privacy" className="hover:text-accent transition-colors">{tPrivacy('footerLink')}</Link>
         </div>
         
         <div className="text-sm text-muted-foreground">
