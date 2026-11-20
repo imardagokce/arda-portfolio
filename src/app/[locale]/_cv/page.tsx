@@ -1,3 +1,6 @@
+// CV hazır olana kadar yayında değil: '_' ile başlayan klasörler Next.js'te rotaya dönüşmez,
+// bu yüzden /cv adresi gerçek bir 404 döner. Hazır olduğunda klasörü tekrar 'cv' yapıp
+// menü ve footer'a /cv linkini geri eklemek yeterli.
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { ScrollReveal } from '@/components/ScrollReveal';
