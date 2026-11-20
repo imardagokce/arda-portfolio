@@ -37,7 +37,7 @@ for the projects I build around whatever sparks my curiosity: developer tools, p
 | **Business & playing cards** | Business cards for the hero, profiles and project pages, and playing cards for featured projects. The home orbit rotates only on click, arrow keys or swipe. |
 | **Dealt projects deck** | Projects are dealt one by one as rounded playing cards. The suit reflects status and the rank reflects stars, with a "Deal again" action. |
 | **Privacy & terms** | Privacy Policy and Terms of Use pages in both languages. No analytics or tracking cookies, so no cookie banner. |
-| **Developer journal** | MDX-based project pages and dev logs, validated at build time with Zod. |
+| **Developer journal** | MDX-based project notes, validated at build time with Zod. |
 | **GitHub integration** | Live repository stats, star counts and project status pulled from the GitHub API. |
 | **SEO ready** | Per-locale metadata and dynamically generated Open Graph images. |
 | **Hardened contact form** | Schema-validated input, per-IP and global rate limiting, and email delivery through Resend. |

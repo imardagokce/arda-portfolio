@@ -8,7 +8,8 @@ Security fixes are applied to the latest code on the `main` branch only. Older c
 
 | Version | Supported |
 | --- | :---: |
-| Latest `main` | :white_check_mark: |
+| Latest `main` (v1.x) | :white_check_mark: |
+| `old` branch (v1.0.0-old, previous interface) | :x: |
 | Older commits | :x: |
 
 ## Reporting a Vulnerability
