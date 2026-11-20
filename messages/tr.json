@@ -10,7 +10,6 @@
     "closeMenu": "Menüyü kapat"
   },
   "Home": {
-    "greeting": "Merhaba, ben Arda.",
     "subtitle": "Aklıma gelen fikirleri gerçek projelere dönüştürüyorum. Kendi kullandığım araçları yazmayı ve her gün yeni bir şey öğrenmeyi seviyorum.",
     "projectsBtn": "Projeler",
     "contactBtn": "İletişim",
@@ -33,7 +32,6 @@
     "statFollowers": "Takipçi",
     "statActivity": "Son Aktivite",
     "statLast": "Son:",
-    "recentLogsTitle": "Son Güncellemeler",
     "ctaTitle": "Yeni fikirlere ve iş birliklerine açığım.",
     "ctaDesc": "Aklında bir proje, bir fikir ya da birlikte yapabileceğimiz bir şey varsa yazmaktan çekinme. Yeni insanlarla tanışmayı, farklı bakış açılarından öğrenmeyi ve fırsatları değerlendirmeyi seviyorum.",
     "ctaBtn": "Benimle Konuş",
@@ -76,9 +74,6 @@
     "title": "Projeler",
     "subtitle": "Kişisel projelerim, açık kaynak katkılarım ve dijital deneylerim.",
     "backBtn": "Geri dön",
-    "sourceCode": "Kaynak Kod",
-    "liveDemo": "Canlı Demo",
-    "associatedLogs": "Geliştirici Günlüğü",
     "status": {
       "active": "Üzerinde Çalışılıyor",
       "nearly-finished": "Tamamlanmak Üzere",
@@ -86,8 +81,7 @@
       "idea": "Fikir Aşaması",
       "planned": "Planlandı",
       "paused": "Beklemede",
-      "archived": "Arşiv",
-      "notSpecified": "Durum Belirtilmedi"
+      "archived": "Arşiv"
     },
     "filters": {
       "all": "Tümü",
@@ -99,7 +93,6 @@
       "paused": "Beklemede",
       "archived": "Arşiv"
     },
-    "viewDetails": "Detayları İncele",
     "viewGithub": "GitHub'da Gör",
     "noDescription": "Açıklama belirtilmemiş.",
     "releases": "Sürümler",
@@ -109,7 +102,6 @@
     "noCommits": "Son aktivite bulunamadı.",
     "noRepos": "Burada henüz bir şey yok.",
     "noFilterMatch": "Eşleşen bir sonuç bulunamadı.",
-    "viewCommit": "Commit'i İncele",
     "disclaimer": "Bu proje yalnızca eğitim ve araştırma amaçlıdır. İçerdiği hiçbir analiz veya çıktı yatırım ya da bahis tavsiyesi değildir.",
     "redeal": "Yeniden dağıt",
     "suitOther": "Diğer",

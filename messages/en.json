@@ -10,7 +10,6 @@
     "closeMenu": "Close menu"
   },
   "Home": {
-    "greeting": "Hi, I'm Arda.",
     "subtitle": "I turn the ideas that come to mind into real projects. I enjoy writing the tools I use myself and learning something new every day.",
     "projectsBtn": "Projects",
     "contactBtn": "Contact",
@@ -33,7 +32,6 @@
     "statFollowers": "Followers",
     "statActivity": "Last Activity",
     "statLast": "Last:",
-    "recentLogsTitle": "Recent Updates",
     "ctaTitle": "Open to new ideas and collaborations.",
     "ctaDesc": "If you have a project, an idea, or something we could build together, feel free to get in touch. I enjoy meeting new people, learning from different perspectives, and making the most of opportunities.",
     "ctaBtn": "Talk to Me",
@@ -76,9 +74,6 @@
     "title": "Projects",
     "subtitle": "My personal projects, open source contributions, and digital experiments.",
     "backBtn": "Go back",
-    "sourceCode": "Source Code",
-    "liveDemo": "Live Demo",
-    "associatedLogs": "Dev Log",
     "status": {
       "active": "In Progress",
       "nearly-finished": "Nearly Finished",
@@ -86,8 +81,7 @@
       "idea": "Idea Stage",
       "planned": "Planned",
       "paused": "Paused",
-      "archived": "Archived",
-      "notSpecified": "Not Specified"
+      "archived": "Archived"
     },
     "filters": {
       "all": "All",
@@ -99,7 +93,6 @@
       "paused": "Paused",
       "archived": "Archived"
     },
-    "viewDetails": "View Details",
     "viewGithub": "View on GitHub",
     "noDescription": "No description provided.",
     "releases": "Releases",
@@ -109,7 +102,6 @@
     "noCommits": "No recent commits found.",
     "noRepos": "Nothing here yet.",
     "noFilterMatch": "No matching results found.",
-    "viewCommit": "View Commit",
     "disclaimer": "This project is for educational and research purposes only. None of its analysis or output is investment or betting advice.",
     "redeal": "Deal again",
     "suitOther": "Other",
