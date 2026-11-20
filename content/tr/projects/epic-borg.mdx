@@ -34,14 +34,15 @@ Bugün, Epic Borg adlı dijital çalışma masasını sıfırdan inşa ettik. İ
 - İçeriklerin veritabanı olmadan sunulabilmesi için **`next-mdx-remote`** ve **Zod** kullanılarak, build anında doğrulama yapan (tip güvenli) bir Markdown/MDX sistemi yazıldı.
 
 ### 3. Tasarım ve UI Bileşenleri
-- "Minimalist, premium ve kendinden emin" prensibiyle yola çıkılarak, `globals.css` içerisine hafif bir kâğıt greni (noise) eklendi.
-- Google Fonts üzerinden modern **Geist** yazı tipi entegre edildi.
-- Animasyonlar herhangi bir animasyon kütüphanesi olmadan, **CSS keyframe'leri ve tarayıcının yerel API'leriyle** çalışıyor:
-  - Sayfa kaydırıldıkça küçülen, bulanıklık efektine (backdrop-blur) sahip yüzen bir **Navbar** yapıldı. Küçülmeyi pasif bir scroll dinleyicisi ve CSS geçişleri sağlıyor.
-  - Ekrana SVG çizgileriyle çizilen pürüzsüz bir **İmza Animasyonu** `stroke-dashoffset` değerini hareket ettiren CSS keyframe'leriyle eklendi. Her oturumda bir kez oynuyor (`sessionStorage` ile takip ediliyor) ve azaltılmış hareket tercih eden kullanıcılarda atlanıyor.
+- **Letterpress kartvizit kimliği:** Kemik rengi kâğıt, hafif bir kâğıt dokusu, kan kırmızısı mürekkep (#8A0303, koyu modda #E5484D) ve keskin köşeler; hepsi tasarım token'ları olarak tanımlı.
+- **Tipografi:** Başlıklar ve kartvizit metinleri Cormorant Garamond serif yazı tipiyle, gövde metinleri Geist ile yazılıyor.
+- Animasyonlar herhangi bir animasyon kütüphanesi olmadan, **CSS keyframe'leri ve tarayıcının yerel API'leriyle** çalışıyor ve `prefers-reduced-motion` tercihine saygı duyuyor:
+  - **Ana sayfadaki gezegen:** Kör kabartma tanıtım metni, çizilmiş eğik bir yörüngenin merkezinde duruyor; yörüngedeki dört kartvizit uydu yalnızca tıklama, önceki/sonraki bağlantıları, ok tuşları veya kaydırma ile dönüyor, sayfa kaydırılırken asla dönmüyor. Dar ekranlarda tek, kaydırılabilir bir karta dönüşüyor.
 
 ### 4. Sayfalar ve Deneyim
-- **Ana Sayfa:** Devasa bir watermark imza eşliğinde, okunabilirliği yüksek temiz bir giriş (Hero) bölümü tasarlandı.
-- **Projeler:** Projeler GitHub API'sinden canlı olarak çekiliyor. Her proje sayfasında README, son sürümler ve son commit'ler gösteriliyor; projenin durumu (üzerinde çalışılıyor, tamamlandı vb.) reponun topic'lerinden okunuyor.
-- **Hakkımda & Bağlantılar:** Okunabilirliği yüksek profil sayfaları kodlandı.
-- **İletişim:** Kullanıcı deneyimini artırmak adına "Floating Labels" kullanıldı ve arka planda **Resend API** e-posta gönderim altyapısı hazırlandı.
+- **Ana Sayfa:** Giriş (Hero) bölümü, ad ve unvanın yer aldığı tek ve ortalanmış bir kartvizit. Öne çıkan projeler, her yüklemede rastgele belirlenen sıra ve takımla oyun kartları olarak gösteriliyor.
+- **Projeler:** Projeler GitHub API'sinden canlı olarak çekiliyor ve sayfa açıldığında tek tek, yuvarlak köşeli oyun kartları olarak bir desteden dağıtılıyor. Takım projenin durumunu gösteriyor (maça: tamamlandı, karo: tamamlanmak üzere, kupa: aktif, sinek: diğer), sıra ise yıldız sayısına göre belirleniyor; en çok yıldızlı proje as oluyor. "Yeniden dağıt" desteyi baştan dağıtıyor, filtreler ise kartları toplayıp yeniden dağıtıyor. Fork'lar, arşivlenmiş repolar ve `hide-from-site` etiketli repolar listelenmiyor ve 404 döndürüyor.
+- **Proje Sayfaları:** Her proje sayfası önce projenin kartviziti, ardından README, sürümler ve son commit'ler ile açılıyor. Piyasa ve bahis konulu projelerde "yatırım veya bahis tavsiyesi değildir" notu gösteriliyor.
+- **Hakkımda & Bağlantılar:** Her profil bir kartvizit olarak tasarlandı.
+- **İletişim:** Kırtasiye tarzında bir form; mesajın Resend üzerinden iletilmesi için ayrı ve açık bir onay kutusu var (KVKK Madde 9). Onay sunucu tarafında da kontrol ediliyor.
+- **Yasal:** Gizlilik Politikası ve Kullanım Koşulları iki dilde yayında. Analitik veya izleme çerezi kullanılmadığı için çerez afişi yok. Bilinmeyen adresler yerelleştirilmiş bir 404 kartı gösteriyor.

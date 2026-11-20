@@ -34,14 +34,15 @@ Today, we built the digital workspace named Epic Borg from scratch. Here is the 
 - Created a type-safe Markdown/MDX system using **`next-mdx-remote`** and **Zod** that performs build-time validation.
 
 ### 3. Design & UI Components
-- Driven by the "minimalist, premium, and confident" principle, a subtle paper grain (noise) was added to `globals.css`.
-- Integrated the modern **Geist** font.
-- Animations run on **CSS keyframes and native browser APIs**, with no animation library:
-  - Built a floating **Navbar** with a backdrop-blur effect that shrinks as the page scrolls, driven by a passive scroll listener and CSS transitions.
-  - Added a smooth, SVG-drawn **Signature Animation** by animating `stroke-dashoffset` with CSS keyframes. It plays once per session (tracked in `sessionStorage`) and is skipped for users who prefer reduced motion.
+- **Letterpress business-card identity:** bone-coloured paper with a subtle paper-grain texture, blood-red ink (#8A0303, brightened to #E5484D in dark mode) and sharp corners, all defined as design tokens.
+- **Typography:** Cormorant Garamond serif for headings and card text, with Geist for body text.
+- Animations run on **CSS keyframes and native browser APIs**, with no animation library, and respect `prefers-reduced-motion`:
+  - **Home planet:** A blind-embossed intro text sits at the centre of a drawn, tilted orbit with four business-card satellites. They rotate only on click, prev/next links, arrow keys or swipe, never on page scroll. On narrow screens they become one swipeable card.
 
 ### 4. Pages & Experience
-- **Home:** Designed a highly readable Hero section accompanied by a massive watermark signature.
-- **Projects:** Projects are pulled live from the GitHub API. Each project page shows its README, latest releases and recent commits, and its status (active, completed, etc.) is read from the repository's topics.
-- **About & Links:** Coded minimal profile pages with high readability.
-- **Contact:** Implemented "Floating Labels" in the form inputs to enhance user experience, and prepared the email delivery backend using the **Resend API**.
+- **Home:** The hero is a single centred business card with the name and role. Featured projects are shown as playing cards whose rank and suit are random on each load.
+- **Projects:** Projects are pulled live from the GitHub API and dealt one by one from a deck as rounded playing cards when the page opens. The suit shows status (spades for completed, diamonds for nearly finished, hearts for active, clubs for other) and the rank follows stars, so the most-starred project is the Ace. "Deal again" re-deals the deck, and filters gather and re-deal it. Forks, archived repositories and repositories tagged `hide-from-site` are not listed and return 404.
+- **Project pages:** Each project page opens with the project's business card, followed by its README, releases and recent commits. Market and betting projects show a "not investment or betting advice" note.
+- **About & Links:** Each profile is a business card.
+- **Contact:** A stationery-style form with a separate, explicit consent checkbox for sending the message through **Resend** (KVKK Art. 9). The consent is also checked on the server.
+- **Legal:** A Privacy Policy and Terms of Use in both languages. The site uses no analytics or tracking cookies, so there is no cookie banner. Unknown URLs show a localised 404 card.

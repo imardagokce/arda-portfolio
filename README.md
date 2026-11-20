@@ -31,14 +31,17 @@ for the projects I build around whatever sparks my curiosity: developer tools, p
 
 | | |
 | --- | --- |
-| **Minimalist design** | A clean, distraction-free reading experience with subtle micro-interactions, built on CSS keyframes and native browser APIs, with no animation library. |
+| **Letterpress design** | Bone-coloured paper with a subtle grain, blood-red ink and sharp-cornered business cards, with Cormorant Garamond headings and Geist body text. |
 | **Bilingual (i18n)** | Full English and Turkish support with locale-aware URL routing via `next-intl`. |
-| **Light & dark themes** | Follows the system preference, with a carefully tuned deep dark palette defined as CSS variables. |
+| **Light & dark themes** | Follows the system preference, with blood-red ink brightened for dark mode. All colours are defined as CSS variables. |
+| **Business & playing cards** | Business cards for the hero, profiles and project pages, and playing cards for featured projects. The home orbit rotates only on click, arrow keys or swipe. |
+| **Dealt projects deck** | Projects are dealt one by one as rounded playing cards. The suit reflects status and the rank reflects stars, with a "Deal again" action. |
+| **Privacy & terms** | Privacy Policy and Terms of Use pages in both languages. No analytics or tracking cookies, so no cookie banner. |
 | **Developer journal** | MDX-based project pages and dev logs, validated at build time with Zod. |
 | **GitHub integration** | Live repository stats, star counts and project status pulled from the GitHub API. |
 | **SEO ready** | Per-locale metadata and dynamically generated Open Graph images. |
 | **Hardened contact form** | Schema-validated input, per-IP and global rate limiting, and email delivery through Resend. |
-| **Accessible motion** | Animations respect `prefers-reduced-motion`. |
+| **Accessible motion** | Animations are built on CSS and native browser APIs, with no animation library, and respect `prefers-reduced-motion`. |
 
 ## Tech Stack
 
