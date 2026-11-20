@@ -66,7 +66,7 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
       });
       const h = cardH.current;
       const rx = Math.round(cw / 2 + (CARD_W * SIDE_SCALE) / 2 + 48);
-      const ry = Math.round(ch / 2 + h / 2 + 40);
+      const ry = Math.round(ch / 2 + h / 2 + 28); // daha sıkı dikey boşluk: yörünge menünün altındaki alana rahat sığar
       const next = {
         desktop: w >= 2 * rx + CARD_W * SIDE_SCALE,
         rx,
@@ -212,7 +212,7 @@ export function ExpertiseOrbit({ centre, items, prevLabel, nextLabel, positionTe
             // Önden ve yandan geçen kartlar opak kalır (yörünge çizgisi içlerinden görünmesin); yalnızca yazıları solar.
             const behind = d < -0.001;
             const cardOpacity = behind ? opacity : 1;
-            const textOpacity = behind ? 1 : Math.max(opacity, 0.7);
+            const textOpacity = behind ? 1 : Math.max(opacity, 0.88); // yandaki başlıklar okunur kalsın
             return (
               <button
                 key={i}
