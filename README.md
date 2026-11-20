@@ -94,6 +94,7 @@ CONTACT_EMAIL=youremail@example.com
 | `RESEND_API_KEY` | ✅ | API key used by the contact form. |
 | `RESEND_FROM_EMAIL` | — | Sender address. Defaults to `onboarding@resend.dev`. |
 | `CONTACT_EMAIL` | ✅ | Address that receives contact form messages. |
+| `NEXT_PUBLIC_SITE_URL` | — | Public site address used for absolute links, the sitemap and share images. Defaults to the Vercel production URL. |
 
 ### Scripts
 

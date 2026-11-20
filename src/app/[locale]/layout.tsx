@@ -8,6 +8,7 @@ import { NavBar } from '@/components/NavBar';
 import { Footer } from '@/components/Footer';
 import { AnimatedSignature } from '@/components/AnimatedSignature';
 import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google';
+import { SITE_URL } from '@/lib/site';
 import '../globals.css';
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Metadata' });
   
   return {
+    metadataBase: new URL(SITE_URL),
     title: {
       template: '%s | Arda',
       default: t('title'),
