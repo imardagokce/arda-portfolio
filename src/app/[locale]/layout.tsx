@@ -8,6 +8,7 @@ import { NavBar } from '@/components/NavBar';
 import { Footer } from '@/components/Footer';
 import { AnimatedSignature } from '@/components/AnimatedSignature';
 import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import { SITE_URL } from '@/lib/site';
 import '../globals.css';
 
@@ -87,6 +88,8 @@ export default async function LocaleLayout({
             </AnimatedSignature>
           </ThemeProvider>
         </NextIntlClientProvider>
+        {/* Vercel Web Analytics: çerezsiz sayfa görüntüleme sayımı; yalnızca Vercel üzerinde veri gönderir. */}
+        <Analytics />
       </body>
     </html>
   );

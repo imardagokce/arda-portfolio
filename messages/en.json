@@ -148,7 +148,7 @@
   },
   "Privacy": {
     "title": "Privacy Policy",
-    "updated": "Last updated: 19 November 2026",
+    "updated": "Last updated: 24 November 2026",
     "intro": "This policy explains what data is processed when you visit this website, under the Turkish Personal Data Protection Law No. 6698 (KVKK) and the EU General Data Protection Regulation (GDPR).",
     "controllerTitle": "Data Controller",
     "controllerDesc": "The owner of this website and the data controller is Arda Gökçe Alkan. You can send privacy requests through the contact form or in writing.",
@@ -162,7 +162,7 @@
     "cookie2": "theme (local storage): remembers your light or dark theme preference.",
     "cookie3": "Signature animation flag (session storage): makes the intro animation play only once per session; cleared when the browser closes.",
     "thirdTitle": "Third-Party Services",
-    "thirdDesc": "Project information is fetched from the GitHub API on the server; your browser does not connect to GitHub directly. Fonts are served from this site itself; no requests are sent to Google.",
+    "thirdDesc": "Project information is fetched from the GitHub API on the server; your browser does not connect to GitHub directly. Fonts are served from this site itself; no requests are sent to Google. Visitor numbers are measured with Vercel Web Analytics, provided by this site's hosting provider Vercel Inc. (USA). It does not use cookies or store your IP address; it records only the page visited, the referring site, your approximate country, and your browser, operating system and device type, and it cannot recognise you across days. These statistics are used only to see which pages are read and are kept for at most 30 days.",
     "rightsTitle": "Your Rights",
     "rightsDesc": "Under Article 11 of the KVKK and the GDPR, you have the right to learn whether your data is processed, to request information, to have it corrected or deleted, to object to processing and to withdraw your explicit consent at any time. You can send requests through the contact form or in writing; requests are answered within 30 days. You may also lodge a complaint with the Turkish Personal Data Protection Authority or the data protection authority of your country.",
     "changesTitle": "Changes",

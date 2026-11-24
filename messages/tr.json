@@ -148,7 +148,7 @@
   },
   "Privacy": {
     "title": "Gizlilik Politikası",
-    "updated": "Son güncelleme: 19 Kasım 2026",
+    "updated": "Son güncelleme: 24 Kasım 2026",
     "intro": "Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) kapsamında, bu web sitesini ziyaret ettiğinizde hangi verilerin işlendiğini açıklar.",
     "controllerTitle": "Veri Sorumlusu",
     "controllerDesc": "Bu sitenin sahibi ve veri sorumlusu Arda Gökçe Alkan'dır. Gizlilikle ilgili talepleriniz için iletişim formunu kullanabilir ya da yazılı olarak başvurabilirsiniz.",
@@ -162,7 +162,7 @@
     "cookie2": "theme (tarayıcı deposu): Açık veya koyu tema tercihinizi hatırlar.",
     "cookie3": "İmza animasyonu kaydı (oturum deposu): Giriş animasyonunun bir oturumda yalnızca bir kez oynamasını sağlar; tarayıcı kapanınca silinir.",
     "thirdTitle": "Üçüncü Taraf Hizmetler",
-    "thirdDesc": "Proje bilgileri GitHub API'sinden sunucu tarafında çekilir; tarayıcınız GitHub'a doğrudan bağlanmaz. Yazı tipleri bu sitenin kendi sunucusundan yüklenir, Google'a istek gönderilmez.",
+    "thirdDesc": "Proje bilgileri GitHub API'sinden sunucu tarafında çekilir; tarayıcınız GitHub'a doğrudan bağlanmaz. Yazı tipleri bu sitenin kendi sunucusundan yüklenir, Google'a istek gönderilmez. Ziyaretçi sayıları, sitenin barındırma sağlayıcısı Vercel Inc. (ABD) tarafından sunulan Vercel Web Analytics ile ölçülür. Bu ölçüm çerez kullanmaz ve IP adresinizi saklamaz; yalnızca ziyaret edilen sayfayı, gelinen siteyi, yaklaşık ülkenizi, tarayıcı, işletim sistemi ve cihaz türünüzü kaydeder ve sizi farklı günlerde tanıyamaz. Bu istatistikler yalnızca hangi sayfaların okunduğunu görmek için kullanılır ve en fazla 30 gün saklanır.",
     "rightsTitle": "Haklarınız",
     "rightsDesc": "KVKK'nın 11. maddesi ve GDPR kapsamında; verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, işlemeye itiraz etme ve verdiğiniz açık rızayı dilediğiniz zaman geri alma haklarına sahipsiniz. Taleplerinizi iletişim formu üzerinden ya da yazılı olarak iletebilirsiniz; başvurular en geç 30 gün içinde yanıtlanır. Ayrıca Kişisel Verileri Koruma Kurulu'na veya bulunduğunuz ülkenin veri koruma otoritesine şikâyette bulunabilirsiniz.",
     "changesTitle": "Değişiklikler",
