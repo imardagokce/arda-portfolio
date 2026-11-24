@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import { z } from 'zod';
 import { createRateLimiter, getClientIp } from '@/lib/rate-limit';
 import { ContactSchema } from '@/lib/schemas';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 // Geçici (Placeholder) Resend API Key
 const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder_123');
@@ -26,7 +27,8 @@ function tooManyRequests(retryAfterSeconds: number) {
 }
 
 export async function POST(request: Request) {
-  const ipLimit = ipLimiter(getClientIp(request));
+  const clientIp = getClientIp(request);
+  const ipLimit = ipLimiter(clientIp);
   if (!ipLimit.allowed) {
     return tooManyRequests(ipLimit.retryAfterSeconds);
   }
@@ -47,6 +49,13 @@ export async function POST(request: Request) {
   }
 
   const { name, email, subject, message } = parsed.data;
+
+  // Bot kontrolü (Cloudflare Turnstile). Anahtar tanımlı değilse atlanır; bkz. lib/turnstile.ts.
+  // Toplam gönderim kotasından önce yapılır ki botlar kotayı tüketemesin.
+  const turnstileToken = (body as { turnstileToken?: unknown }).turnstileToken;
+  if (!(await verifyTurnstileToken(turnstileToken, clientIp === 'unknown' ? null : clientIp))) {
+    return NextResponse.json({ error: 'Bot verification failed' }, { status: 403 });
+  }
 
   // Yalnızca gerçekten gönderilecek (doğrulamayı geçmiş) mesajlar toplam kotadan düşer.
   const globalLimit = globalSendLimiter('all');

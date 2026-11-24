@@ -1,9 +1,10 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { Turnstile, TURNSTILE_SITE_KEY, type TurnstileHandle } from '@/components/Turnstile';
 import { CONTACT_LIMITS } from '@/lib/contact-limits';
 import { Link } from '@/i18n/routing';
 
@@ -17,10 +18,13 @@ const statusClass = 'border border-border p-4 text-sm text-foreground animate-in
 export default function ContactPage() {
   const t = useTranslations('Contact');
   const tPrivacy = useTranslations('Privacy');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'rateLimited'>('idle');
+  const locale = useLocale();
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'rateLimited' | 'botCheck'>('idle');
   const [consentChecked, setConsentChecked] = useState(false);
   const [consentError, setConsentError] = useState(false);
   const consentRef = useRef<HTMLInputElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +36,12 @@ export default function ContactPage() {
       return;
     }
     setConsentError(false);
+
+    // Bot kontrolü etkinse ve henüz tamamlanmadıysa gönderilmez.
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setStatus('botCheck');
+      return;
+    }
     setStatus('loading');
 
     const formData = new FormData(e.currentTarget);
@@ -45,11 +55,19 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, consent: true }),
+        body: JSON.stringify({ ...data, consent: true, turnstileToken }),
         signal: controller.signal
       });
 
       clearTimeout(timeoutId);
+      // Jeton tek kullanımlıktır; sonuç ne olursa olsun bir sonraki gönderim için yenisi alınır.
+      turnstileRef.current?.reset();
+
+      // 403: bot kontrolü sunucuda doğrulanamadı (süresi dolmuş ya da geçersiz jeton).
+      if (res.status === 403) {
+        setStatus('botCheck');
+        return;
+      }
 
       // 429: sunucudaki rate limit'e takıldı; genel hata yerine ne yapılacağını söyleyen ayrı bir mesaj gösterilir.
       if (res.status === 429) {
@@ -64,6 +82,7 @@ export default function ContactPage() {
       setConsentChecked(false);
     } catch {
       clearTimeout(timeoutId);
+      turnstileRef.current?.reset();
       setStatus('error');
     }
   };
@@ -156,6 +175,11 @@ export default function ContactPage() {
                 {t('rateLimitMessage')}
               </p>
             )}
+            {status === 'botCheck' && (
+              <p className={statusClass}>
+                {t('botCheckMessage')}
+              </p>
+            )}
 
             <div>
               <div className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -182,6 +206,8 @@ export default function ContactPage() {
                 </p>
               )}
             </div>
+
+            <Turnstile ref={turnstileRef} language={locale} onToken={setTurnstileToken} />
 
             <button
               type="submit"

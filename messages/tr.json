@@ -68,6 +68,7 @@
     "successMessage": "Mesajınız ulaştı. En kısa sürede dönüş yapacağım.",
     "errorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
     "rateLimitMessage": "Çok fazla deneme yapıldı. Lütfen birkaç dakika bekleyip tekrar deneyin.",
+    "botCheckMessage": "Lütfen butonun üstündeki güvenlik doğrulamasını tamamlayıp tekrar deneyin.",
     "submitBtn": "Gönder"
   },
   "Projects": {
@@ -162,7 +163,7 @@
     "cookie2": "theme (tarayıcı deposu): Açık veya koyu tema tercihinizi hatırlar.",
     "cookie3": "İmza animasyonu kaydı (oturum deposu): Giriş animasyonunun bir oturumda yalnızca bir kez oynamasını sağlar; tarayıcı kapanınca silinir.",
     "thirdTitle": "Üçüncü Taraf Hizmetler",
-    "thirdDesc": "Proje bilgileri GitHub API'sinden sunucu tarafında çekilir; tarayıcınız GitHub'a doğrudan bağlanmaz. Yazı tipleri bu sitenin kendi sunucusundan yüklenir, Google'a istek gönderilmez. Ziyaretçi sayıları, sitenin barındırma sağlayıcısı Vercel Inc. (ABD) tarafından sunulan Vercel Web Analytics ile ölçülür. Bu ölçüm çerez kullanmaz ve IP adresinizi saklamaz; yalnızca ziyaret edilen sayfayı, gelinen siteyi, yaklaşık ülkenizi, tarayıcı, işletim sistemi ve cihaz türünüzü kaydeder ve sizi farklı günlerde tanıyamaz. Bu istatistikler yalnızca hangi sayfaların okunduğunu görmek için kullanılır ve en fazla 30 gün saklanır.",
+    "thirdDesc": "Proje bilgileri GitHub API'sinden sunucu tarafında çekilir; tarayıcınız GitHub'a doğrudan bağlanmaz. Yazı tipleri bu sitenin kendi sunucusundan yüklenir, Google'a istek gönderilmez. Ziyaretçi sayıları, sitenin barındırma sağlayıcısı Vercel Inc. (ABD) tarafından sunulan Vercel Web Analytics ile ölçülür. Bu ölçüm çerez kullanmaz ve IP adresinizi saklamaz; yalnızca ziyaret edilen sayfayı, gelinen siteyi, yaklaşık ülkenizi, tarayıcı, işletim sistemi ve cihaz türünüzü kaydeder ve sizi farklı günlerde tanıyamaz. Bu istatistikler yalnızca hangi sayfaların okunduğunu görmek için kullanılır ve en fazla 30 gün saklanır. İletişim formunu spam'e karşı korumak için iletişim sayfasında Cloudflare Turnstile (Cloudflare, Inc., ABD) kullanılır; ziyaretçinin insan olup olmadığını tarayıcınızdan gelen teknik bilgiler ve IP adresinizle, takip çerezi kullanmadan kontrol eder ve yalnızca iletişim sayfasında çalışır.",
     "rightsTitle": "Haklarınız",
     "rightsDesc": "KVKK'nın 11. maddesi ve GDPR kapsamında; verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, işlemeye itiraz etme ve verdiğiniz açık rızayı dilediğiniz zaman geri alma haklarına sahipsiniz. Taleplerinizi iletişim formu üzerinden ya da yazılı olarak iletebilirsiniz; başvurular en geç 30 gün içinde yanıtlanır. Ayrıca Kişisel Verileri Koruma Kurulu'na veya bulunduğunuz ülkenin veri koruma otoritesine şikâyette bulunabilirsiniz.",
     "changesTitle": "Değişiklikler",
