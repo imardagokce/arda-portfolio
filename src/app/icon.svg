@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 28 132 132" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Açılış animasyonundaki ve menüdeki imza (bkz. components/AnimatedSignature.tsx). Sekme boyutunda okunsun diye çizgiler kalınlaştırıldı. -->
+  <style>
+    .ink { stroke: #8A0303; }
+    .dot { fill: #8A0303; }
+    @media (prefers-color-scheme: dark) {
+      .ink { stroke: #E5484D; }
+      .dot { fill: #E5484D; }
+    }
+  </style>
+  <path class="ink" stroke-width="16" d="M 55,145 C 60,145 80,80 100,40 C 98,90 102,130 115,150 C 118,154 122,150 120,145" />
+  <path class="ink" stroke-width="16" d="M 45,115 C 80,105 120,98 155,93" />
+  <circle class="dot" cx="155" cy="93" r="13" />
+</svg>
