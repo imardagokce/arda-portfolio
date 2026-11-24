@@ -106,6 +106,25 @@ export default async function ProjectDetailPage({
     }
   };
 
+  // README ve release notlarındaki göreli bağlantılar (LICENSE, docs/setup.md, ./CONTRIBUTING.md...)
+  // GitHub'da repoya göre çözülür. Sitede olduğu gibi bırakılırsa /projects/LICENSE gibi 404 veren
+  // adreslere gider; bu yüzden repodaki dosyanın GitHub sayfasına çevrilir. Klasör bağlantılarını
+  // GitHub blob → tree olarak kendisi yönlendirir. Kendi MDX notların bu kurala dahil değildir:
+  // onlardaki /about gibi bağlantılar site içi sayfalardır.
+  const repoBlobBase = `${repoData.url}/blob/${repoData.defaultBranch || 'main'}/`;
+  const githubComponents = {
+    ...mdxComponents,
+    a: (props: ComponentProps<'a'>) => {
+      let href = props.href;
+      // Tam adresler (http:, mailto:...), protokolsüz adresler (//) ve sayfa içi çapalar (#) olduğu gibi kalır.
+      if (typeof href === 'string' && href && !/^([a-z][a-z0-9+.-]*:|\/\/|#)/i.test(href)) {
+        // Baştaki "/" GitHub'da repo kökünü ifade eder.
+        href = new URL(href.replace(/^\/+/, ''), repoBlobBase).toString();
+      }
+      return <a {...props} href={href} />;
+    }
+  };
+
   return (
     <article className="w-full max-w-3xl mx-auto px-6 py-12 md:py-24">
       <ScrollReveal>
@@ -175,7 +194,7 @@ export default async function ProjectDetailPage({
       <ScrollReveal delay={0.2}>
         <div className="mt-16 prose prose-neutral dark:prose-invert max-w-none prose-headings:font-semibold prose-a:text-accent hover:prose-a:text-accent/80">
           {readme ? (
-             <MDXRemote source={readme} options={githubMarkdownOptions} components={mdxComponents} />
+             <MDXRemote source={readme} options={githubMarkdownOptions} components={githubComponents} />
           ) : (
              <p className="text-muted-foreground italic text-center py-12">
                {locale === 'tr' ? 'Bu proje için henüz README bulunmuyor.' : 'No README found for this project yet.'}
@@ -210,7 +229,7 @@ export default async function ProjectDetailPage({
                   </summary>
                   <div className="pt-6">
                     <div className="prose prose-sm dark:prose-invert max-w-none prose-a:text-accent">
-                      <MDXRemote source={release.body} options={githubMarkdownOptions} components={mdxComponents} />
+                      <MDXRemote source={release.body} options={githubMarkdownOptions} components={githubComponents} />
                     </div>
                   </div>
                 </details>
