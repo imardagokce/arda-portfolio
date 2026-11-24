@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # The site is deployed to production on every push to main, so vulnerable
+  # dependencies matter.
+  #
+  # Routine version-update pull requests are switched off (limit 0): each one
+  # would open a branch in this repository. Dependabot alerts and security
+  # updates are controlled in the repository's Security settings and are not
+  # affected; a pull request only appears when a dependency has a known
+  # vulnerability. To check for new versions by hand: `npm outdated`.
+  - package-ecosystem: "npm"
+    directory: "/"
+    open-pull-requests-limit: 0
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
