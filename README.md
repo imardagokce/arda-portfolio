@@ -61,7 +61,7 @@ for the projects I build around whatever sparks my curiosity: developer tools, p
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 20.9 or later
+- [Node.js](https://nodejs.org/) 26 (the version Vercel builds with; see .nvmrc)
 - npm
 
 ### Installation

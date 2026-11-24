@@ -15,7 +15,7 @@ Thanks for your interest in improving this project! This is a personal portfolio
 
 ### Prerequisites
 
-- Node.js 20.9 or newer (required by Next.js 16)
+- Node.js 26 (the version used by Vercel builds; see .nvmrc)
 - npm (the repository ships a `package-lock.json`)
 
 ### Install and run
