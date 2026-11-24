@@ -6,7 +6,7 @@ import { routing } from '@/i18n/routing';
 // Sosyal medya paylaşımlarında görünen görsel (og:image / twitter:image), dile göre üretilir.
 // Tasarım sitenin koyu temasını kullanır: lacivert zemin, altın tonlu yazı ve imza işareti.
 // Önemli içerik tuvalin orta %80'inde tutulur; platformlar kenarları kırpsa bile okunur kalır.
-export const alt = 'Arda | Digital Workspace';
+export const alt = 'Arda | Software Developer';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
